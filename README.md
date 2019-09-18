@@ -31,6 +31,25 @@ Status](https://ci.appveyor.com/api/projects/status/github/seabbs/EstZoonoticTB?
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/seabbs/EstZoonoticTB/master.svg)](https://codecov.io/github/seabbs/EstZoonoticTB?branch=master)
 
+## To do
+
+### Datasets
+
+  - \[ \] Cattle population data by country.
+      - [Source](http://www.fao.org/faostat/en/#search/Cattle)
+  - \[ \] Other animal resevoirs by country
+      - Need to know what animals can have TB.
+      - [Source](http://www.fao.org/faostat/en/?#data/QA)
+  - \[ \] Population data by country.
+      - Available as rural and urban split.
+      - [Source](http://www.fao.org/faostat/en/#search/Cattle)
+  - \[ \] Bovine TB in animals.
+      - Available as an indicator
+      - Stratified by wild and domesticated
+  - \[ \] Bovine TB in humans by country (if available).
+  - \[ \] TB incidence by country.
+      - Estimates via [getTBinR](https://github.com/seabbs/getTBinR)
+
 ## Quick start
 
 ## Shiny dashboard
