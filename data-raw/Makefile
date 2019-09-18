@@ -1,4 +1,0 @@
-default: all
-RDIR = .
-
-all: 

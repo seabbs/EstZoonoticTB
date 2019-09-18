@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1568816320045.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2053285758",
+    "id" : "7309B922",
+    "lastKnownWriteTime" : 1568816404,
+    "last_content_update" : 1568816404028,
+    "path" : "~/EstZoonoticTB/tests/testthat/test-dashboard.R",
+    "project_path" : "tests/testthat/test-dashboard.R",
+    "properties" : {
+        "cursorPosition" : "0,9",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
