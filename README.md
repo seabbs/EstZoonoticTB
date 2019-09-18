@@ -3,7 +3,7 @@
 
 [![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-blue.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
 [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/EstZoonoticTB)](https://CRAN.R-project.org/package=EstZoonoticTB)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.7.0-blue.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
 [![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
 
 ## Installation
