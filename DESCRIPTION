@@ -1,0 +1,40 @@
+Type: Package
+Package: EstZoonoticTB
+Title: Estimate and Visualise Zoonotic Tuberculosis
+Version: 0.7.0
+Authors@R: 
+    person(given = "Sam Abbott",
+           role = c("aut", "cre"),
+           email = "contact@samabbott.co.uk",
+           comment = c(ORCID = "0000-0001-8057-8037"))
+Description: Estimate and visualise zoonotic tuberculosis.
+License: GPL-3 | file LICENSE
+URL: https://www.samabbott.co.uk/EstZoonoticTB,
+    https://github.com/seabbs/EstZoonoticTB
+BugReports: https://github.com/seabbs/EstZoonoticTB/issues
+Depends: 
+    R (>= 3.3.0)
+Imports: 
+Suggests:
+    spelling,
+    covr,
+    devtools,
+    usethis,
+    knitr,
+    pkgnet,
+    rmarkdown,
+    shiny,
+    shinycssloaders,
+    shinydashboard,
+    shinyWidgets,
+    testthat,
+    tidyverse,
+    vdiffr,
+    getTBinR
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Language: en-GB
