@@ -4,13 +4,13 @@ RDIR = .
 all: 
 
 
-all: demographics_cleaned.csv zoonotic_tb_animals_cleaned.csv
+all: demographics_clean.csv zoonotic_tb_animals_clean.csv
 
 ## Import and clean demographic data
-demographics_cleaned.csv: demographics.R
+demographics_clean.csv: demographics.R
 			Rscript demographics.R
 			
 ## Import and clean zoonotic TB present in animals data
-zoonotic_tb_animals_cleaned.csv: zoonotic_tb_animals.R
+zoonotic_tb_animals_clean.csv: zoonotic_tb_animals.R
 			Rscript zoonotic_tb_animals.R
 			
