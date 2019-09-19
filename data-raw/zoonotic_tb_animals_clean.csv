@@ -1,0 +1,711 @@
+country,country_code,year,half,animal,present
+Afghanistan,AFG,2018,2,dom,yes
+Afghanistan,AFG,2018,2,wild,
+Afghanistan,AFG,2018,1,dom,yes
+Afghanistan,AFG,2018,1,wild,
+"Albania, Republic of",ALB,2018,2,dom,yes
+"Albania, Republic of",ALB,2018,2,wild,
+"Albania, Republic of",ALB,2018,1,dom,
+"Albania, Republic of",ALB,2018,1,wild,
+"Algeria, People's Democratic Republic of",DZA,2018,1,dom,yes
+"Algeria, People's Democratic Republic of",DZA,2018,1,wild,
+"Algeria, People's Democratic Republic of",DZA,2018,2,dom,yes
+"Algeria, People's Democratic Republic of",DZA,2018,2,wild,
+"Andorra, Principality of",AND,2018,1,dom,no
+"Andorra, Principality of",AND,2018,1,wild,no
+"Andorra, Principality of",AND,2018,2,dom,no
+"Andorra, Principality of",AND,2018,2,wild,no
+"Angola, Republic of",AGO,2018,1,dom,no
+"Angola, Republic of",AGO,2018,1,wild,
+"Angola, Republic of",AGO,2018,2,dom,no
+"Angola, Republic of",AGO,2018,2,wild,
+"Argentina, Argentine Republic",ARG,2018,1,dom,yes
+"Argentina, Argentine Republic",ARG,2018,1,wild,yes
+"Argentina, Argentine Republic",ARG,2018,2,dom,yes
+"Argentina, Argentine Republic",ARG,2018,2,wild,yes
+Armenia,ARM,2018,2,dom,no
+Armenia,ARM,2018,2,wild,no
+Armenia,ARM,2018,1,dom,yes
+Armenia,ARM,2018,1,wild,no
+"Australia, Commonwealth of",AUS,2018,1,dom,no
+"Australia, Commonwealth of",AUS,2018,1,wild,no
+"Australia, Commonwealth of",AUS,2018,2,dom,no
+"Australia, Commonwealth of",AUS,2018,2,wild,no
+"Austria, Republic of",AUT,2018,2,dom,no
+"Austria, Republic of",AUT,2018,2,wild,no
+"Austria, Republic of",AUT,2018,1,dom,yes
+"Austria, Republic of",AUT,2018,1,wild,no
+"Azerbaijan, Republic of",AZE,2018,1,dom,no
+"Azerbaijan, Republic of",AZE,2018,1,wild,no
+"Azerbaijan, Republic of",AZE,2018,2,dom,no
+"Azerbaijan, Republic of",AZE,2018,2,wild,no
+"Bahrain, Kingdom of",BHR,2018,1,dom,no
+"Bahrain, Kingdom of",BHR,2018,1,wild,no
+"Bahrain, Kingdom of",BHR,2018,2,dom,no
+"Bahrain, Kingdom of",BHR,2018,2,wild,no
+"Bangladesh, People's Republic of",BGD,2018,2,dom,yes
+"Bangladesh, People's Republic of",BGD,2018,2,wild,
+"Bangladesh, People's Republic of",BGD,2018,1,dom,yes
+"Bangladesh, People's Republic of",BGD,2018,1,wild,
+Barbados,BRB,2018,1,dom,no
+Barbados,BRB,2018,1,wild,
+Barbados,BRB,2018,2,dom,no
+Barbados,BRB,2018,2,wild,
+Belarus,BLR,2018,1,dom,no
+Belarus,BLR,2018,1,wild,
+Belarus,BLR,2018,2,dom,no
+Belarus,BLR,2018,2,wild,
+"Belgium, Kingdom of",BEL,2018,1,dom,yes
+"Belgium, Kingdom of",BEL,2018,1,wild,no
+"Belgium, Kingdom of",BEL,2018,2,dom,yes
+"Belgium, Kingdom of",BEL,2018,2,wild,no
+Belize,BLZ,2018,1,dom,no
+Belize,BLZ,2018,1,wild,no
+Belize,BLZ,2018,2,dom,no
+Belize,BLZ,2018,2,wild,no
+"Bhutan, Kingdom of",BTN,2018,1,dom,no
+"Bhutan, Kingdom of",BTN,2018,1,wild,no
+"Bhutan, Kingdom of",BTN,2018,2,dom,no
+"Bhutan, Kingdom of",BTN,2018,2,wild,no
+"Bolivia, Republic of",BOL,2018,1,dom,yes
+"Bolivia, Republic of",BOL,2018,1,wild,
+"Bolivia, Republic of",BOL,2018,2,dom,yes
+"Bolivia, Republic of",BOL,2018,2,wild,
+Bosnia and Herzegovina,BIH,2018,1,dom,no
+Bosnia and Herzegovina,BIH,2018,1,wild,no
+Bosnia and Herzegovina,BIH,2018,2,dom,no
+Bosnia and Herzegovina,BIH,2018,2,wild,no
+"Botswana, Republic of",BWA,2018,1,dom,no
+"Botswana, Republic of",BWA,2018,1,wild,
+"Brazil, Federative Republic of",BRA,2018,2,dom,yes
+"Brazil, Federative Republic of",BRA,2018,2,wild,
+"Brazil, Federative Republic of",BRA,2018,1,dom,yes
+"Brazil, Federative Republic of",BRA,2018,1,wild,
+Brunei Darussalam,BRN,2018,2,dom,
+Brunei Darussalam,BRN,2018,2,wild,
+Brunei Darussalam,BRN,2018,1,dom,
+Brunei Darussalam,BRN,2018,1,wild,
+"Bulgaria, People's Republic of",BGR,2018,2,dom,yes
+"Bulgaria, People's Republic of",BGR,2018,2,wild,no
+"Bulgaria, People's Republic of",BGR,2018,1,dom,yes
+"Bulgaria, People's Republic of",BGR,2018,1,wild,no
+Burkina Faso,BFA,2018,2,dom,yes
+Burkina Faso,BFA,2018,2,wild,yes
+Burkina Faso,BFA,2018,1,dom,yes
+Burkina Faso,BFA,2018,1,wild,yes
+"Burundi, Republic of",BDI,2018,1,dom,yes
+"Burundi, Republic of",BDI,2018,1,wild,
+"Burundi, Republic of",BDI,2018,2,dom,yes
+"Burundi, Republic of",BDI,2018,2,wild,
+Cabo Verde,CPV,2018,2,dom,no
+Cabo Verde,CPV,2018,2,wild,
+Cabo Verde,CPV,2018,1,dom,no
+Cabo Verde,CPV,2018,1,wild,
+"Cambodia, Kingdom of",KHM,2018,1,dom,no
+"Cambodia, Kingdom of",KHM,2018,1,wild,
+"Cambodia, Kingdom of",KHM,2018,2,dom,no
+"Cambodia, Kingdom of",KHM,2018,2,wild,
+Canada,CAN,2018,1,dom,no
+Canada,CAN,2018,1,wild,yes
+Canada,CAN,2018,2,dom,yes
+Canada,CAN,2018,2,wild,yes
+Central African Republic,CAF,2018,2,dom,yes
+Central African Republic,CAF,2018,2,wild,
+Central African Republic,CAF,2018,1,dom,yes
+Central African Republic,CAF,2018,1,wild,
+Ceuta,CEU,2018,1,dom,no
+Ceuta,CEU,2018,1,wild,no
+Ceuta,CEU,2018,2,dom,no
+Ceuta,CEU,2018,2,wild,no
+"Chad, Republic of",TCD,2018,1,dom,no
+"Chad, Republic of",TCD,2018,1,wild,
+"Chad, Republic of",TCD,2018,2,dom,no
+"Chad, Republic of",TCD,2018,2,wild,
+"Chile, Republic of",CHL,2018,1,dom,yes
+"Chile, Republic of",CHL,2018,1,wild,no
+"Chile, Republic of",CHL,2018,2,dom,yes
+"Chile, Republic of",CHL,2018,2,wild,no
+"China, People's Republic of",CHN,2018,1,dom,yes
+"China, People's Republic of",CHN,2018,1,wild,
+Chinese Taipei,TWN,2018,1,dom,yes
+Chinese Taipei,TWN,2018,1,wild,no
+Chinese Taipei,TWN,2018,2,dom,yes
+Chinese Taipei,TWN,2018,2,wild,no
+"Colombia, Republic of",COL,2018,1,dom,yes
+"Colombia, Republic of",COL,2018,1,wild,no
+"Colombia, Republic of",COL,2018,2,dom,yes
+"Colombia, Republic of",COL,2018,2,wild,no
+"Comoros, Union of the",COM,2018,1,dom,
+"Comoros, Union of the",COM,2018,1,wild,
+"Congo, Democratic Republic of",COD,2018,1,dom,yes
+"Congo, Democratic Republic of",COD,2018,1,wild,
+"Congo, People's Republic of",COG,2018,1,dom,no
+"Congo, People's Republic of",COG,2018,1,wild,
+"Congo, People's Republic of",COG,2018,2,dom,yes
+"Congo, People's Republic of",COG,2018,2,wild,
+Cook Islands,COK,2018,2,dom,
+Cook Islands,COK,2018,2,wild,
+Cook Islands,COK,2018,1,dom,
+Cook Islands,COK,2018,1,wild,
+"Costa Rica, Republic of",CRI,2018,2,dom,yes
+"Costa Rica, Republic of",CRI,2018,2,wild,
+"Costa Rica, Republic of",CRI,2018,1,dom,yes
+"Costa Rica, Republic of",CRI,2018,1,wild,
+"Cote D'Ivoire, Ivory Coast, Republic of the",CIV,2018,1,dom,yes
+"Cote D'Ivoire, Ivory Coast, Republic of the",CIV,2018,1,wild,
+"Cote D'Ivoire, Ivory Coast, Republic of the",CIV,2018,2,dom,
+"Cote D'Ivoire, Ivory Coast, Republic of the",CIV,2018,2,wild,
+"Cuba, Republic of",CUB,2018,1,dom,no
+"Cuba, Republic of",CUB,2018,1,wild,no
+"Cuba, Republic of",CUB,2018,2,dom,no
+"Cuba, Republic of",CUB,2018,2,wild,no
+"Cyprus, Republic of",CYP,2018,1,dom,no
+"Cyprus, Republic of",CYP,2018,1,wild,no
+"Cyprus, Republic of",CYP,2018,2,dom,no
+"Cyprus, Republic of",CYP,2018,2,wild,no
+Czech Republic,CZE,2018,1,dom,no
+Czech Republic,CZE,2018,1,wild,no
+Czech Republic,CZE,2018,2,dom,no
+Czech Republic,CZE,2018,2,wild,no
+"Denmark, Kingdom of",DNK,2018,1,dom,no
+"Denmark, Kingdom of",DNK,2018,1,wild,no
+"Denmark, Kingdom of",DNK,2018,2,dom,no
+"Denmark, Kingdom of",DNK,2018,2,wild,no
+"Djibouti, Republic of",DJI,2018,1,dom,no
+"Djibouti, Republic of",DJI,2018,1,wild,no
+"Djibouti, Republic of",DJI,2018,2,dom,no
+"Djibouti, Republic of",DJI,2018,2,wild,no
+Dominican Republic,DOM,2018,1,dom,yes
+Dominican Republic,DOM,2018,1,wild,yes
+Dominican Republic,DOM,2018,2,dom,yes
+Dominican Republic,DOM,2018,2,wild,yes
+"Ecuador, Republic of",ECU,2018,1,dom,yes
+"Ecuador, Republic of",ECU,2018,1,wild,
+"Ecuador, Republic of",ECU,2018,2,dom,yes
+"Ecuador, Republic of",ECU,2018,2,wild,
+"Egypt, Arab Republic of",EGY,2018,1,dom,yes
+"Egypt, Arab Republic of",EGY,2018,1,wild,no
+"El Salvador, Republic of",SLV,2018,1,dom,yes
+"El Salvador, Republic of",SLV,2018,1,wild,
+"El Salvador, Republic of",SLV,2018,2,dom,yes
+"El Salvador, Republic of",SLV,2018,2,wild,
+Eritrea,ERI,2018,1,dom,no
+Eritrea,ERI,2018,1,wild,no
+Eritrea,ERI,2018,2,dom,no
+Eritrea,ERI,2018,2,wild,no
+Estonia,EST,2018,1,dom,no
+Estonia,EST,2018,1,wild,no
+Estonia,EST,2018,2,dom,no
+Estonia,EST,2018,2,wild,no
+Ethiopia,ETH,2018,1,dom,no
+Ethiopia,ETH,2018,1,wild,
+Ethiopia,ETH,2018,2,dom,no
+Ethiopia,ETH,2018,2,wild,
+Falkland Islands (Malvinas),FLK,2018,1,dom,
+Falkland Islands (Malvinas),FLK,2018,1,wild,
+Faroe Islands,FRO,2018,1,dom,no
+Faroe Islands,FRO,2018,1,wild,no
+"Fiji, Republic of the Fiji Islands",FJI,2018,1,dom,yes
+"Fiji, Republic of the Fiji Islands",FJI,2018,1,wild,
+"Fiji, Republic of the Fiji Islands",FJI,2018,2,dom,yes
+"Fiji, Republic of the Fiji Islands",FJI,2018,2,wild,
+"Finland, Republic of",FIN,2018,1,dom,no
+"Finland, Republic of",FIN,2018,1,wild,no
+"Finland, Republic of",FIN,2018,2,dom,no
+"Finland, Republic of",FIN,2018,2,wild,no
+"France, French Republic",FRA,2018,1,dom,yes
+"France, French Republic",FRA,2018,1,wild,yes
+French Guiana,GUF,2018,1,dom,no
+French Guiana,GUF,2018,1,wild,no
+French Guiana,GUF,2018,2,dom,no
+French Guiana,GUF,2018,2,wild,no
+French Polynesia,PYF,2018,1,dom,no
+French Polynesia,PYF,2018,1,wild,no
+French Polynesia,PYF,2018,2,dom,no
+French Polynesia,PYF,2018,2,wild,no
+"Gambia, Republic of the",GMB,2018,1,dom,
+"Gambia, Republic of the",GMB,2018,1,wild,
+"Gambia, Republic of the",GMB,2018,2,dom,
+"Gambia, Republic of the",GMB,2018,2,wild,
+Georgia,GEO,2018,2,dom,no
+Georgia,GEO,2018,2,wild,no
+Georgia,GEO,2018,1,dom,no
+Georgia,GEO,2018,1,wild,no
+Germany,DEU,2018,1,dom,no
+Germany,DEU,2018,1,wild,no
+Germany,DEU,2018,2,dom,no
+Germany,DEU,2018,2,wild,no
+"Ghana, Republic of",GHA,2018,1,dom,yes
+"Ghana, Republic of",GHA,2018,1,wild,no
+"Ghana, Republic of",GHA,2018,2,dom,yes
+"Ghana, Republic of",GHA,2018,2,wild,no
+"Greece, Hellenic Republic",GRC,2018,1,dom,yes
+"Greece, Hellenic Republic",GRC,2018,1,wild,no
+Greenland,GRL,2018,2,dom,
+Greenland,GRL,2018,2,wild,
+Greenland,GRL,2018,1,dom,
+Greenland,GRL,2018,1,wild,
+Guadeloupe (France),GLP,2018,2,dom,
+Guadeloupe (France),GLP,2018,2,wild,
+Guadeloupe (France),GLP,2018,1,dom,
+Guadeloupe (France),GLP,2018,1,wild,
+"Guinea-Bissau, Republic of",GNB,2018,1,dom,
+"Guinea-Bissau, Republic of",GNB,2018,1,wild,
+"Guinea-Bissau, Republic of",GNB,2018,2,dom,
+"Guinea-Bissau, Republic of",GNB,2018,2,wild,
+"Guyana, Republic of",GUY,2018,2,dom,yes
+"Guyana, Republic of",GUY,2018,2,wild,
+"Guyana, Republic of",GUY,2018,1,dom,yes
+"Guyana, Republic of",GUY,2018,1,wild,
+"Haiti, Republic of",HTI,2018,2,dom,
+"Haiti, Republic of",HTI,2018,2,wild,
+"Haiti, Republic of",HTI,2018,1,dom,
+"Haiti, Republic of",HTI,2018,1,wild,
+"Honduras, Republic of",HND,2018,2,dom,yes
+"Honduras, Republic of",HND,2018,2,wild,
+"Honduras, Republic of",HND,2018,1,dom,yes
+"Honduras, Republic of",HND,2018,1,wild,
+"Hong Kong, Special Administrative Region of China",HKG,2018,1,dom,no
+"Hong Kong, Special Administrative Region of China",HKG,2018,1,wild,
+"Hong Kong, Special Administrative Region of China",HKG,2018,2,dom,no
+"Hong Kong, Special Administrative Region of China",HKG,2018,2,wild,
+Hrvatska (Croatia),HRV,2018,2,dom,yes
+Hrvatska (Croatia),HRV,2018,2,wild,no
+Hrvatska (Croatia),HRV,2018,1,dom,yes
+Hrvatska (Croatia),HRV,2018,1,wild,no
+"Hungary, Hungarian People's Republic",HUN,2018,2,dom,yes
+"Hungary, Hungarian People's Republic",HUN,2018,2,wild,yes
+"Hungary, Hungarian People's Republic",HUN,2018,1,dom,yes
+"Hungary, Hungarian People's Republic",HUN,2018,1,wild,yes
+"Iceland, Republic of",ISL,2018,1,dom,no
+"Iceland, Republic of",ISL,2018,1,wild,no
+"Iceland, Republic of",ISL,2018,2,dom,no
+"Iceland, Republic of",ISL,2018,2,wild,no
+"India, Republic of",IND,2018,1,dom,no
+"India, Republic of",IND,2018,1,wild,
+"India, Republic of",IND,2018,2,dom,no
+"India, Republic of",IND,2018,2,wild,
+"Indonesia, Republic of",IDN,2018,1,dom,no
+"Indonesia, Republic of",IDN,2018,1,wild,
+"Indonesia, Republic of",IDN,2018,2,dom,no
+"Indonesia, Republic of",IDN,2018,2,wild,
+"Iran, Islamic Republic of",IRN,2018,2,dom,yes
+"Iran, Islamic Republic of",IRN,2018,2,wild,
+"Iran, Islamic Republic of",IRN,2018,1,dom,yes
+"Iran, Islamic Republic of",IRN,2018,1,wild,
+"Iraq, Republic of",IRQ,2018,1,dom,no
+"Iraq, Republic of",IRQ,2018,1,wild,no
+"Iraq, Republic of",IRQ,2018,2,dom,no
+"Iraq, Republic of",IRQ,2018,2,wild,no
+Ireland,IRL,2018,1,dom,yes
+Ireland,IRL,2018,1,wild,yes
+Ireland,IRL,2018,2,dom,yes
+Ireland,IRL,2018,2,wild,yes
+"Israel, State of",ISR,2018,1,dom,no
+"Israel, State of",ISR,2018,1,wild,no
+"Israel, State of",ISR,2018,2,dom,no
+"Israel, State of",ISR,2018,2,wild,no
+"Italy, Italian Republic",ITA,2018,1,dom,yes
+"Italy, Italian Republic",ITA,2018,1,wild,yes
+"Italy, Italian Republic",ITA,2018,2,dom,yes
+"Italy, Italian Republic",ITA,2018,2,wild,yes
+Jamaica,JAM,2018,1,dom,no
+Jamaica,JAM,2018,1,wild,no
+Jamaica,JAM,2018,2,dom,no
+Jamaica,JAM,2018,2,wild,no
+Japan,JPN,2018,1,dom,no
+Japan,JPN,2018,1,wild,no
+"Jordan, Hashemite Kingdom of",JOR,2018,1,dom,yes
+"Jordan, Hashemite Kingdom of",JOR,2018,1,wild,
+"Kazakhstan, Republic of",KAZ,2018,1,dom,no
+"Kazakhstan, Republic of",KAZ,2018,1,wild,no
+"Kazakhstan, Republic of",KAZ,2018,2,dom,no
+"Kazakhstan, Republic of",KAZ,2018,2,wild,no
+"Kenya, Republic of",KEN,2018,1,dom,no
+"Kenya, Republic of",KEN,2018,1,wild,no
+"Kenya, Republic of",KEN,2018,2,dom,no
+"Kenya, Republic of",KEN,2018,2,wild,no
+"Kiribati, Republic of",KIR,2018,1,dom,
+"Kiribati, Republic of",KIR,2018,1,wild,
+"Korea, Republic of",KOR,2018,2,dom,yes
+"Korea, Republic of",KOR,2018,2,wild,no
+"Korea, Republic of",KOR,2018,1,dom,yes
+"Korea, Republic of",KOR,2018,1,wild,no
+"Kuwait, State of",KWT,2018,1,dom,no
+"Kuwait, State of",KWT,2018,1,wild,no
+"Kuwait, State of",KWT,2018,2,dom,no
+"Kuwait, State of",KWT,2018,2,wild,no
+Kyrgyz Republic,KGZ,2018,2,dom,no
+Kyrgyz Republic,KGZ,2018,2,wild,no
+Kyrgyz Republic,KGZ,2018,1,dom,no
+Kyrgyz Republic,KGZ,2018,1,wild,no
+Lao People's Democratic Republic,LAO,2018,1,dom,no
+Lao People's Democratic Republic,LAO,2018,1,wild,no
+Lao People's Democratic Republic,LAO,2018,2,dom,no
+Lao People's Democratic Republic,LAO,2018,2,wild,no
+Latvia,LVA,2018,1,dom,no
+Latvia,LVA,2018,1,wild,no
+Latvia,LVA,2018,2,dom,no
+Latvia,LVA,2018,2,wild,no
+"Lesotho, Kingdom of",LSO,2018,1,dom,no
+"Lesotho, Kingdom of",LSO,2018,1,wild,
+"Lesotho, Kingdom of",LSO,2018,2,dom,no
+"Lesotho, Kingdom of",LSO,2018,2,wild,
+"Liberia, Republic of",LBR,2018,1,dom,
+"Liberia, Republic of",LBR,2018,1,wild,
+"Liberia, Republic of",LBR,2018,2,dom,yes
+"Liberia, Republic of",LBR,2018,2,wild,
+Libyan Arab Jamahiriya,LBY,2018,1,dom,no
+Libyan Arab Jamahiriya,LBY,2018,1,wild,
+Libyan Arab Jamahiriya,LBY,2018,2,dom,no
+Libyan Arab Jamahiriya,LBY,2018,2,wild,
+"Liechtenstein, Principality of",LIE,2018,1,dom,no
+"Liechtenstein, Principality of",LIE,2018,1,wild,no
+"Liechtenstein, Principality of",LIE,2018,2,dom,no
+"Liechtenstein, Principality of",LIE,2018,2,wild,no
+Lithuania,LTU,2018,1,dom,no
+Lithuania,LTU,2018,1,wild,no
+Lithuania,LTU,2018,2,dom,no
+Lithuania,LTU,2018,2,wild,no
+"Macedonia, the former Yugoslav Republic of",MKD,2018,2,dom,yes
+"Macedonia, the former Yugoslav Republic of",MKD,2018,2,wild,yes
+"Macedonia, the former Yugoslav Republic of",MKD,2018,1,dom,yes
+"Macedonia, the former Yugoslav Republic of",MKD,2018,1,wild,yes
+"Madagascar, Republic of",MDG,2018,2,dom,yes
+"Madagascar, Republic of",MDG,2018,2,wild,
+"Madagascar, Republic of",MDG,2018,1,dom,yes
+"Madagascar, Republic of",MDG,2018,1,wild,
+"Malawi, Republic of",MWI,2018,1,dom,
+"Malawi, Republic of",MWI,2018,1,wild,
+"Malawi, Republic of",MWI,2018,2,dom,yes
+"Malawi, Republic of",MWI,2018,2,wild,
+Malaysia,MYS,2018,1,dom,yes
+Malaysia,MYS,2018,1,wild,no
+"Mali, Republic of",MLI,2018,1,dom,
+"Mali, Republic of",MLI,2018,1,wild,
+"Mali, Republic of",MLI,2018,2,dom,
+"Mali, Republic of",MLI,2018,2,wild,
+"Malta, Republic of",MLT,2018,2,dom,no
+"Malta, Republic of",MLT,2018,2,wild,no
+"Malta, Republic of",MLT,2018,1,dom,yes
+"Malta, Republic of",MLT,2018,1,wild,no
+Marshall Islands,MHL,2018,2,dom,
+Marshall Islands,MHL,2018,2,wild,
+Marshall Islands,MHL,2018,1,dom,
+Marshall Islands,MHL,2018,1,wild,
+Martinique,MTQ,2018,1,dom,no
+Martinique,MTQ,2018,1,wild,
+Martinique,MTQ,2018,2,dom,no
+Martinique,MTQ,2018,2,wild,
+"Mauritania, Islamic Republic of",MRT,2018,1,dom,yes
+"Mauritania, Islamic Republic of",MRT,2018,1,wild,
+"Mauritania, Islamic Republic of",MRT,2018,2,dom,yes
+"Mauritania, Islamic Republic of",MRT,2018,2,wild,
+Mauritius,MUS,2018,1,dom,no
+Mauritius,MUS,2018,1,wild,no
+Mauritius,MUS,2018,2,dom,no
+Mauritius,MUS,2018,2,wild,no
+Mayotte (France),MYT,2018,2,dom,
+Mayotte (France),MYT,2018,2,wild,
+Mayotte (France),MYT,2018,1,dom,
+Mayotte (France),MYT,2018,1,wild,
+Melilla,MEL,2018,1,dom,no
+Melilla,MEL,2018,1,wild,no
+Melilla,MEL,2018,2,dom,no
+Melilla,MEL,2018,2,wild,no
+"Mexico, United Mexican States",MEX,2018,2,dom,yes
+"Mexico, United Mexican States",MEX,2018,2,wild,no
+"Mexico, United Mexican States",MEX,2018,1,dom,yes
+"Mexico, United Mexican States",MEX,2018,1,wild,no
+"Micronesia, Federated States of",FSM,2018,2,dom,
+"Micronesia, Federated States of",FSM,2018,2,wild,
+"Micronesia, Federated States of",FSM,2018,1,dom,
+"Micronesia, Federated States of",FSM,2018,1,wild,
+"Moldova, Republic of",MDA,2018,1,dom,no
+"Moldova, Republic of",MDA,2018,1,wild,no
+"Moldova, Republic of",MDA,2018,2,dom,no
+"Moldova, Republic of",MDA,2018,2,wild,no
+"Mongolia, Mongolian People's Republic",MNG,2018,1,dom,no
+"Mongolia, Mongolian People's Republic",MNG,2018,1,wild,no
+"Mongolia, Mongolian People's Republic",MNG,2018,2,dom,no
+"Mongolia, Mongolian People's Republic",MNG,2018,2,wild,no
+"Montenegro, Republic of",MNE,2018,1,dom,no
+"Montenegro, Republic of",MNE,2018,1,wild,no
+"Montenegro, Republic of",MNE,2018,2,dom,no
+"Montenegro, Republic of",MNE,2018,2,wild,no
+"Morocco, Kingdom of",MAR,2018,1,dom,yes
+"Morocco, Kingdom of",MAR,2018,1,wild,
+"Morocco, Kingdom of",MAR,2018,2,dom,yes
+"Morocco, Kingdom of",MAR,2018,2,wild,
+"Mozambique, People's Republic of",MOZ,2018,1,dom,yes
+"Mozambique, People's Republic of",MOZ,2018,1,wild,yes
+"Mozambique, People's Republic of",MOZ,2018,2,dom,yes
+"Mozambique, People's Republic of",MOZ,2018,2,wild,yes
+Myanmar,MMR,2018,1,dom,no
+Myanmar,MMR,2018,1,wild,no
+Myanmar,MMR,2018,2,dom,no
+Myanmar,MMR,2018,2,wild,no
+Namibia,NAM,2018,1,dom,no
+Namibia,NAM,2018,1,wild,no
+Namibia,NAM,2018,2,dom,no
+Namibia,NAM,2018,2,wild,no
+"Nepal, Kingdom of",NPL,2018,1,dom,no
+"Nepal, Kingdom of",NPL,2018,1,wild,
+"Nepal, Kingdom of",NPL,2018,2,dom,no
+"Nepal, Kingdom of",NPL,2018,2,wild,
+"Netherlands, Kingdom of the",NLD,2018,1,dom,no
+"Netherlands, Kingdom of the",NLD,2018,1,wild,no
+"Netherlands, Kingdom of the",NLD,2018,2,dom,no
+"Netherlands, Kingdom of the",NLD,2018,2,wild,no
+New Caledonia,NCL,2018,2,dom,
+New Caledonia,NCL,2018,2,wild,
+New Caledonia,NCL,2018,1,dom,
+New Caledonia,NCL,2018,1,wild,
+New Zealand,NZL,2018,1,dom,yes
+New Zealand,NZL,2018,1,wild,yes
+New Zealand,NZL,2018,2,dom,yes
+New Zealand,NZL,2018,2,wild,yes
+"Nicaragua, Republic of",NIC,2018,1,dom,no
+"Nicaragua, Republic of",NIC,2018,1,wild,
+"Nicaragua, Republic of",NIC,2018,2,dom,no
+"Nicaragua, Republic of",NIC,2018,2,wild,
+"Niger, Republic of the",NER,2018,1,dom,yes
+"Niger, Republic of the",NER,2018,1,wild,
+"Niger, Republic of the",NER,2018,2,dom,yes
+"Niger, Republic of the",NER,2018,2,wild,
+"Nigeria, Federal Republic of",NGA,2018,1,dom,yes
+"Nigeria, Federal Republic of",NGA,2018,1,wild,yes
+"Nigeria, Federal Republic of",NGA,2018,2,dom,yes
+"Nigeria, Federal Republic of",NGA,2018,2,wild,yes
+"Norway, Kingdom of",NOR,2018,1,dom,no
+"Norway, Kingdom of",NOR,2018,1,wild,no
+"Norway, Kingdom of",NOR,2018,2,dom,no
+"Norway, Kingdom of",NOR,2018,2,wild,no
+"Oman, Sultanate of",OMN,2018,1,dom,no
+"Oman, Sultanate of",OMN,2018,1,wild,no
+"Oman, Sultanate of",OMN,2018,2,dom,no
+"Oman, Sultanate of",OMN,2018,2,wild,no
+"Pakistan, Islamic Republic of",PAK,2018,2,dom,yes
+"Pakistan, Islamic Republic of",PAK,2018,2,wild,yes
+"Pakistan, Islamic Republic of",PAK,2018,1,dom,yes
+"Pakistan, Islamic Republic of",PAK,2018,1,wild,yes
+Palau,PLW,2018,2,dom,
+Palau,PLW,2018,2,wild,
+Palau,PLW,2018,1,dom,
+Palau,PLW,2018,1,wild,
+Palestinian Auton. Territories,PSE,2018,1,dom,no
+Palestinian Auton. Territories,PSE,2018,1,wild,
+Palestinian Auton. Territories,PSE,2018,2,dom,no
+Palestinian Auton. Territories,PSE,2018,2,wild,
+"Panama, Republic of",PAN,2018,1,dom,no
+"Panama, Republic of",PAN,2018,1,wild,
+"Panama, Republic of",PAN,2018,2,dom,no
+"Panama, Republic of",PAN,2018,2,wild,
+Papua New Guinea,PNG,2018,2,dom,
+Papua New Guinea,PNG,2018,2,wild,
+Papua New Guinea,PNG,2018,1,dom,
+Papua New Guinea,PNG,2018,1,wild,
+"Paraguay, Republic of",PRY,2018,2,dom,yes
+"Paraguay, Republic of",PRY,2018,2,wild,
+"Paraguay, Republic of",PRY,2018,1,dom,yes
+"Paraguay, Republic of",PRY,2018,1,wild,
+"Peru, Republic of",PER,2018,2,dom,yes
+"Peru, Republic of",PER,2018,2,wild,
+"Peru, Republic of",PER,2018,1,dom,yes
+"Peru, Republic of",PER,2018,1,wild,
+"Philippines, Republic of the",PHL,2018,1,dom,
+"Philippines, Republic of the",PHL,2018,1,wild,
+"Poland, Polish People's Republic",POL,2018,2,dom,yes
+"Poland, Polish People's Republic",POL,2018,2,wild,no
+"Poland, Polish People's Republic",POL,2018,1,dom,yes
+"Poland, Polish People's Republic",POL,2018,1,wild,no
+"Portugal, Portuguese Republic",PRT,2018,1,dom,yes
+"Portugal, Portuguese Republic",PRT,2018,1,wild,yes
+"Portugal, Portuguese Republic",PRT,2018,2,dom,yes
+"Portugal, Portuguese Republic",PRT,2018,2,wild,yes
+"Qatar, State of",QAT,2018,1,dom,no
+"Qatar, State of",QAT,2018,1,wild,
+"Qatar, State of",QAT,2018,2,dom,no
+"Qatar, State of",QAT,2018,2,wild,
+Republic of Guinea,GIN,2018,1,dom,
+Republic of Guinea,GIN,2018,1,wild,
+Republic of Guinea,GIN,2018,2,dom,
+Republic of Guinea,GIN,2018,2,wild,
+Reunion,REU,2018,1,dom,no
+Reunion,REU,2018,1,wild,
+Reunion,REU,2018,2,dom,no
+Reunion,REU,2018,2,wild,
+"Romania, Socialist Republic of",ROU,2018,1,dom,yes
+"Romania, Socialist Republic of",ROU,2018,1,wild,
+"Romania, Socialist Republic of",ROU,2018,2,dom,yes
+"Romania, Socialist Republic of",ROU,2018,2,wild,
+Russian Federation,RUS,2018,2,dom,yes
+Russian Federation,RUS,2018,2,wild,
+Russian Federation,RUS,2018,1,dom,yes
+Russian Federation,RUS,2018,1,wild,
+"Samoa, Independent State of",WSM,2018,1,dom,no
+"Samoa, Independent State of",WSM,2018,1,wild,
+"Samoa, Independent State of",WSM,2018,2,dom,no
+"Samoa, Independent State of",WSM,2018,2,wild,
+"San Marino, Republic of",SMR,2018,1,dom,no
+"San Marino, Republic of",SMR,2018,1,wild,
+"San Marino, Republic of",SMR,2018,2,dom,no
+"San Marino, Republic of",SMR,2018,2,wild,
+"Sao Tome and Principe, Democratic Republic of",STP,2018,1,dom,
+"Sao Tome and Principe, Democratic Republic of",STP,2018,1,wild,
+"Sao Tome and Principe, Democratic Republic of",STP,2018,2,dom,
+"Sao Tome and Principe, Democratic Republic of",STP,2018,2,wild,
+"Saudi Arabia, Kingdom of",SAU,2018,1,dom,no
+"Saudi Arabia, Kingdom of",SAU,2018,1,wild,no
+"Saudi Arabia, Kingdom of",SAU,2018,2,dom,no
+"Saudi Arabia, Kingdom of",SAU,2018,2,wild,no
+"Senegal, Republic of",SEN,2018,2,dom,yes
+"Senegal, Republic of",SEN,2018,2,wild,
+"Senegal, Republic of",SEN,2018,1,dom,yes
+"Senegal, Republic of",SEN,2018,1,wild,
+"Serbia, Republic of",SRB,2018,1,dom,yes
+"Serbia, Republic of",SRB,2018,1,wild,no
+"Serbia, Republic of",SRB,2018,2,dom,yes
+"Serbia, Republic of",SRB,2018,2,wild,no
+"Sierra Leone, Republic of",SLE,2018,1,dom,no
+"Sierra Leone, Republic of",SLE,2018,1,wild,
+"Singapore, Republic of",SGP,2018,1,dom,no
+"Singapore, Republic of",SGP,2018,1,wild,no
+"Singapore, Republic of",SGP,2018,2,dom,no
+"Singapore, Republic of",SGP,2018,2,wild,no
+Slovakia (Slovak Republic),SVK,2018,2,dom,no
+Slovakia (Slovak Republic),SVK,2018,2,wild,
+Slovakia (Slovak Republic),SVK,2018,1,dom,no
+Slovakia (Slovak Republic),SVK,2018,1,wild,
+Slovenia,SVN,2018,1,dom,no
+Slovenia,SVN,2018,1,wild,no
+Slovenia,SVN,2018,2,dom,no
+Slovenia,SVN,2018,2,wild,no
+"Somalia, Somali Republic",SOM,2018,1,dom,
+"Somalia, Somali Republic",SOM,2018,1,wild,
+"Somalia, Somali Republic",SOM,2018,2,dom,
+"Somalia, Somali Republic",SOM,2018,2,wild,
+"South Africa, Republic of",ZAF,2018,2,dom,yes
+"South Africa, Republic of",ZAF,2018,2,wild,yes
+"South Africa, Republic of",ZAF,2018,1,dom,yes
+"South Africa, Republic of",ZAF,2018,1,wild,yes
+South Sudan (Rep. of),SSD,2018,1,dom,
+South Sudan (Rep. of),SSD,2018,1,wild,
+"Spain, Spanish State",ESP,2018,2,dom,yes
+"Spain, Spanish State",ESP,2018,2,wild,yes
+"Spain, Spanish State",ESP,2018,1,dom,yes
+"Spain, Spanish State",ESP,2018,1,wild,yes
+"Sri Lanka, Democratic Socialist Republic of",LKA,2018,1,dom,yes
+"Sri Lanka, Democratic Socialist Republic of",LKA,2018,1,wild,no
+"Sri Lanka, Democratic Socialist Republic of",LKA,2018,2,dom,yes
+"Sri Lanka, Democratic Socialist Republic of",LKA,2018,2,wild,no
+St. Helena,SHN,2018,2,dom,
+St. Helena,SHN,2018,2,wild,
+St. Helena,SHN,2018,1,dom,
+St. Helena,SHN,2018,1,wild,
+St. Lucia,LCA,2018,2,dom,
+St. Lucia,LCA,2018,2,wild,
+St. Lucia,LCA,2018,1,dom,
+St. Lucia,LCA,2018,1,wild,
+St. Vincent and the Grenadines,VCT,2018,1,dom,
+St. Vincent and the Grenadines,VCT,2018,1,wild,
+"Sudan, Democratic Republic of the",SDN,2018,1,dom,no
+"Sudan, Democratic Republic of the",SDN,2018,1,wild,no
+"Sudan, Democratic Republic of the",SDN,2018,2,dom,no
+"Sudan, Democratic Republic of the",SDN,2018,2,wild,no
+"Suriname, Republic of",SUR,2018,1,dom,no
+"Suriname, Republic of",SUR,2018,1,wild,no
+"Suriname, Republic of",SUR,2018,2,dom,no
+"Suriname, Republic of",SUR,2018,2,wild,no
+"Swaziland, Kingdom of",SWZ,2018,1,dom,yes
+"Swaziland, Kingdom of",SWZ,2018,1,wild,
+"Swaziland, Kingdom of",SWZ,2018,2,dom,yes
+"Swaziland, Kingdom of",SWZ,2018,2,wild,
+"Sweden, Kingdom of",SWE,2018,1,dom,no
+"Sweden, Kingdom of",SWE,2018,1,wild,no
+"Sweden, Kingdom of",SWE,2018,2,dom,no
+"Sweden, Kingdom of",SWE,2018,2,wild,no
+"Switzerland, Swiss Confederation",CHE,2018,1,dom,no
+"Switzerland, Swiss Confederation",CHE,2018,1,wild,no
+"Switzerland, Swiss Confederation",CHE,2018,2,dom,no
+"Switzerland, Swiss Confederation",CHE,2018,2,wild,no
+Syrian Arab Republic,SYR,2018,1,dom,no
+Syrian Arab Republic,SYR,2018,1,wild,no
+Syrian Arab Republic,SYR,2018,2,dom,no
+Syrian Arab Republic,SYR,2018,2,wild,no
+"Tanzania, United Republic of",TZA,2018,1,dom,yes
+"Tanzania, United Republic of",TZA,2018,1,wild,yes
+"Tanzania, United Republic of",TZA,2018,2,dom,yes
+"Tanzania, United Republic of",TZA,2018,2,wild,yes
+"Thailand, Kingdom of",THA,2018,1,dom,no
+"Thailand, Kingdom of",THA,2018,1,wild,no
+"Thailand, Kingdom of",THA,2018,2,dom,no
+"Thailand, Kingdom of",THA,2018,2,wild,no
+"Timor-Leste, Democratic Republic of",TLS,2018,2,dom,
+"Timor-Leste, Democratic Republic of",TLS,2018,2,wild,
+"Timor-Leste, Democratic Republic of",TLS,2018,1,dom,
+"Timor-Leste, Democratic Republic of",TLS,2018,1,wild,
+"Tonga, Kingdom of",TON,2018,2,dom,no
+"Tonga, Kingdom of",TON,2018,2,wild,
+"Tonga, Kingdom of",TON,2018,1,dom,no
+"Tonga, Kingdom of",TON,2018,1,wild,
+"Trinidad and Tobago, Republic of",TTO,2018,1,dom,no
+"Trinidad and Tobago, Republic of",TTO,2018,1,wild,
+"Tunisia, Republic of",TUN,2018,1,dom,yes
+"Tunisia, Republic of",TUN,2018,1,wild,no
+"Tunisia, Republic of",TUN,2018,2,dom,yes
+"Tunisia, Republic of",TUN,2018,2,wild,no
+"Turkey, Republic of",TUR,2018,2,dom,yes
+"Turkey, Republic of",TUR,2018,2,wild,
+"Turkey, Republic of",TUR,2018,1,dom,yes
+"Turkey, Republic of",TUR,2018,1,wild,
+Turkmenistan,TKM,2018,1,dom,no
+Turkmenistan,TKM,2018,1,wild,no
+Turkmenistan,TKM,2018,2,dom,no
+Turkmenistan,TKM,2018,2,wild,no
+"Uganda, Republic of",UGA,2018,1,dom,yes
+"Uganda, Republic of",UGA,2018,1,wild,yes
+"Uganda, Republic of",UGA,2018,2,dom,yes
+"Uganda, Republic of",UGA,2018,2,wild,yes
+Ukraine,UKR,2018,1,dom,no
+Ukraine,UKR,2018,1,wild,no
+Ukraine,UKR,2018,2,dom,no
+Ukraine,UKR,2018,2,wild,no
+United Arab Emirates,ARE,2018,2,dom,
+United Arab Emirates,ARE,2018,2,wild,
+United Arab Emirates,ARE,2018,1,dom,
+United Arab Emirates,ARE,2018,1,wild,
+United Kingdom of Great Britain & N. Ireland,GBR,2018,1,dom,yes
+United Kingdom of Great Britain & N. Ireland,GBR,2018,1,wild,yes
+United States of America,USA,2018,2,dom,yes
+United States of America,USA,2018,2,wild,yes
+United States of America,USA,2018,1,dom,yes
+United States of America,USA,2018,1,wild,yes
+"Uruguay, Eastern Republic of",URY,2018,2,dom,yes
+"Uruguay, Eastern Republic of",URY,2018,2,wild,yes
+"Uruguay, Eastern Republic of",URY,2018,1,dom,yes
+"Uruguay, Eastern Republic of",URY,2018,1,wild,yes
+Uzbekistan,UZB,2018,1,dom,no
+Uzbekistan,UZB,2018,1,wild,no
+Uzbekistan,UZB,2018,2,dom,no
+Uzbekistan,UZB,2018,2,wild,no
+Vanuatu,VUT,2018,1,dom,no
+Vanuatu,VUT,2018,1,wild,
+Vanuatu,VUT,2018,2,dom,no
+Vanuatu,VUT,2018,2,wild,
+"Venezuela, Bolivarian Republic of",VEN,2018,1,dom,yes
+"Venezuela, Bolivarian Republic of",VEN,2018,1,wild,
+"Venezuela, Bolivarian Republic of",VEN,2018,2,dom,yes
+"Venezuela, Bolivarian Republic of",VEN,2018,2,wild,
+"Vietnam, Socialist Republic of",VNM,2018,1,dom,no
+"Vietnam, Socialist Republic of",VNM,2018,1,wild,
+"Vietnam, Socialist Republic of",VNM,2018,2,dom,no
+"Vietnam, Socialist Republic of",VNM,2018,2,wild,
+"Zambia, Republic of",ZMB,2018,1,dom,yes
+"Zambia, Republic of",ZMB,2018,1,wild,no
+"Zambia, Republic of",ZMB,2018,2,dom,yes
+"Zambia, Republic of",ZMB,2018,2,wild,no
+Zimbabwe,ZWE,2018,1,dom,no
+Zimbabwe,ZWE,2018,1,wild,no
+Zimbabwe,ZWE,2018,2,dom,no
+Zimbabwe,ZWE,2018,2,wild,no

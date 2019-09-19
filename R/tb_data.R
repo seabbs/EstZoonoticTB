@@ -3,9 +3,9 @@
 #' @description This function relies on [getTBinR](https://www.samabbott.co.uk/getTBinR/) to source WHO tuberculosis (TB)
 #' data. It then curates this data - extracting the country, region, year, TB incidence, 
 #' TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's).
-#' @param inc_floor Numeric, defaults to 100. What is the minimum incidence to keep in the data.
-#' @param inc_rate_floor Numeric, defaults to 1 per 100,000. What is the minimum incidence
-#' rate to keep in the data.
+#' @param inc_floor Numeric, defaults to NULL. What is the minimum incidence to keep in the data.
+#' @param inc_rate_floor Numeric, defaults to NULL. What is the minimum incidence
+#' rate (per 100,000) to keep in the data.
 #' @return A dataframe containing curated TB data from the WHO.
 #' @export
 #' @importFrom dplyr select mutate filter
@@ -15,7 +15,7 @@
 #' 
 #' ## Get the data
 #' tb_data()
-tb_data <- function(inc_floor = 100, inc_rate_floor = 1) {
+tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL) {
   ## Assign NULL for packaging
   country <- NULL; e_inc_100k <- NULL; e_inc_100k_hi <- NULL;
   e_inc_100k_lo <- NULL; e_inc_num <- NULL; e_inc_tbhiv_100k <- NULL;
@@ -34,9 +34,17 @@ tb_data <- function(inc_floor = 100, inc_rate_floor = 1) {
                   prop_hiv_hi = e_inc_tbhiv_100k_hi / e_inc_100k_lo) %>% 
     dplyr::mutate(tb_inc = e_inc_100k, tb_inc_lo = e_inc_100k_lo, tb_inc_hi = e_inc_100k_hi) %>% 
     dplyr::select(country, iso3, g_whoregion, year, tb_cases,
-                  tidyselect::contains("tb_inc"), tidyselect::contains("prop_hiv")) %>% 
-    dplyr::filter(tb_cases >= inc_floor, tb_inc >= inc_rate_floor)
+                  tidyselect::contains("tb_inc"), tidyselect::contains("prop_hiv"))
   
+  if (!is.null(inc_floor)) {
+    tb <- tb %>% 
+      dplyr::filter(tb_cases >= inc_floor)
+  }
+  
+  if (!is.null(inc_rate_floor)) {
+    tb <- tb %>% 
+      dplyr::filter(tb_inc >= inc_rate_floor)
+  }
   
   return(tb)
 }

@@ -25,18 +25,26 @@ library(EstZoonoticTB)
 
 - [ ] Bovine TB in humans by country (if available). 
     - Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/)
+    
 ## Animals
 
-- [ ] Bovine TB in animals.
-  - Available as an indicator
-  - Stratified by wild and domesticated
+* Sourced from the [OIE](https://www.oie.int) via personal communication
+* Data cleaning details can be found in [/data-raw/zoonotic_tb_animals.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R)
+* Data available for 2018 split into halfs
+* Data is available for domesticated and wild animals - stratified into present, limited, suspected, limited + suspected, not present and missing. 
+* Incidence or incidence rates are not available in this dataset.
+* Data quality is low.
+* Last recorded status is also available but this field has currently been excluded due to its poor quality. 
+
+```{r}
+EstZoonoticTB::zoonotic_tb_animals
+```
 
 # Tuberculosis (TB) incidence
 
 * Sourced from the [WHO](http://www.who.int/tb/country/data/download/en/) using [`{getTBinR}`](https://www.samabbott.co.uk/getTBinR/index.html).
 * Extracted TB incidence, TB incidence rates (+ CI's), and proportion HIV positive (+ CI's).
 * Data sourced using `EstZoonoticTB::tb_data()`. See `?EstZoonoticTB::tb_data()` for documentation.
-* Countries are excluded if incidence was below 100 or if incidence rates were below 1.
 
 
 ```{r}

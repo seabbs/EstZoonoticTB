@@ -50,4 +50,4 @@ usethis::use_data(demographics, overwrite = TRUE)
 
 # Save into data-raw in csv format ----------------------------------------
 
-data.table::fwrite(demographics, "demographics-clean.csv")
+data.table::fwrite(demographics, "demographics_clean.csv")
