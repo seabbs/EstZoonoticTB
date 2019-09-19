@@ -30,9 +30,10 @@ reference:
   - title: Datasets
     desc: These datasets are either built in or sourced on demand
     contents:
-    - zoonotic_tb_animals
     - tb_data
-    - demographocs
+    - zoonotic_tb_animals
+    - demographics
+    - animal_demographics
   - title: Reporting
     desc: Package reporting functionality
     contents:
