@@ -4,7 +4,13 @@
 \alias{tb_data}
 \title{Tuberculosis data from the World Health Organization (WHO).}
 \usage{
-tb_data()
+tb_data(inc_floor = 100, inc_rate_floor = 1)
+}
+\arguments{
+\item{inc_floor}{Numeric, defaults to 100. What is the minimum incidence to keep in the data.}
+
+\item{inc_rate_floor}{Numeric, defaults to 1 per 100,000. What is the minimum incidence
+rate to keep in the data.}
 }
 \value{
 A dataframe containing curated TB data from the WHO.

@@ -33,9 +33,15 @@ library(EstZoonoticTB)
 
 # Tuberculosis (TB) incidence
 
-* Sourced from the WHO using WHO data
-* Extract TB incidence, proportion in children, proportion HIV positive, and proportion drug resistant.
-* Data sourced using `EstZoonoticTB::get_tb_data()`. See `?EstZoonoticTB::get_tb_data()` for documentation.
+* Sourced from the [WHO](http://www.who.int/tb/country/data/download/en/) using [`{getTBinR}`](https://www.samabbott.co.uk/getTBinR/index.html).
+* Extracted TB incidence, TB incidence rates (+ CI's), and proportion HIV positive (+ CI's).
+* Data sourced using `EstZoonoticTB::tb_data()`. See `?EstZoonoticTB::tb_data()` for documentation.
+* Countries are excluded if incidence was below 100 or if incidence rates were below 1.
+
+
+```{r}
+EstZoonoticTB::tb_data()
+```
 
 # Animal reservoir populations
 
@@ -55,11 +61,14 @@ library(EstZoonoticTB)
 
 ## Demographics
 
-- Population data by country.
-   - Available as rural and urban split.
-   - [Source](http://www.fao.org/faostat/en/#search/Cattle)
+* Sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
+* Data cleaning can be found in [/data-raw/demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/cleaning.R).
+* Population estimates are available by country from 1950 until 2018. 
+* The proportion of each country that is rural is also available.
+
+
+```{r}
+EstZoonoticTB::demographics
+```
    
 
-
-- [x] TB incidence by country.
-    - Estimates via [getTBinR](https://github.com/seabbs/getTBinR)
