@@ -14,6 +14,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Articles"
+      menu:
+      - text: "Data sources"
+        href: articles/data-sources.html
     - text: News
       menu:
       - text: "Change log"
@@ -22,3 +26,14 @@ navbar:
       text: "Functions"
       href: reference/index.html
         
+reference:
+  - title: Datasets
+    desc: These datasets are either built in or sourced on demand
+    contents:
+    - zoonotic_tb_animals
+    - tb_data
+    - demographocs
+  - title: Reporting
+    desc: Package reporting functionality
+    contents:
+    - dashboard

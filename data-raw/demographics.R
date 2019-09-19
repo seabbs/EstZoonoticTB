@@ -20,7 +20,6 @@ demographics <- demographics %>%
                 type = Element, year = Year, pop = Value)
 
 
-
 # Clean data --------------------------------------------------------------
 
 demographics <- demographics %>% 

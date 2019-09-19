@@ -21,6 +21,8 @@ remotes::install_github("seabbs/EstZoonoticTB")
 [![Development
 documentation](https://img.shields.io/badge/Documentation-development-lightblue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/dev)
 [![Functions](https://img.shields.io/badge/Documentation-functions-orange.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/index.html)
+[![Data
+sources](https://img.shields.io/badge/Documentation-data%20sources-orange.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
 
 ## Testing
 
