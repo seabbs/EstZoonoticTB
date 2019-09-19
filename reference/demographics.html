@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tuberculosis data from the World Health Organization (WHO). — tb_data • EstZoonoticTB</title>
+<title>Demographic data — demographics • EstZoonoticTB</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,10 +48,10 @@
 
 
 
-<meta property="og:title" content="Tuberculosis data from the World Health Organization (WHO). — tb_data" />
-<meta property="og:description" content="This function relies on getTBinR to source WHO tuberculosis (TB)
-data. It then curates this data - extracting the country, region, year, TB incidence,
-TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's)." />
+<meta property="og:title" content="Demographic data — demographics" />
+<meta property="og:description" content="Country level demographic data from 1950 to the current day. Also includes the proportion of the population
+that are rural. Data is sourced from the FAO.
+Data cleaning details can be found in /data-raw/demographics.R." />
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -140,66 +140,36 @@ TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tuberculosis data from the World Health Organization (WHO).</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/tb_data.R'><code>R/tb_data.R</code></a></small>
-    <div class="hidden name"><code>tb_data.Rd</code></div>
+    <h1>Demographic data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/demographics.R'><code>R/demographics.R</code></a></small>
+    <div class="hidden name"><code>demographics.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function relies on <a href='https://www.samabbott.co.uk/getTBinR/'>getTBinR</a> to source WHO tuberculosis (TB)
-data. It then curates this data - extracting the country, region, year, TB incidence,
-TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's).</p>
+    <p>Country level demographic data from 1950 to the current day. Also includes the proportion of the population
+that are rural. Data is sourced from the <a href='http://www.fao.org/faostat/en/?#data/OA'>FAO</a>.
+Data cleaning details can be found in <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/cleaning.R'>/data-raw/demographics.R</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tb_data</span>(<span class='kw'>inc_floor</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>inc_rate_floor</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='no'>demographics</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>inc_floor</th>
-      <td><p>Numeric, defaults to 100. What is the minimum incidence to keep in the data.</p></td>
-    </tr>
-    <tr>
-      <th>inc_rate_floor</th>
-      <td><p>Numeric, defaults to 1 per 100,000. What is the minimum incidence
-rate to keep in the data.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A dataframe containing curated TB data from the WHO.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>A data frame with 14,857 rows and 5 variables.</p><dl class='dl-horizontal'>
+<dt>country</dt><dd><p>Country name (factor)</p></dd>
+<dt>country_code</dt><dd><p>Country code (numeric)</p></dd>
+<dt>year</dt><dd><p>Year (numeric)</p></dd>
+<dt>population</dt><dd><p>Estimated population size (numeric)</p></dd>
+<dt>prop_rural</dt><dd><p>Proportion of population that is estimated to be rural (numeric)</p></dd>
 
-    <div class='dont-index'><p>get_tb_burden</p></div>
+</dl>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## Get the data</span>
-<span class='fu'>tb_data</span>()</div><div class='output co'>#&gt; <span class='message'>Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></div><div class='output co'>#&gt; <span class='message'>Saving data to: /tmp/Rtmpb3S194/tb_burden.rds</span></div><div class='output co'>#&gt; <span class='message'>Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></div><div class='output co'>#&gt; <span class='message'>Saving data to: /tmp/Rtmpb3S194/mdr_tb.rds</span></div><div class='output co'>#&gt; <span class='message'>Joining TB burden data and MDR TB data.</span></div><div class='output co'>#&gt; # A tibble: 3,094 x 11
-#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi prop_hiv
-#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1 Afghan… AFG   Eastern Me…  2000    38000    190       123       271  0.00358
-#&gt;  2 Afghan… AFG   Eastern Me…  2001    40000    189       123       271  0.00302
-#&gt;  3 Afghan… AFG   Eastern Me…  2002    42000    189       122       270  0.00259
-#&gt;  4 Afghan… AFG   Eastern Me…  2003    44000    189       122       270  0.00233
-#&gt;  5 Afghan… AFG   Eastern Me…  2004    46000    189       122       270  0.00217
-#&gt;  6 Afghan… AFG   Eastern Me…  2005    47000    189       122       270  0.00222
-#&gt;  7 Afghan… AFG   Eastern Me…  2006    49000    189       122       270  0.00222
-#&gt;  8 Afghan… AFG   Eastern Me…  2007    50000    189       122       270  0.00228
-#&gt;  9 Afghan… AFG   Eastern Me…  2008    52000    189       122       270  0.00233
-#&gt; 10 Afghan… AFG   Eastern Me…  2009    53000    189       123       270  0.00238
-#&gt; # … with 3,084 more rows, and 2 more variables: prop_hiv_lo &lt;dbl&gt;,
-#&gt; #   prop_hiv_hi &lt;dbl&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#format">Format</a></li>
     </ul>
 
   </div>

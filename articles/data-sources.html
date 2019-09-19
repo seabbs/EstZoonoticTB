@@ -131,10 +131,32 @@
 <h1 class="hasAnchor">
 <a href="#tuberculosis-tb-incidence" class="anchor"></a>Tuberculosis (TB) incidence</h1>
 <ul>
-<li>Sourced from the WHO using WHO data</li>
-<li>Extract TB incidence, proportion in children, proportion HIV positive, and proportion drug resistant.</li>
-<li>Data sourced using <code>EstZoonoticTB::get_tb_data()</code>. See <code>?EstZoonoticTB::get_tb_data()</code> for documentation.</li>
+<li>Sourced from the <a href="http://www.who.int/tb/country/data/download/en/">WHO</a> using <a href="https://www.samabbott.co.uk/getTBinR/index.html"><code>{getTBinR}</code></a>.</li>
+<li>Extracted TB incidence, TB incidence rates (+ CI’s), and proportion HIV positive (+ CI’s).</li>
+<li>Data sourced using <code><a href="../reference/tb_data.html">EstZoonoticTB::tb_data()</a></code>. See <code>?EstZoonoticTB::tb_data()</code> for documentation.</li>
+<li>Countries are excluded if incidence was below 100 or if incidence rates were below 1.</li>
 </ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/tb_data.html">tb_data</a></span>()</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpdCMUOk/tb_burden.rds</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpdCMUOk/mdr_tb.rds</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; Joining TB burden data and MDR TB data.</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; # A tibble: 3,094 x 11</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;  1 Afghan… AFG   Eastern Me…  2000    38000    190       123       271</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  2 Afghan… AFG   Eastern Me…  2001    40000    189       123       271</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  3 Afghan… AFG   Eastern Me…  2002    42000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  4 Afghan… AFG   Eastern Me…  2003    44000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  5 Afghan… AFG   Eastern Me…  2004    46000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  6 Afghan… AFG   Eastern Me…  2005    47000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  7 Afghan… AFG   Eastern Me…  2006    49000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  8 Afghan… AFG   Eastern Me…  2007    50000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  9 Afghan… AFG   Eastern Me…  2008    52000    189       122       270</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; 10 Afghan… AFG   Eastern Me…  2009    53000    189       123       270</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; # … with 3,084 more rows, and 3 more variables: prop_hiv &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; #   prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="animal-reservoir-populations" class="section level1">
 <h1 class="hasAnchor">
@@ -168,19 +190,26 @@
 <h2 class="hasAnchor">
 <a href="#demographics" class="anchor"></a>Demographics</h2>
 <ul>
-<li>Population data by country.
-<ul>
-<li>Available as rural and urban split.</li>
-<li><a href="http://www.fao.org/faostat/en/#search/Cattle">Source</a></li>
+<li>Sourced from the <a href="http://www.fao.org/faostat/en/?#data/OA">FAO</a>.</li>
+<li>Data cleaning can be found in <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/cleaning.R">/data-raw/demographics.R</a>.</li>
+<li>Population estimates are available by country from 1950 until 2018.</li>
+<li>The proportion of each country that is rural is also available.</li>
 </ul>
-</li>
-<li>[x] TB incidence by country.
-<ul>
-<li>Estimates via <a href="https://github.com/seabbs/getTBinR">getTBinR</a>
-</li>
-</ul>
-</li>
-</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">EstZoonoticTB<span class="op">::</span>demographics</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14,867 x 5</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;    country     country_code  year population prop_rural</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;              &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  1 Afghanistan            2  1950    7752118      0.940</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  2 Afghanistan            2  1951    7839510      0.938</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  3 Afghanistan            2  1952    7934980      0.936</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  4 Afghanistan            2  1953    8038596      0.934</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  5 Afghanistan            2  1954    8150447      0.931</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  6 Afghanistan            2  1955    8270581      0.929</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  7 Afghanistan            2  1956    8399030      0.927</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  8 Afghanistan            2  1957    8535807      0.924</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  9 Afghanistan            2  1958    8680946      0.921</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 10 Afghanistan            2  1959    8834445      0.919</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; # … with 14,857 more rows</span></a></code></pre></div>
 </div>
 </div>
   </div>
