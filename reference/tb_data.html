@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • EstZoonoticTB</title>
+<title>Tuberculosis data from the World Health Organization (WHO). — tb_data • EstZoonoticTB</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,7 +48,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Tuberculosis data from the World Health Organization (WHO). — tb_data" />
+<meta property="og:description" content="This function relies on getTBinR to source WHO tuberculosis (TB)
+data. It then curates this data - extracting the country, region, year, TB incidence,
+TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's)." />
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +72,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -135,48 +138,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Tuberculosis data from the World Health Organization (WHO).</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/tb_data.R'><code>R/tb_data.R</code></a></small>
+    <div class="hidden name"><code>tb_data.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This function relies on <a href='https://www.samabbott.co.uk/getTBinR/'>getTBinR</a> to source WHO tuberculosis (TB)
+data. It then curates this data - extracting the country, region, year, TB incidence,
+TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's).</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>tb_data</span>()</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="dashboard.html">dashboard()</a></code> </p>
-        </td>
-        <td><p>Run a Zoonotic TB Shiny Dashboard</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tb_data.html">tb_data()</a></code> </p>
-        </td>
-        <td><p>Tuberculosis data from the World Health Organization (WHO).</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A dataframe containing curated TB data from the WHO.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>get_tb_burden</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>## Get the data</span>
+<span class='fu'>tb_data</span>()</div><div class='output co'>#&gt; <span class='message'>Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></div><div class='output co'>#&gt; <span class='message'>Saving data to: /tmp/RtmpLAShe5/tb_burden.rds</span></div><div class='output co'>#&gt; <span class='message'>Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></div><div class='output co'>#&gt; <span class='message'>Saving data to: /tmp/RtmpLAShe5/mdr_tb.rds</span></div><div class='output co'>#&gt; <span class='message'>Joining TB burden data and MDR TB data.</span></div><div class='output co'>#&gt; # A tibble: 3,850 x 11
+#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi prop_hiv
+#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 Afghan… AFG   Eastern Me…  2000    38000    190       123       271  0.00358
+#&gt;  2 Afghan… AFG   Eastern Me…  2001    40000    189       123       271  0.00302
+#&gt;  3 Afghan… AFG   Eastern Me…  2002    42000    189       122       270  0.00259
+#&gt;  4 Afghan… AFG   Eastern Me…  2003    44000    189       122       270  0.00233
+#&gt;  5 Afghan… AFG   Eastern Me…  2004    46000    189       122       270  0.00217
+#&gt;  6 Afghan… AFG   Eastern Me…  2005    47000    189       122       270  0.00222
+#&gt;  7 Afghan… AFG   Eastern Me…  2006    49000    189       122       270  0.00222
+#&gt;  8 Afghan… AFG   Eastern Me…  2007    50000    189       122       270  0.00228
+#&gt;  9 Afghan… AFG   Eastern Me…  2008    52000    189       122       270  0.00233
+#&gt; 10 Afghan… AFG   Eastern Me…  2009    53000    189       123       270  0.00238
+#&gt; # … with 3,840 more rows, and 2 more variables: prop_hiv_lo &lt;dbl&gt;,
+#&gt; #   prop_hiv_hi &lt;dbl&gt;</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
