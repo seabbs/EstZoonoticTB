@@ -140,7 +140,7 @@
 <li>Sourced from the <a href="https://www.oie.int">OIE</a> via personal communication</li>
 <li>Data cleaning details can be found in <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R">/data-raw/zoonotic_tb_animals.R</a>
 </li>
-<li>Data available for 2018 split into halfs</li>
+<li>Data available for 2018 split into half years.</li>
 <li>Data is available for domesticated and wild animals - stratified into present, limited, suspected, limited + suspected, not present and missing.</li>
 <li>Incidence or incidence rates are not available in this dataset.</li>
 <li>Data quality is low.</li>
@@ -173,9 +173,9 @@
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/tb_data.html">tb_data</a></span>()</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpA2XG9h/tb_burden.rds</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpziV284/tb_burden.rds</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpA2XG9h/mdr_tb.rds</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpziV284/mdr_tb.rds</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Joining TB burden data and MDR TB data.</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; # A tibble: 3,850 x 11</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi</span></a>
@@ -192,41 +192,12 @@
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; 10 Afghan… AFG   Eastern Me…  2009    53000    189       123       270</span></a>
 <a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; # … with 3,840 more rows, and 3 more variables: prop_hiv &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; #   prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;</span></a></code></pre></div>
-</div>
-<div id="animal-reservoir-populations" class="section level1">
-<h1 class="hasAnchor">
-<a href="#animal-reservoir-populations" class="anchor"></a>Animal reservoir populations</h1>
-<div id="domesticated" class="section level2">
-<h2 class="hasAnchor">
-<a href="#domesticated" class="anchor"></a>Domesticated</h2>
-<ul>
-<li>Cattle
-<ul>
-<li><a href="http://www.fao.org/faostat/en/#search/Cattle">Source</a></li>
-</ul>
-</li>
-<li>Other
-<ul>
-<li>Need to know what animals can have TB.</li>
-<li><a href="http://www.fao.org/faostat/en/?#data/QA">Source</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="wildlife" class="section level2">
-<h2 class="hasAnchor">
-<a href="#wildlife" class="anchor"></a>Wildlife</h2>
-<ul>
-<li>What wild animals?</li>
-<li><a href="http://www.fao.org/faostat/en/?#data/QA">Source</a></li>
-</ul>
-</div>
 <div id="demographics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#demographics" class="anchor"></a>Demographics</h2>
 <ul>
 <li>Sourced from the <a href="http://www.fao.org/faostat/en/?#data/OA">FAO</a>.</li>
-<li>Data cleaning can be found in <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/cleaning.R">/data-raw/demographics.R</a>.</li>
+<li>Data cleaning can be found in <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographoics.R">/data-raw/demographics.R</a>.</li>
 <li>Population estimates are available by country from 1950 until 2018.</li>
 <li>The proportion of each country that is rural is also available.</li>
 </ul>
@@ -247,6 +218,25 @@
 <a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; # … with 14,857 more rows</span></a></code></pre></div>
 </div>
 </div>
+<div id="animal-demographics" class="section level1">
+<h1 class="hasAnchor">
+<a href="#animal-demographics" class="anchor"></a>Animal Demographics</h1>
+<div id="domesticated" class="section level2">
+<h2 class="hasAnchor">
+<a href="#domesticated" class="anchor"></a>Domesticated</h2>
+<ul>
+<li>Sourced from the <a href="http://www.fao.org/faostat/en/?#data/OA">FAO</a>.</li>
+<li>Data cleaning can be found in <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R">/data-raw/animal_demographics.R</a>.</li>
+<li>Animals included:
+<ul>
+<li>Cattle</li>
+<li>Other</li>
+<li>What wild animals?</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -261,12 +251,14 @@
       <li><a href="#animals">Animals</a></li>
       </ul>
 </li>
-      <li><a href="#tuberculosis-tb-incidence">Tuberculosis (TB) incidence</a></li>
       <li>
-<a href="#animal-reservoir-populations">Animal reservoir populations</a><ul class="nav nav-pills nav-stacked">
+<a href="#tuberculosis-tb-incidence">Tuberculosis (TB) incidence</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#demographics">Demographics</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#animal-demographics">Animal Demographics</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#domesticated">Domesticated</a></li>
-      <li><a href="#wildlife">Wildlife</a></li>
-      <li><a href="#demographics">Demographics</a></li>
       </ul>
 </li>
       </ul>
