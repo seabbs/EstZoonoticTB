@@ -47,7 +47,7 @@ Status](https://img.shields.io/codecov/c/github/seabbs/EstZoonoticTB/master.svg)
       - Available as an indicator
       - Stratified by wild and domesticated
   - \[ \] Bovine TB in humans by country (if available).
-  - \[ \] TB incidence by country.
+  - \[x\] TB incidence by country.
       - Estimates via [getTBinR](https://github.com/seabbs/getTBinR)
 
 ## Quick start

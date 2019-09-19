@@ -15,6 +15,8 @@ BugReports: https://github.com/seabbs/EstZoonoticTB/issues
 Depends: 
     R (>= 3.3.0)
 Imports: 
+    getTBinR,
+    magrittr
 Suggests:
     spelling,
     covr,
@@ -29,8 +31,7 @@ Suggests:
     shinyWidgets,
     testthat,
     tidyverse,
-    vdiffr,
-    getTBinR
+    vdiffr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
