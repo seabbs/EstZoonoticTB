@@ -1,7 +1,7 @@
-# devtools::install_github("seabbs/getTBinR")
+
 library(pkgnet)
 library(dplyr)
-## devtools::install_github("jimhester/itdepends")
+## remotes::install_github("jimhester/itdepends")
 library(itdepends)
 
 ## Declare paths explicitly as currently required by pkgnet
