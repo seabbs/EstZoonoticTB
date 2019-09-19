@@ -76,4 +76,7 @@ EstZoonoticTB::demographics
   * Other
   * What wild animals?
 
-
+```{r}
+EstZoonoticTB::animal_demographics
+```
+   
