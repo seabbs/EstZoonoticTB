@@ -16,7 +16,9 @@ Depends:
     R (>= 3.3.0)
 Imports: 
     getTBinR,
-    magrittr
+    magrittr,
+    dplyr, 
+    tidyselect
 Suggests:
     spelling,
     covr,

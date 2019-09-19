@@ -1,0 +1,65 @@
+---
+title: "Data sources"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data sources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(EstZoonoticTB)
+```
+
+
+# Bovine tuberculosis (TB) incidence estimates
+
+## Humans
+
+- [ ] Bovine TB in humans by country (if available). 
+    - Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/)
+## Animals
+
+- [ ] Bovine TB in animals.
+  - Available as an indicator
+  - Stratified by wild and domesticated
+
+# Tuberculosis (TB) incidence
+
+* Sourced from the WHO using WHO data
+* Extract TB incidence, proportion in children, proportion HIV positive, and proportion drug resistant.
+* Data sourced using `EstZoonoticTB::get_tb_data()`. See `?EstZoonoticTB::get_tb_data()` for documentation.
+
+# Animal reservoir populations
+
+## Domesticated
+
+* Cattle
+    - [Source](http://www.fao.org/faostat/en/#search/Cattle)
+* Other
+    - Need to know what animals can have TB.
+    - [Source](http://www.fao.org/faostat/en/?#data/QA)
+    
+## Wildlife
+
+* What wild animals?
+* [Source](http://www.fao.org/faostat/en/?#data/QA)
+
+
+## Demographics
+
+- Population data by country.
+   - Available as rural and urban split.
+   - [Source](http://www.fao.org/faostat/en/#search/Cattle)
+   
+
+
+- [x] TB incidence by country.
+    - Estimates via [getTBinR](https://github.com/seabbs/getTBinR)
