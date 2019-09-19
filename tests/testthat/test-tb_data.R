@@ -15,3 +15,13 @@ test_that("TB data has at least 1 row",{
   skip_on_cran()
   expect_true(nrow(tb_data()) > 0)
 })
+
+test_that("TB data can be filtered for an incidence floor",{
+  skip_on_cran()
+  expect_true(nrow(tb_data(inc_floor = 1e12)) == 0)
+})
+
+test_that("TB data can be filtered for an incidence rate floor",{
+  skip_on_cran()
+  expect_true(nrow(tb_data(inc_rate_floor = 1e12)) == 0)
+})
