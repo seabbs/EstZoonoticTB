@@ -2,6 +2,7 @@
 
 ## Feature updates
 
+* Imported [`getTBinR::get_tb_burden()`](https://www.samabbott.co.uk/getTBinR/reference/get_tb_burden.html) in order to surface WHO TB burden estimates.
 
 ## Package updates
 
