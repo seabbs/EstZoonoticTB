@@ -1,9 +1,9 @@
 
 # EstZoonoticTB: an R package for estimating and visualising zoonotic TB <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-[![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-blue.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
+[![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-green.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
 [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/EstZoonoticTB)](https://CRAN.R-project.org/package=EstZoonoticTB)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-lightgrey.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
 [![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
 
 ## Installation
@@ -22,7 +22,7 @@ remotes::install_github("seabbs/EstZoonoticTB")
 documentation](https://img.shields.io/badge/Documentation-development-lightblue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/dev)
 [![Functions](https://img.shields.io/badge/Documentation-functions-orange.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/index.html)
 [![Data
-sources](https://img.shields.io/badge/Documentation-data%20sources-orange.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
+sources](https://img.shields.io/badge/Documentation-data%20sources-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
 
 ## Testing
 
