@@ -30,7 +30,7 @@ library(EstZoonoticTB)
 
 * Sourced from the [OIE](https://www.oie.int) via personal communication
 * Data cleaning details can be found in [/data-raw/zoonotic_tb_animals.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R)
-* Data available for 2018 split into halfs
+* Data available for 2018 split into half years.
 * Data is available for domesticated and wild animals - stratified into present, limited, suspected, limited + suspected, not present and missing. 
 * Incidence or incidence rates are not available in this dataset.
 * Data quality is low.
@@ -51,26 +51,11 @@ EstZoonoticTB::zoonotic_tb_animals
 EstZoonoticTB::tb_data()
 ```
 
-# Animal reservoir populations
-
-## Domesticated
-
-* Cattle
-    - [Source](http://www.fao.org/faostat/en/#search/Cattle)
-* Other
-    - Need to know what animals can have TB.
-    - [Source](http://www.fao.org/faostat/en/?#data/QA)
-    
-## Wildlife
-
-* What wild animals?
-* [Source](http://www.fao.org/faostat/en/?#data/QA)
-
 
 ## Demographics
 
 * Sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
-* Data cleaning can be found in [/data-raw/demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/cleaning.R).
+* Data cleaning can be found in [/data-raw/demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographoics.R).
 * Population estimates are available by country from 1950 until 2018. 
 * The proportion of each country that is rural is also available.
 
@@ -79,4 +64,16 @@ EstZoonoticTB::tb_data()
 EstZoonoticTB::demographics
 ```
    
+   
+# Animal Demographics
+
+## Domesticated
+
+* Sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
+* Data cleaning can be found in [/data-raw/animal_demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R).
+* Animals included:
+  * Cattle
+  * Other
+  * What wild animals?
+
 

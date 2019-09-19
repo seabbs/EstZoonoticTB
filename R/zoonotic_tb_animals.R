@@ -9,6 +9,6 @@
 #'   \item{year}{Year (numeric)}
 #'   \item{half}{Year half (numeric)}
 #'   \item{animal}{Animal type (factor: "dom" = domesticated; "wild" = wild)}
-#'   \item{present}{Presence of zoonostic TB in animals (factor: present; limited; suspected; limited + suspected; not present; NA)}
+#'   \item{present}{Presence of zoonotic TB in animals (factor: present; limited; suspected; limited + suspected; not present; NA)}
 #' }
 "zoonotic_tb_animals"
