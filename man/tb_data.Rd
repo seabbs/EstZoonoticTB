@@ -18,7 +18,8 @@ A dataframe containing curated TB data from the WHO.
 \description{
 This function relies on \href{https://www.samabbott.co.uk/getTBinR/}{getTBinR} to source WHO tuberculosis (TB)
 data. It then curates this data - extracting the country, region, year, TB incidence,
-TB incidence rates (+ CI's) and the proportion of cases with HIV (+ CI's).
+TB incidence rates (+ CI's), the proportion of cases with extra-pulmonary TB, and the proportion of cases with HIV (+ CI's).
+Data prior to 2000 is dropped.
 }
 \examples{
 

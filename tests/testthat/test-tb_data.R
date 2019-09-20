@@ -8,7 +8,7 @@ test_that("TB data can be successfully extracted", {
 
 test_that("TB data has the expected number of columns",{
   skip_on_cran()
-  expect_equal(ncol(tb_data()), 11)
+  expect_equal(ncol(tb_data()), 12)
 })
 
 test_that("TB data has at least 1 row",{

@@ -43,7 +43,8 @@ EstZoonoticTB::zoonotic_tb_animals
 # Tuberculosis (TB) incidence
 
 * Sourced from the [WHO](http://www.who.int/tb/country/data/download/en/) using [`{getTBinR}`](https://www.samabbott.co.uk/getTBinR/index.html).
-* Extracted TB incidence, TB incidence rates (+ CI's), and proportion HIV positive (+ CI's).
+* Extracted TB incidence, TB incidence rates (+ CI's), proportion with extra-pulmonary TB, and proportion HIV positive (+ CI's).
+* Data prior to 2000 is dropped due to the high proportion of missing data.
 * Data sourced using `EstZoonoticTB::tb_data()`. See `?EstZoonoticTB::tb_data()` for documentation.
 
 
