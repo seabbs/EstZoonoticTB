@@ -23,6 +23,15 @@ library(EstZoonoticTB)
 
 ## Humans
 
+* Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/).
+* Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB.
+* Data is restricted to 61 countries. 
+
+### Limitations
+
+* Studies are often not representative of overall TB and zoonotic TB incidence. Potentially this could be counter balanced by looking at study level TB incidence versus nationwide TB incidence.
+* Zoonotic TB incidence is highly hetergeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.
+* 
 - [ ] Bovine TB in humans by country (if available). 
     - Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/)
     
