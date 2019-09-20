@@ -1,8 +1,7 @@
 # Data info ---------------------------------------------------------------
-## THIS IS A PLACEHOLDER FILE - DO NOT USE
 ## Data downloaded from here: http://www.fao.org/faostat/en/?#data/OA
-## Data downloaded on 19/09/19
-## Searched for population, selected annual population, and selected all data for downloading. 
+## Data downloaded on 20/09/19
+## Searched for cattle, selected live animals, and then selected cattle with all years and countries. 
 
 
 # Raw data ----------------------------------------------------------------
@@ -17,24 +16,19 @@ animal_demographics <- data.table::fread("animal_demographics.csv") %>%
 
 animal_demographics <- animal_demographics %>% 
   dplyr::select(country = Area, country_code = `Area Code`,
-                type = Element, year = Year, pop = Value)
+                type = Item, year = Year, pop = Value)
 
 
 # Clean data --------------------------------------------------------------
 
 animal_demographics <- animal_demographics %>% 
   dplyr::mutate(country = factor(country),
-                pop = pop * 1000) %>% 
-  dplyr::filter(type %in% c("Total Population - Both sexes", "Rural population", "Urban population")) %>% 
+                type = type %>% 
+                  tolower()) %>% 
   tidyr::pivot_wider(
     names_from = c("type"), 
     values_from = "pop"
   ) %>% 
-  dplyr::rename(population = `Total Population - Both sexes`, 
-                rural = `Rural population`,
-                urban = `Urban population`) %>% 
-  dplyr::mutate(prop_rural = rural / population) %>% 
-  dplyr::select(-urban, -rural) %>% 
   ## Dealing with no ASCII characters in the country names (found via devtools::check)
   dplyr::mutate(country = country %>% 
                   as.character() %>% 

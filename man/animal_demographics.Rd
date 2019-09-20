@@ -4,19 +4,18 @@
 \name{animal_demographics}
 \alias{animal_demographics}
 \title{Animal demographic data}
-\format{A data frame with 14,857 rows and 5 variables.
+\format{A data frame with 14,857 rows and 4 variables.
 \describe{
 \item{country}{Country name (factor)}
 \item{country_code}{Country code (numeric)}
 \item{year}{Year (numeric)}
-\item{population}{Estimated population size (numeric)}
-\item{prop_rural}{Proportion of population that is estimated to be rural (numeric)}
+\item{cattle}{Estimated number of cattle (numeric)}
 }}
 \usage{
 animal_demographics
 }
 \description{
-Country level animal demographic data from 1950 to the current day. Data is sourced from the \href{http://www.fao.org/faostat/en/?#data/OA}{FAO}.
+Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the \href{http://www.fao.org/faostat/en/?#data/OA}{FAO}.
 Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R}{/data-raw/animal_demographics.R}.
 }
 \keyword{datasets}

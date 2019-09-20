@@ -73,8 +73,7 @@ EstZoonoticTB::demographics
 * Data cleaning can be found in [/data-raw/animal_demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R).
 * Animals included:
   * Cattle
-  * Other
-  * What wild animals?
+* Additional animals that are vecotors of Zoonotic TB could also be included as needed/thought appropriate
 
 ```{r}
 EstZoonoticTB::animal_demographics

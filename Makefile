@@ -3,7 +3,7 @@
 default: all
 
 
-all: build_data package docs man/figures/logo.png README.md git_commit
+all: build_data package docs man/figures/logo.png README.md check_package git_commit
 
 #Update data
 .PHONY: build_data
@@ -29,6 +29,11 @@ README.md: README.Rmd
 		Rscript -e 'rmarkdown::render("README.Rmd")' && \
 		rm README.html
 		
+## Check package locally
+.PHONY: check_package
+check_package: 
+			Rscript -e "devtools::check()"
+			
 #Commit updates
 .PHONY: git_commit
 git_commit:
