@@ -21,7 +21,8 @@ tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL) {
   country <- NULL; e_inc_100k <- NULL; e_inc_100k_hi <- NULL;
   e_inc_100k_lo <- NULL; e_inc_num <- NULL; e_inc_tbhiv_100k <- NULL;
   e_inc_tbhiv_100k_hi <- NULL; e_inc_tbhiv_100k_lo <- NULL; g_whoregion <- NULL;
-  iso3 <- NULL; tb_cases <- NULL; year <- NULL; tb_inc <- NULL;
+  iso3 <- NULL; tb_cases <- NULL; year <- NULL; tb_inc <- NULL; new_ep <- NULL;
+  ep_tb_cases <- NULL; prop_tb_ep <- NULL;
   
   ## Pull data
   tb <- EstZoonoticTB::get_tb_burden(additional_datasets = "all")
