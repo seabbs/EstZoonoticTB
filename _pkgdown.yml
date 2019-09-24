@@ -34,6 +34,9 @@ reference:
     - zoonotic_tb_animals
     - demographics
     - animal_demographics
+  - title: Data manipulation
+    desc: Functions for data manipulation.
+    - link_data
   - title: Reporting
     desc: Package reporting functionality
     contents:

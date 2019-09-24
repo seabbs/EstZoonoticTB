@@ -42,6 +42,15 @@ remotes::install_github("seabbs/EstZoonoticTB")
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/seabbs/EstZoonoticTB?branch=master&svg=true)](https://ci.appveyor.com/project/seabbs/EstZoonoticTB)
 [![Coverage Status](https://img.shields.io/codecov/c/github/seabbs/EstZoonoticTB/master.svg)](https://codecov.io/github/seabbs/EstZoonoticTB?branch=master)
 
+
+## Data
+
+The package comes prepackaged with multiple datasets that can then be linked into a single dataset ready for analysis. This linked dataset can be accessed using the following,
+
+```{r}
+EstZoonoticTB::link_data()
+```
+
 ## Shiny dashboard
 
 To explore the package functionality in an interactive session, or to investigate Zoonotic TB without having to code extensively in R, a shiny dashboard has been built into the package. This can either be used locally using, 

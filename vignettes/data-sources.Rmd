@@ -74,6 +74,7 @@ library(EstZoonoticTB)
 ### Cleaned data
 
 * Country-wide and non-country wide data-sets joined
+* Manually adjusted country names to map to those found in other TB incidence datasets. See `EstZoonoticTB::link_data` for error checking of this.
 * Proportion of TB cases that were zoonotic TB estimated for each study
 * Upper and lower confidence intervals (95%) also included.
 * Standard error also included for later use in modelling/simulation.

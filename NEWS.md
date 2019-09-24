@@ -8,6 +8,7 @@
 * Added FAO demographic estimates for cattle.
 * Added data on zoonotic TB incidence in humans from [this](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/) systematic review.
 * Added a data sources vignette detailing available data, sources, and cleaning steps taken.
+* Added `EstZoonoticTB::link_data` to link the various relevant datasets. By default using built in datasets but custom datasets (using the same formatting) can also be supplied.
 
 ## Package updates
 

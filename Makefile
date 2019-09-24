@@ -14,7 +14,7 @@ build_data:
 #build update documents and build package
 .PHONY: package
 package:
-		 R CMD INSTALL --no-multiarch --with-keep.source .
+		 Rscript -e 'devtools::install()'
 
 .PHONY: docs		 
 docs:
@@ -23,16 +23,18 @@ docs:
 #update logo
 man/figures/logo.png: inst/scripts/generate_hex_sticker.R
 		Rscript inst/scripts/generate_hex_sticker.R
-		
-#update readme
-README.md: README.Rmd
-		Rscript -e 'rmarkdown::render("README.Rmd")' && \
-		rm README.html
+
 		
 ## Check package locally
 .PHONY: check_package
 check_package: 
 			Rscript -e "devtools::check()"
+			
+#update readme
+README.md: README.Rmd
+		Rscript -e 'rmarkdown::render("README.Rmd")' && \
+		rm README.html
+
 			
 #Commit updates
 .PHONY: git_commit

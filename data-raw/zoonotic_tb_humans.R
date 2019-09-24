@@ -324,7 +324,13 @@ zoonotic_tb_humans <- zoonotic_tb_humans %>%
                 prop_tb_z_hi = purrr::map_dbl(prop_test, ~ .$conf.int[2]),
                 prop_tb_z_se = (prop_tb_z_hi - prop_tb_z_lo) / (2 * qnorm(0.975))
                 ) %>% 
-  dplyr::select(-prop_test)
+  dplyr::select(-prop_test) %>% 
+  dplyr::mutate(country = country %>% 
+                  as.character %>% 
+                  replace(country %in% "United Kingdom", "United Kingdom of Great Britain and Northern Ireland") %>% 
+                  replace(country %in% "Czech Republic", "Czechia") %>% 
+                  replace(country %in% "Tanzania", "United Republic of Tanzania") %>% 
+                  factor)
 
 summary(zoonotic_tb_humans)
 
