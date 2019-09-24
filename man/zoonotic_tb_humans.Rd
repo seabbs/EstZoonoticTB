@@ -4,7 +4,7 @@
 \name{zoonotic_tb_humans}
 \alias{zoonotic_tb_humans}
 \title{Status of zoonotic TB in humans}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 201 rows and 12 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 201 rows and 16 columns.}
 \usage{
 zoonotic_tb_humans
 }

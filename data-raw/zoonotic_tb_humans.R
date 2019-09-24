@@ -313,11 +313,24 @@ zoonotic_tb_humans <- country_wide %>%
   dplyr::mutate(dirty_id = id, id = 1:dplyr::n()) %>% 
   dplyr::select(id, study_id, dirty_id, tidyselect::everything())
 
+
+
+# Generate outcome variables ----------------------------------------------
+
+zoonotic_tb_humans <- zoonotic_tb_humans %>%
+  dplyr::mutate(prop_test = purrr::map2(cases, sample_size, ~ stats::prop.test(.x, .y))) %>% 
+  dplyr::mutate(prop_tb_z = purrr::map_dbl(prop_test, ~ .$estimate),
+                prop_tb_z_lo = purrr::map_dbl(prop_test, ~ .$conf.int[1]),
+                prop_tb_z_hi = purrr::map_dbl(prop_test, ~ .$conf.int[2]),
+                prop_tb_z_se = (prop_tb_z_hi - prop_tb_z_lo) / (2 * qnorm(0.975))
+                ) %>% 
+  dplyr::select(-prop_test)
+
 summary(zoonotic_tb_humans)
 
 # Load into package -------------------------------------------------------
 
-usethis::use_data(zoonotic_tb_humans , overwrite = TRUE)
+usethis::use_data(zoonotic_tb_humans, overwrite = TRUE)
 
 
 # Save into data-raw in csv format ----------------------------------------

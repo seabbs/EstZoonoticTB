@@ -23,7 +23,7 @@ library(EstZoonoticTB)
 
 ## Humans
 
-* Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/).
+* Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/) by Muller et al.
 * Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB.
 * Data is restricted to 61 countries. 
 
