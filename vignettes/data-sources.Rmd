@@ -23,25 +23,73 @@ library(EstZoonoticTB)
 
 ## Humans
 
+### Raw data
+
 * Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/) by Muller et al.
-* Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB.
+* Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB. Data includes zoonotic TB cases,  and sample size (TB cases).
 * Data is restricted to 61 countries. 
+* Data quality is extremely low with multiple issues. 
+
+
+### Data cleaning
+
+#### Initial data cleaning
+
+* Added a logical variable capturing if studies are multi-year.
+* Standardized missing data to be listed as `NA`.
+* Extract country name by assuming it comes before the first comma in the area string.
+* Extract the study end date by assuming (with some manual post processing) that the last 4 digits in the study period are the final year of the study.
+* Replace `NA` with 0 zoonotic TB cases for studies that have no TB cases.
+
+#### Exclusions
+
+* Replace missing sample size data with TB case data.
+* If the number of zoonotic TB cases is unknown attempt to back calculate using the sample size and proportion of cases that have zoonotic TB.
+* Drop studies with an unknown study period.
+* Drop studies from the EU as a whole.
+* Drop all studies from the US due to low quality data.
+* Drop all studies that look at subset of ages.
+* Drop all studies that look at a specific gender.
+* Exclude studies that did not look at the general population, identified TB cases, hospital populations, or identified TB cases in hospital populations.
+* Drop studies that are not country wide if that country has country wide data available. (**This is a major assumption that could be re-evaluated**).
+* If a study reports data on TB cases then drop duplicated data on the general/hospital population.
+* Drop all studies that don't list a sample size (**This may be to restrictive as some studies may use the overall population size as the sample size**).
+* Split data-set into country-wide and non-country wide studies for further cleaning.
+
+
+#### Country-wide data
+
+* Excluded studies in sub-populations or high risk populations via manual inspection.
+* Dropped data from New Zealand as a study is duplicated with differing sample sizes.
+* Excluded duplicate entries for France and Ireland.
+* Final data-set has data from 36 countries across 18 years (1990 - 2007)
+
+#### Non-country wide data
+
+
+* No exclusions based on sub-populations as all studies are effectively sampling sub-populations (risk, location, etc). This needs to be appropriately adjusted for at the analysis stage.
+* Excluded duplicate entries from Sierra Leone and Argentina
+* Final data-set has data from 14 countries across 15 years (1991 - 2008).
+
+### Cleaned data
+
+* Country-wide and non-country wide data-sets joined
+* Proportion of TB cases that were zoonotic TB estimated for each study
+* Upper and lower confidence intervals (95%) also included.
+* Standard error also included for later use in modelling/simulation.
 
 ### Limitations
 
-* Studies are often not representative of overall TB and zoonotic TB incidence. Potentially this could be counter balanced by looking at study level TB incidence versus nationwide TB incidence.
-* Zoonotic TB incidence is highly hetergeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.
-* 
-- [ ] Bovine TB in humans by country (if available). 
-    - Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/)
-    
+* Studies are often not representative of overall TB and zoonotic TB incidence.
+* Zoonotic TB incidence is highly heterogeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.
+
 ## Animals
 
 * Sourced from the [OIE](https://www.oie.int) via personal communication
 * Data cleaning details can be found in [/data-raw/zoonotic_tb_animals.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R)
 * Data available for 2018 split into half years.
 * Data is available for domesticated and wild animals - stratified into present, limited, suspected, limited + suspected, not present and missing. 
-* Incidence or incidence rates are not available in this dataset.
+* Incidence or incidence rates are not available in this data set.
 * Data quality is low.
 * Last recorded status is also available but this field has currently been excluded due to its poor quality. 
 
@@ -83,7 +131,7 @@ EstZoonoticTB::demographics
 * Data cleaning can be found in [/data-raw/animal_demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R).
 * Animals included:
   * Cattle
-* Additional animals that are vecotors of Zoonotic TB could also be included as needed/thought appropriate
+* Additional animals that are vectors of Zoonotic TB could also be included as needed/thought appropriate
 
 ```{r}
 EstZoonoticTB::animal_demographics
