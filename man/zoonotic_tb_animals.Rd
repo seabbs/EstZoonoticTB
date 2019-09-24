@@ -4,14 +4,13 @@
 \name{zoonotic_tb_animals}
 \alias{zoonotic_tb_animals}
 \title{Status of zoonotic TB in animals}
-\format{A data frame with 710 rows and 6 variables.
+\format{A data frame with 187 rows and 5 variables.
 \describe{
 \item{country}{Country name (factor)}
 \item{country_code}{Country code (factor)}
 \item{year}{Year (numeric)}
-\item{half}{Year half (numeric)}
-\item{animal}{Animal type (factor: "dom" = domesticated; "wild" = wild)}
-\item{present}{Presence of zoonotic TB in animals (factor: present; limited; suspected; limited + suspected; not present; NA)}
+\item{dom}{Presence of zoonotic TB in  domesticated animals (factor: present; limited; suspected; limited + suspected; not present; NA)}
+\item{wild}{Presence of zoonotic TB in wild animals (factor: present; limited; suspected; limited + suspected; not present; NA)}
 }}
 \usage{
 zoonotic_tb_animals

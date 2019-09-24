@@ -78,6 +78,10 @@ library(EstZoonoticTB)
 * Upper and lower confidence intervals (95%) also included.
 * Standard error also included for later use in modelling/simulation.
 
+```{r}
+EstZoonoticTB::zoonotic_tb_humans
+```
+
 ### Limitations
 
 * Studies are often not representative of overall TB and zoonotic TB incidence.
@@ -92,6 +96,7 @@ library(EstZoonoticTB)
 * Incidence or incidence rates are not available in this data set.
 * Data quality is low.
 * Last recorded status is also available but this field has currently been excluded due to its poor quality. 
+* Data for half years has been combined into data summarised across a year.
 
 ```{r}
 EstZoonoticTB::zoonotic_tb_animals

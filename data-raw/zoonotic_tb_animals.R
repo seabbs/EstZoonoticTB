@@ -61,7 +61,7 @@ zoonotic_tb_animals <- zoonotic_tb_animals %>%
     ) %>% 
   ## Combine these variables into a single variable
   dplyr::mutate(
-    zoonostic_tb = dplyr::case_when(
+    zoonotic_tb = dplyr::case_when(
       present %in% "yes" & suspected_present %in% "no" & limited_present %in% "no" ~ "present",
       present %in% "yes" & suspected_present %in% "yes" & limited_present %in% "no" ~ "suspected",
       present %in% "yes" & suspected_present %in% "no" & limited_present %in% "yes" ~ "limited",
@@ -78,9 +78,30 @@ zoonotic_tb_animals <- zoonotic_tb_animals %>%
 # Finalise variables ------------------------------------------------------
 
 zoonotic_tb_animals <- zoonotic_tb_animals %>% 
-  dplyr::select(tidyselect::contains("country"), year, half, animal, present) %>% 
+  dplyr::select(tidyselect::contains("country"), year, half, animal, zoonotic_tb) %>% 
   dplyr::mutate_at(.vars = dplyr::vars(year, half), as.numeric) %>% 
   dplyr::mutate_if(is.character, factor)
+
+
+
+# Spread into animal status and merge across time -------------------------
+
+## Assumes that any observation counts equally with any other.
+
+zoonotic_tb_animals <- zoonotic_tb_animals %>% 
+  tidyr::pivot_wider(names_from = half,
+                     values_from = "zoonotic_tb") %>% 
+  dplyr::mutate(present = dplyr::case_when(`1` %in% "present" | `2` %in% "present"  ~  "present",
+                                           `1` %in% "limited" | `2` %in% "limited" ~ "limited",
+                                           `1` %in% "suspected" | `2` %in% "suspected" ~ "suspected",
+                                           `1` %in% "suspected + limited" | `2` %in% "suspected + limited" ~ "suspected + limited",
+                                           `1` %in% "not present" | `2` %in% "not present" ~ "not present") %>%
+           factor) %>% 
+  dplyr::select(-`1`, -`2`) %>% 
+  tidyr::pivot_wider(names_from = animal,
+                     values_from = "present",
+                     names_prefix = "")
+
   
 # Load into package -------------------------------------------------------
 
