@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • EstZoonoticTB</title>
+<title>Status of zoonotic TB in humans — zoonotic_tb_humans • EstZoonoticTB</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,7 +48,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Status of zoonotic TB in humans — zoonotic_tb_humans" />
+<meta property="og:description" content="Country level data on the status of zoonotic TB in humans across multiple years. Data is sourced from this systematic review.
+via personal communication. Data cleaning details can be found in /data-raw/zoonotic_tb_humans.R." />
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +71,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -149,46 +151,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Status of zoonotic TB in humans</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/zoonotic_tb_humans.R'><code>R/zoonotic_tb_humans.R</code></a></small>
+    <div class="hidden name"><code>zoonotic_tb_humans.Rd</code></div>
     </div>
 
-    <div id="estzoonotictb-0-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#estzoonotictb-0-1-0" class="anchor"></a>EstZoonoticTB 0.1.0</h1>
-<div id="feature-updates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#feature-updates" class="anchor"></a>Feature updates</h2>
-<ul>
-<li>Imported <a href="https://www.samabbott.co.uk/getTBinR/reference/get_tb_burden.html"><code><a href="samabbott.co.uk/getTBinR//reference/get_tb_burden.html">getTBinR::get_tb_burden()</a></code></a> in order to surface WHO TB burden estimates.</li>
-<li>Added FAO estimates of population demographics to the package.</li>
-<li>Added OIE estimates for zoonostic TB presence in domesticated and wild animals.</li>
-<li>Added FAO demographic estimates for cattle.</li>
-<li>Added data on zoonotic TB incidence in humans from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/">this</a> systematic review.</li>
-<li>Added a data sources vignette detailing available data, sources, and cleaning steps taken.</li>
-</ul>
-</div>
-<div id="package-updates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-updates" class="anchor"></a>Package updates</h2>
-<ul>
-<li>Set up package using existing infrastructure from <a href="https://github.com/seabbs/getTBinR">getTBinR</a>.</li>
-<li>Documentation building set up using Travis CI.</li>
-<li>Added tests for all datasets.</li>
-</ul>
-</div>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Country level data on the status of zoonotic TB in humans across multiple years. Data is sourced from <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/'>this systematic review</a>.
+via personal communication. Data cleaning details can be found in <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_humans.R'>/data-raw/zoonotic_tb_humans.R</a>.</p>
+    </div>
 
+    <pre class="usage"><span class='no'>zoonotic_tb_humans</span></pre>
+
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 201 rows and 12 columns.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#estzoonotictb-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#format">Format</a></li>
+    </ul>
 
+  </div>
 </div>
 
 
