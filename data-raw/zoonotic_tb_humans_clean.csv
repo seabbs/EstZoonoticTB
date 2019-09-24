@@ -1,0 +1,202 @@
+id,study_id,dirty_id,country,geo_coverage,study_pop,sampling_strat,study_period,study_end,multi_year_study,cases,sample_size
+1,2,279,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,2,441
+2,2,280,Belgium,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,583
+3,2,281,Bulgaria,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,1314
+4,2,282,Cyprus,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,28
+5,2,283,Czech Republic,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,1,478
+6,2,284,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,1,216
+7,2,285,Estonia,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,303
+8,2,286,France,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,2933
+9,2,287,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,158
+10,2,288,Germany,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,41,2725
+11,2,289,Greece,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,1,349
+12,2,290,Hungary,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,653
+13,2,291,Ireland,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,5,212
+14,2,292,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,6,1360
+15,2,293,Latvia,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,788
+16,2,294,Lithuania,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,1218
+17,2,295,Luxembourg,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,26
+18,2,296,Malta,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,14
+19,2,297,Netherlands,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,9,400
+20,2,298,Poland,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,4523
+21,2,299,Portugal,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,1784
+22,2,300,Romania,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,10456
+23,2,301,Slovakia,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,308
+24,2,302,Slovenia,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,2,148
+25,2,303,Spain,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,11,3614
+26,2,304,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,4,240
+27,2,305,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,24,3221
+28,2,307,Iceland,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,0,7
+29,2,308,Norway,Country-wide data,Country-wide detected TB cases,All notified cases included,2007,2007,no,2,138
+30,2,309,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,4,485
+31,2,310,Belgium,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,2,603
+32,2,311,Cyprus,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,21
+33,2,312,Czech Republic,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,520
+34,2,313,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,3,201
+35,2,314,Estonia,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,267
+36,2,316,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,187
+37,2,317,Germany,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,50,2957
+38,2,319,Hungary,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,708
+39,2,320,Ireland,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,5,219
+40,2,321,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,9,1881
+41,2,322,Latvia,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,787
+42,2,324,Luxembourg,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,1,32
+43,2,325,Malta,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,11
+44,2,326,Netherlands,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,13,493
+45,2,328,Portugal,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,1865
+46,2,329,Slovakia,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,310
+47,2,330,Slovenia,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,146
+48,2,332,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,2,256
+49,2,333,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,31,3436
+50,2,336,Iceland,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,1,6
+51,2,337,Norway,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,140
+52,2,338,Romania,Country-wide data,Country-wide detected TB cases,All notified cases included,2006,2006,no,0,11124
+53,2,339,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,6,533
+54,2,341,Cyprus,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,19
+55,2,342,Czech Republic,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,2,543
+56,2,343,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,220
+57,2,344,Estonia,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,292
+58,2,346,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,234
+59,2,347,Germany,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,53,3165
+60,2,350,Ireland,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,3,187
+61,2,351,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,7,1778
+62,2,352,Latvia,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,843
+63,2,354,Luxembourg,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,34
+64,2,355,Malta,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,1,8
+65,2,358,Portugal,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,1825
+66,2,359,Slovakia,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,301
+67,2,361,Spain,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,4,3727
+68,2,362,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,4,279
+69,2,363,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,39,3377
+70,2,365,Iceland,Country-wide data,Country-wide detected TB cases,All notified cases included,2005,2005,no,0,5
+71,2,367,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,4,649
+72,2,368,Belgium,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,5,1249
+73,2,369,Cyprus,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,2,18
+74,2,371,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,3,203
+75,2,372,Estonia,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,429
+76,2,373,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,347
+77,2,379,Germany,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,51,3505
+78,2,380,Greece,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,121
+79,2,381,Hungary,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,2476
+80,2,386,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,5,1643
+81,2,387,Latvia,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,1373
+82,2,388,Lithuania,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,1924
+83,2,394,Slovenia,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,265
+84,2,397,Spain,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,4,3191
+85,2,398,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,6,371
+86,2,403,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,8,188
+87,2,405,Norway,Country-wide data,Country-wide detected TB cases,All notified cases included,2004,2004,no,0,151
+88,2,406,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,4,543
+89,2,407,Belgium,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,5,448
+90,2,410,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,1,216
+91,2,412,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,0,230
+92,2,415,Greece,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,0,340
+93,2,417,Ireland,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,6,146
+94,2,418,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,1,1865
+95,2,420,Lithuania,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,0,1171
+96,2,427,Spain,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,4,4109
+97,2,428,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,5,211
+98,2,430,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,30,1621
+99,2,432,Norway,Country-wide data,Country-wide detected TB cases,All notified cases included,2003,2003,no,0,132
+100,2,433,Austria,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,4,498
+101,2,434,Belgium,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,2,778
+102,2,437,Denmark,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,2,217
+103,2,439,Finland,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,0,265
+104,2,442,Greece,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,0,357
+105,2,444,Ireland,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,7,173
+106,2,445,Italy,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,4,1861
+107,2,454,Spain,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,6,4702
+108,2,455,Sweden,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,7,209
+109,2,456,Netherlands,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,8,617
+110,2,457,United Kingdom,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,20,2165
+111,2,459,Norway,Country-wide data,Country-wide detected TB cases,All notified cases included,2002,2002,no,2,113
+112,9,543,Australia,Country-wide data,All bacteriologically confirmed cases of human TB in Australia in 2007,All notified cases included,2007,2007,no,1,872
+113,47,638,Australia,Country-wide data,Bacteriologically confirmed TB cases in Ausitralia,All notified cases included,2006,2006,no,2,905
+114,57,751,Colombia,Country-wide data,"TB cases with isolates submitted for culture diagnosis to the National Institute of Health, Bogotá",All notified cases included,1989-2005,2005,yes,0,12500
+115,57,758,Ecuador,Country-wide data,Isolates of patients submitted to the Izquieta Perez National Reference Laboratory and the laboratory network,Convenience sample/unknown sampling strategy,1998-2005,2005,yes,2,1044
+116,57,761,Peru,Country-wide data,"Isolates of culture-confirmed TB cases, captured by the National Institute of Health, public health laboratory network",All notified cases included,2004,2004,no,0,16401
+117,57,762,Peru,Country-wide data,"Isolates of culture-confirmed TB cases, captured by the National Institute of Health, public health laboratory network",All notified cases included,2005,2005,no,0,15502
+118,72,787,Australia,Country-wide data,Bacteriologically confirmed cases of TB,All notified cases included,2005,2005,no,2,810
+119,134,826,New Zealand,Country-wide data,TB cases captured by New Zealand's three referral laboratories for TB,All notified cases included,1995-2002,2002,yes,54,1997
+120,162,1053,Ireland,Country-wide data,Culture-confirmed TB cases,All notified cases included,1998,1998,no,6,241
+121,1142,1171,France,Country-wide data,Culture-positive TB cases,All notified cases included,1995,1995,no,38,7075
+122,1059,1325,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1990,1990,no,0,2576
+123,1059,1326,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1991,1991,no,0,2158
+124,1059,1327,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1992,1992,no,2,2187
+125,1059,1328,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1993,1993,no,5,2284
+126,1059,1329,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1994,1994,no,2,2219
+127,1059,1330,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1995,1995,no,0,2114
+128,1059,1331,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1996,1996,no,1,2175
+129,1059,1332,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1997,1997,no,1,2055
+130,1059,1333,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1998,1998,no,0,2118
+131,1059,1334,Croatia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1999,1999,no,0,1770
+132,1059,1335,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1990,1990,no,7,1512
+133,1059,1336,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1991,1991,no,6,1555
+134,1059,1337,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1992,1992,no,8,1428
+135,1059,1338,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1993,1993,no,4,1226
+136,1059,1339,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1994,1994,no,3,1164
+137,1059,1340,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1995,1995,no,1,1189
+138,1059,1341,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1996,1996,no,2,1097
+139,1059,1342,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1997,1997,no,1,1048
+140,1059,1343,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1998,1998,no,1,1066
+141,1059,1344,Czech Republic,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1999,1999,no,3,1002
+142,1059,1345,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1990,1990,no,2,1193
+143,1059,1346,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1991,1991,no,1,1198
+144,1059,1347,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1992,1992,no,0,1180
+145,1059,1348,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1993,1993,no,1,1140
+146,1059,1349,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1994,1994,no,0,1165
+147,1059,1350,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1995,1995,no,2,963
+148,1059,1351,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1996,1996,no,1,850
+149,1059,1352,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1997,1997,no,0,783
+150,1059,1353,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1998,1998,no,0,744
+151,1059,1354,Slovakia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1999,1999,no,0,651
+152,1059,1355,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1990,1990,no,0,419
+153,1059,1356,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1991,1991,no,0,363
+154,1059,1357,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1992,1992,no,1,389
+155,1059,1358,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1993,1993,no,0,420
+156,1059,1359,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1994,1994,no,0,334
+157,1059,1360,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1995,1995,no,0,345
+158,1059,1361,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1996,1996,no,0,423
+159,1059,1362,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1997,1997,no,0,356
+160,1059,1363,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1998,1998,no,0,346
+161,1059,1364,Slovenia,Country-wide data,Culture-positive TB patients with diagnosed disease causing agent,All notified cases included,1999,1999,no,0,316
+162,1131,1376,Mexico,Country-wide data,TB patients with cultures tested for the presence of M. bovis,Convenience sample/unknown sampling strategy,1991-1992,1992,yes,1216.8,15210
+163,1131,1385,Sweden,Country-wide data,Culture-positive TB cases,All notified cases included,1990,1990,no,10,451
+164,1131,1386,Sweden,Country-wide data,Culture-positive TB cases,All notified cases included,1991,1991,no,15,446
+165,1131,1387,Sweden,Country-wide data,Culture-positive TB cases,All notified cases included,1992,1992,no,16,425
+166,242,1464,Australia,Country-wide data,TB culture positive cases reported in Australia,All notified cases included,2000,2000,no,2,765
+167,250,1473,Spain,Country-wide data,M. bovis isolates from TB patients reported to National Reference lab,All notified cases included,Jan 1994-Nov 1996,1996,yes,3,80
+168,269,1476,Australia,Country-wide data,M. tuberculosis complex isolates from TB patients,All notified cases included,1998,1998,no,5,700
+169,269,1477,Australia,Country-wide data,M. tuberculosis complex isolates from TB patients,All notified cases included,1999,1999,no,4,760
+170,213,1559,Australia,Country-wide data,"clinical specimens that were culture-positive for Mycobacterium tuberculosis complex, identified by the Australian Mycobacterium Reference Laboratory Network",All notified cases included,2001,2001,no,1,771
+171,12,548,Côte d'Ivoire,Non-country-wide data,"Consecutive, new, culture positive, smear positive tuberculosis patients from randomly selected Tuberculosis Centres and some Rural Health Centres in Côte d'Ivoire",Cluster sampling,"Dec 1994-Jan 1995, May 1995-May 1996",1996,yes,0,320
+172,12,549,Sierra Leone,Non-country-wide data,"All smear positive cases registered for re-treatment (treatment failure at month 5 or later during therapy, relapse cases, interrupted treatment) between March 2003 and June 2004 in the Western Area and Kenema districts in Sierra Leone",All notified cases included,Mar 2003-Jun 2004,2004,yes,0,97
+173,12,551,Burundi,Non-country-wide data,Patients with TB lymphadenitis or pulmonary TB,Convenience sample/unknown sampling strategy,Nov 1987-Jun 1994,1994,yes,0,117
+174,14,565,Argentina,Non-country-wide data,"Patients with diagnosis of pulmonary TB, collected at Cetrángolo Hospital",Convenience sample/unknown sampling strategy,2004-2005,2005,yes,4,113
+175,15,589,Ethiopia,Non-country-wide data,TB patients with pulmonary or extrapulmonary TB admitted to the hospital and volunteering in the study,Convenience sample/unknown sampling strategy,Dec 2007-May 2008,2008,yes,8,105
+176,15,592,Ethiopia,Non-country-wide data,Consecutively recruited patients with a diagnosis of tuberculous lymphadenitis,All notified cases included,Jan 2000-May 2001,2001,yes,11,40
+177,36,594,China,Non-country-wide data,Approx. 20% of isolates from TB patients hospitalized,Convenience sample/unknown sampling strategy,Aug 2007-Dec 2007,2007,yes,0,82
+178,36,595,China,Non-country-wide data,Approx. 20% of isolates from TB patients hospitalized,Convenience sample/unknown sampling strategy,Jul 2005-Dec 2005,2005,yes,0,105
+179,36,596,China,Non-country-wide data,TB patients hospitalized at Wuhan Hospital for TB and Wuhan TB Prevention and Treatment Hospital,All notified cases included,2005-2007,2007,yes,17,5011
+180,55,727,China,Non-country-wide data,TB cases for which isolates were sent to the reference laboratory of Taiwan,Convenience sample/unknown sampling strategy,2004-2005,2005,yes,15,3321
+181,57,736,Argentina,Non-country-wide data,Culture confirmed TB cases in adults at the Muñiz Hospital,All notified cases included,1981-1991,1991,yes,97,10240
+182,57,739,Argentina,Non-country-wide data,Culture confirmed TB cases in adults at the Muñiz Hospital,All notified cases included,2000-2006,2006,yes,20,6942
+183,57,740,Argentina,Non-country-wide data,Pulmonary TB cases in adults,Convenience sample/unknown sampling strategy,1977-2000,2000,yes,97,3946
+184,57,741,Argentina,Non-country-wide data,Pulmonary TB cases in adults,Convenience sample/unknown sampling strategy,2001-2006,2006,yes,6,590
+185,57,742,Argentina,Non-country-wide data,Pulmonary TB cases,Convenience sample/unknown sampling strategy,2003,2003,no,9,723
+186,57,743,Argentina,Non-country-wide data,Extra-pulmonary TB cases,Convenience sample/unknown sampling strategy,2003,2003,no,0,48
+187,57,744,Argentina,Non-country-wide data,Pulmonary TB cases detected at the Cetrángolo Hospital,All notified cases included,2001-2005,2005,yes,5,1470
+188,62,765,Ghana,Non-country-wide data,Isolates from consecutive pulmonary TB patients referred to the Korle-Bu Teaching hospital and consenting to participate in the study between January and July 2003,Convenience sample/unknown sampling strategy,Jan 2003-Jul 2003,2003,yes,2,64
+189,65,768,Ethiopia,Non-country-wide data,"Clinically diagnosed pulmonary and extra-pulmonary TB cases at Fitche Hospital TB clinic, consenting in study participation",Convenience sample/unknown sampling strategy,Oct 2004-Mar 2005,2005,yes,7,87
+190,80,809,Burkina Faso,Non-country-wide data,Patients with symptomatic TB disease and sputum culture positive for M. tuberculosis complex,Convenience sample/unknown sampling strategy,Jan 2001-Dec 2001,2001,yes,0,120
+191,159,1045,Tanzania,Non-country-wide data,Mycobacterial adenitis patients meeting case definitions with culture confirmed Mycobacterium spp. Infection,All notified cases included,1999-2001,2001,yes,7,65
+192,165,1119,Chad,Non-country-wide data,Suspect TB cases identified at health centres,Convenience sample/unknown sampling strategy,8 Jan-21 Feb 2002,2002,yes,0,10
+193,249,1121,Djibouti,Non-country-wide data,TB lymphadenitis patients at the Centre de lutte antituberculeuse Paul Faure,All notified cases included,Jan-Apr 1999,1999,yes,1,159
+194,464,1122,Madagascar,Non-country-wide data,20% of the microscopy positive pulmonary TB patients detected at the TB health clinic of the Institut d'Hygiène Sociale (IHS) in Antananarivo,Convenience sample/unknown sampling strategy,1994,1994,no,3,126
+195,464,1123,Madagascar,Non-country-wide data,80% of the microscopy positive pulmonary TB patients in Antananarivo prison,Convenience sample/unknown sampling strategy,Feb-Nov 1994,1994,yes,0,36
+196,1074,1369,Ethiopia,Non-country-wide data,Confirmed PCR positive cases of TB lymphadenitis based on combined clinical and cytological criteria. Cases were identified among consequitively identified clinical TB lymphadenitis patients.,Systematic sampling,Jan 2000-May 2001,2001,yes,11,35
+197,1147,1392,Tanzania,Non-country-wide data,Patients identified with culture-positive clinical mycobacterial adenitis,Random sampling,1999-2001,2001,yes,7,65
+198,148,1420,Argentina,Non-country-wide data,"Patients diagnosed with pulmonary TB and reported to the hospital Transito Caceres de Allende, Cordoba, Argentina",All notified cases included,1991-2003,2003,yes,9,742
+199,222,1448,Cameroon,Non-country-wide data,M. tuberculosis complex isolates from TB patients (15 district hospitals),All notified cases included,Jul 1997-Jun 1998,1998,yes,1,455
+200,243,1465,Uganda,Non-country-wide data,TB patients from Mulago hospital,Convenience sample/unknown sampling strategy,1995-1997,1997,yes,1,234
+201,294,1479,Tanzania,Non-country-wide data,Mycobacteria isolates from patients (pastoralist communities) with clinical symptoms compatible with TB,All notified cases included,Mar 1993-Dec 1996,1996,yes,7,44

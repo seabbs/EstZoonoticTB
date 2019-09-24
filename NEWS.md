@@ -6,6 +6,7 @@
 * Added FAO estimates of population demographics to the package. 
 * Added OIE estimates for zoonostic TB presence in domesticated and wild animals.
 * Added FAO demographic estimates for cattle.
+* Added data on zoonotic TB incidence in humans from [this](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/) systematic review.
 * Added a data sources vignette detailing available data, sources, and cleaning steps taken.
 
 ## Package updates

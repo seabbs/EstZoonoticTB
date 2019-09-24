@@ -135,7 +135,7 @@ zoonotic_tb_humans <- zoonotic_tb_humans %>%
   )} %>% 
   ## If a study has data on identified TB cases then drop the data on the general population as this is a duplicate record.
   {dplyr::anti_join(
-    mutate(., 
+    dplyr::mutate(., 
            pop_coverage = as.character(pop_coverage)),
            dplyr::select(., study_id, country, study_period,
                          geo_coverage, pop_coverage) %>% 
@@ -146,7 +146,7 @@ zoonotic_tb_humans <- zoonotic_tb_humans %>%
   } %>% 
   ##Similarly if a study has data on a hospitalised TB cases then drop data on general hospital population
   {dplyr::anti_join(
-    mutate(., 
+    dplyr::mutate(., 
            pop_coverage = as.character(pop_coverage)),
     dplyr::select(., study_id, country, study_period,
                   geo_coverage, pop_coverage) %>% 
@@ -250,7 +250,7 @@ summary(country_wide)
   
 # Non-country wide data ---------------------------------------------------
 
-## Pair down to analysis variables. Look up original data for study detauls
+## WARNING: This data is very low quality - needs to be handled with care.
 
 non_country_wide <- zoonotic_tb_humans %>% 
   dplyr::filter(!(geo_coverage %in% "Country-wide data")) %>% 
@@ -258,7 +258,62 @@ non_country_wide <- zoonotic_tb_humans %>%
 
 
 ## Inspect study populations for exclusion.
-summary(non_country_wide$study_pop)
+levels(non_country_wide$study_pop)
+
+## No studies excluded here to preserve sample size.
+## Kept studies in extra-pulmonary, or pulmonary etc to avoid excluding useful data
+## This bias needs to be considered when modelling. 
+
+
+## ## Inspect based on repeated study period and country
+
+dup_countries <- non_country_wide %>% 
+ dplyr::count(country, study_id, study_period) %>% 
+  dplyr::arrange(desc(n)) %>% 
+  dplyr::filter(n > 1) %>% 
+  dplyr::pull(country) %>% 
+  unique
+
+dup_country_df <- non_country_wide %>% 
+  dplyr::filter(country %in% dup_countries)
+
+
+## Exclude duplicate study from Sierre Leone (id: 550; study_id: 12)
+## Exclude a duplicate Argentinan study id via study pop
+non_country_wide <- non_country_wide %>% 
+  dplyr::filter(id != 550) %>% 
+  dplyr::filter(!(study_pop %in% "Patients with diagnosis of pulmonary TB, collected at ‘‘Emilio Coni’’ National Institute of Respiratory Diseases"))
+
+## Final manual data cleaning check
+non_country_wide
+
+## Exclude a study due to missing study period
+non_country_wide <- non_country_wide %>% 
+  dplyr::filter(id != 1373)
+
+## Finalise country wide data and check
+
+non_country_wide <-  non_country_wide %>%  
+  dplyr::select(id, study_id, country, geo_coverage,
+                study_pop, sampling_strat, study_period,
+                study_end, multi_year_study, cases, sample_size) %>% 
+  dplyr::mutate_if(is.factor, forcats::fct_drop)
+
+summary(non_country_wide)
+
+
+
+
+# Join data sources -------------------------------------------------------
+
+## rebase id
+zoonotic_tb_humans <- country_wide %>% 
+  dplyr::bind_rows(non_country_wide) %>% 
+  dplyr::mutate_if(is.character, factor) %>% 
+  dplyr::mutate(dirty_id = id, id = 1:dplyr::n()) %>% 
+  dplyr::select(id, study_id, dirty_id, tidyselect::everything())
+
+summary(zoonotic_tb_humans)
 
 # Load into package -------------------------------------------------------
 
@@ -267,4 +322,4 @@ usethis::use_data(zoonotic_tb_humans , overwrite = TRUE)
 
 # Save into data-raw in csv format ----------------------------------------
 
-data.table::fwrite(zoonotic_tb_humans, "zoonotic_tb_humans _clean.csv")
+data.table::fwrite(zoonotic_tb_humans, "zoonotic_tb_humans_clean.csv")
