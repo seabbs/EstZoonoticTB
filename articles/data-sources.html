@@ -124,24 +124,84 @@
 <div id="humans" class="section level2">
 <h2 class="hasAnchor">
 <a href="#humans" class="anchor"></a>Humans</h2>
+<div id="raw-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#raw-data" class="anchor"></a>Raw data</h3>
 <ul>
 <li>Source from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/">this systematic review</a> by Muller et al.</li>
-<li>Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB.</li>
+<li>Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB. Data includes zoonotic TB cases, and sample size (TB cases).</li>
 <li>Data is restricted to 61 countries.</li>
+<li>Data quality is extremely low with multiple issues.</li>
 </ul>
+</div>
+<div id="data-cleaning" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-cleaning" class="anchor"></a>Data cleaning</h3>
+<div id="initial-data-cleaning" class="section level4">
+<h4 class="hasAnchor">
+<a href="#initial-data-cleaning" class="anchor"></a>Initial data cleaning</h4>
+<ul>
+<li>Added a logical variable capturing if studies are multi-year.</li>
+<li>Standardized missing data to be listed as <code>NA</code>.</li>
+<li>Extract country name by assuming it comes before the first comma in the area string.</li>
+<li>Extract the study end date by assuming (with some manual post processing) that the last 4 digits in the study period are the final year of the study.</li>
+<li>Replace <code>NA</code> with 0 zoonotic TB cases for studies that have no TB cases.</li>
+</ul>
+</div>
+<div id="exclusions" class="section level4">
+<h4 class="hasAnchor">
+<a href="#exclusions" class="anchor"></a>Exclusions</h4>
+<ul>
+<li>Replace missing sample size data with TB case data.</li>
+<li>If the number of zoonotic TB cases is unknown attempt to back calculate using the sample size and proportion of cases that have zoonotic TB.</li>
+<li>Drop studies with an unknown study period.</li>
+<li>Drop studies from the EU as a whole.</li>
+<li>Drop all studies from the US due to low quality data.</li>
+<li>Drop all studies that look at subset of ages.</li>
+<li>Drop all studies that look at a specific gender.</li>
+<li>Exclude studies that did not look at the general population, identified TB cases, hospital populations, or identified TB cases in hospital populations.</li>
+<li>Drop studies that are not country wide if that country has country wide data available. (<strong>This is a major assumption that could be re-evaluated</strong>).</li>
+<li>If a study reports data on TB cases then drop duplicated data on the general/hospital population.</li>
+<li>Drop all studies that don’t list a sample size (<strong>This may be to restrictive as some studies may use the overall population size as the sample size</strong>).</li>
+<li>Split data-set into country-wide and non-country wide studies for further cleaning.</li>
+</ul>
+</div>
+<div id="country-wide-data" class="section level4">
+<h4 class="hasAnchor">
+<a href="#country-wide-data" class="anchor"></a>Country-wide data</h4>
+<ul>
+<li>Excluded studies in sub-populations or high risk populations via manual inspection.</li>
+<li>Dropped data from New Zealand as a study is duplicated with differing sample sizes.</li>
+<li>Excluded duplicate entries for France and Ireland.</li>
+<li>Final data-set has data from 36 countries across 18 years (1990 - 2007)</li>
+</ul>
+</div>
+<div id="non-country-wide-data" class="section level4">
+<h4 class="hasAnchor">
+<a href="#non-country-wide-data" class="anchor"></a>Non-country wide data</h4>
+<ul>
+<li>No exclusions based on sub-populations as all studies are effectively sampling sub-populations (risk, location, etc). This needs to be appropriately adjusted for at the analysis stage.</li>
+<li>Excluded duplicate entries from Sierra Leone and Argentina</li>
+<li>Final data-set has data from 14 countries across 15 years (1991 - 2008).</li>
+</ul>
+</div>
+</div>
+<div id="cleaned-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cleaned-data" class="anchor"></a>Cleaned data</h3>
+<ul>
+<li>Country-wide and non-country wide data-sets joined</li>
+<li>Proportion of TB cases that were zoonotic TB estimated for each study</li>
+<li>Upper and lower confidence intervals (95%) also included.</li>
+<li>Standard error also included for later use in modelling/simulation.</li>
+</ul>
+</div>
 <div id="limitations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#limitations" class="anchor"></a>Limitations</h3>
 <ul>
-<li>Studies are often not representative of overall TB and zoonotic TB incidence. Potentially this could be counter balanced by looking at study level TB incidence versus nationwide TB incidence.</li>
-<li>Zoonotic TB incidence is highly hetergeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.</li>
-<li>
-<li>[ ] Bovine TB in humans by country (if available).
-<ul>
-<li>Source from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/">this systematic review</a>
-</li>
-</ul>
-</li>
+<li>Studies are often not representative of overall TB and zoonotic TB incidence.</li>
+<li>Zoonotic TB incidence is highly heterogeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.</li>
 </ul>
 </div>
 </div>
@@ -154,7 +214,7 @@
 </li>
 <li>Data available for 2018 split into half years.</li>
 <li>Data is available for domesticated and wild animals - stratified into present, limited, suspected, limited + suspected, not present and missing.</li>
-<li>Incidence or incidence rates are not available in this dataset.</li>
+<li>Incidence or incidence rates are not available in this data set.</li>
 <li>Data quality is low.</li>
 <li>Last recorded status is also available but this field has currently been excluded due to its poor quality.</li>
 </ul>
@@ -186,40 +246,40 @@
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/tb_data.html">tb_data</a></span>()</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/tb_burden.rds</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/tb_burden.rds</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/mdr_tb.rds</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/mdr_tb.rds</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Joining TB burden data and MDR TB data.</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Getting additional dataset: Latent TB infection</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=ltbi_estimates</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/latent_tb_infection.rds</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/latent_tb_infection.rds</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; Getting additional dataset: Notification</span></a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=notifications</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/notification.rds</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/notification.rds</span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; Getting additional dataset: Drug resistance surveillance</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=dr_surveillance</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/drug_resistance_surveillance.rds</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/drug_resistance_surveillance.rds</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; Getting additional dataset: Non-routine HIV surveillance</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=tbhivnonroutinesurv</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/non-routine_hiv_surveillance.rds</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/non-routine_hiv_surveillance.rds</span></a>
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; Getting additional dataset: Outcomes</span></a>
 <a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=outcomes</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/outcomes.rds</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/outcomes.rds</span></a>
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; Getting additional dataset: Budget</span></a>
 <a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=budget</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/budget.rds</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/budget.rds</span></a>
 <a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; Getting additional dataset: Expenditure and utilisation</span></a>
 <a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=expenditure_utilisation</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/expenditure_and_utilisation.rds</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/expenditure_and_utilisation.rds</span></a>
 <a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; Getting additional dataset: Policies and services</span></a>
 <a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=policies</span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/policies_and_services.rds</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/policies_and_services.rds</span></a>
 <a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt; Getting additional dataset: Community engagement</span></a>
 <a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=community</span></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/community_engagement.rds</span></a>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/community_engagement.rds</span></a>
 <a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt; Getting additional dataset: Laboratories</span></a>
 <a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=labs</span></a>
-<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt; Saving data to: /tmp/RtmpdSZ5X9/laboratories.rds</span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt; Saving data to: /tmp/RtmpnSMoG2/laboratories.rds</span></a>
 <a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt; Joining TB burden data and additional datasets.</span></a>
 <a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt; # A tibble: 4,070 x 12</span></a>
 <a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi</span></a>
@@ -276,7 +336,7 @@
 <li>Cattle</li>
 </ul>
 </li>
-<li>Additional animals that are vecotors of Zoonotic TB could also be included as needed/thought appropriate</li>
+<li>Additional animals that are vectors of Zoonotic TB could also be included as needed/thought appropriate</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">EstZoonoticTB<span class="op">::</span>animal_demographics</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 11,338 x 4</span></a>
