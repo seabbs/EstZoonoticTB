@@ -1,3 +1,11 @@
+# EstZoonoticTB 0.2.0
+
+## Feature updates
+
+
+## Package updates
+
+
 # EstZoonoticTB 0.1.0
 
 ## Feature updates

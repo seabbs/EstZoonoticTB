@@ -2,8 +2,7 @@
 # EstZoonoticTB: an R package for estimating and visualising zoonotic TB <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-green.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
-[![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/EstZoonoticTB)](https://CRAN.R-project.org/package=EstZoonoticTB)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-lightgrey.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.2.0-lightgrey.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
 [![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
 
 ## Installation
@@ -41,9 +40,9 @@ be accessed using the following,
 
 ``` r
 EstZoonoticTB::link_data(verbose = FALSE)
-#> # A tibble: 4,148 x 22
+#> # A tibble: 14,882 x 26
 #>    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo
-#>    <chr>   <chr>        <chr>       <dbl>    <int>  <dbl>     <dbl>
+#>    <fct>   <fct>        <fct>       <dbl>    <int>  <dbl>     <dbl>
 #>  1 Afghan… AFG          Eastern Me…  2000    38000    190       123
 #>  2 Afghan… AFG          Eastern Me…  2001    40000    189       123
 #>  3 Afghan… AFG          Eastern Me…  2002    42000    189       122
@@ -54,12 +53,13 @@ EstZoonoticTB::link_data(verbose = FALSE)
 #>  8 Afghan… AFG          Eastern Me…  2007    50000    189       122
 #>  9 Afghan… AFG          Eastern Me…  2008    52000    189       122
 #> 10 Afghan… AFG          Eastern Me…  2009    53000    189       123
-#> # … with 4,138 more rows, and 15 more variables: tb_inc_hi <dbl>,
+#> # … with 14,872 more rows, and 19 more variables: tb_inc_hi <dbl>,
 #> #   prop_tb_ep <dbl>, prop_hiv <dbl>, prop_hiv_lo <dbl>,
-#> #   prop_hiv_hi <dbl>, dom <fct>, wild <fct>, z_tb_id <int>,
-#> #   z_tb_geo_coverage <fct>, z_tb_study_pop <fct>,
-#> #   z_tb_multi_year_study <fct>, prop_tb_z <dbl>, prop_tb_z_lo <dbl>,
-#> #   prop_tb_z_hi <dbl>, prop_tb_z_se <dbl>
+#> #   prop_hiv_hi <dbl>, z_tb_dom_animal <fct>, z_tb_wild_animal <fct>,
+#> #   z_tb_id <int>, z_tb_geo_coverage <fct>, z_tb_study_pop <fct>,
+#> #   z_tb_multi_year_study <fct>, tb_z_prop <dbl>, tb_z_prop_lo <dbl>,
+#> #   tb_z_prop_hi <dbl>, tb_z_prop_se <dbl>, population <dbl>,
+#> #   prop_rural <dbl>, cattle <int>, cattle_per_head <dbl>
 ```
 
 ## Shiny dashboard

@@ -8,7 +8,7 @@ test_that("Linked data can be successfully extracted.", {
 
 test_that("Linked data has the expected number of columns using default datasets.",{
   skip_on_cran()
-  expect_equal(ncol(link_data()), 22)
+  expect_equal(ncol(link_data()), 26)
 })
 
 test_that("Linked data has at least 1 row",{
