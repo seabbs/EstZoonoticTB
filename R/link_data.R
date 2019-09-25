@@ -31,7 +31,14 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
                       demo = NULL, animal_demo = NULL,
                       verbose = TRUE) {
   
-  
+
+# Control for NULL variables ----------------------------------------------
+
+  cases <- NULL; cattle <- NULL; country <- NULL; country.x <- NULL;
+  country.y <- NULL; country_code <- NULL; dirty_id <- NULL;
+  geo_coverage <- NULL; id <- NULL; iso3 <- NULL; multi_year_study <- NULL;
+  population <- NULL; sample_size <- NULL; sampling_strat <- NULL;
+  study_end <- NULL; study_id <- NULL; study_period <- NULL; study_pop <- NULL; 
   
   
   # Use default data if none is supplied ------------------------------------
