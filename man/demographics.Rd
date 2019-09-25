@@ -18,6 +18,6 @@ demographics
 \description{
 Country level demographic data from 1950 to the current day. Also includes the proportion of the population
 that are rural. Data is sourced from the \href{http://www.fao.org/faostat/en/?#data/OA}{FAO}.
-Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographics.R}{/data-raw/demographics.R}.
+Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographics.R}{\\data-raw\\demographics.R}.
 }
 \keyword{datasets}

@@ -16,7 +16,7 @@
 zoonotic_tb_animals
 }
 \description{
-Country level data on the status of zoonotic TB in animals (domesticated and wild) for 2018. Data is sourced from the \href{https://www.oie.int}{OIE}
-via personal communication. Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R}{/data-raw/zoonotic_tb_animals.R}.
+Country level data on the status of zoonotic TB in animals domesticated and wild for 2018. Data is sourced from the \href{https://www.oie.int}{OIE}
+via personal communication. Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R}{\\data-raw\\zoonotic_tb_animals.R}.
 }
 \keyword{datasets}

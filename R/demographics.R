@@ -2,7 +2,7 @@
 #'
 #' Country level demographic data from 1950 to the current day. Also includes the proportion of the population
 #' that are rural. Data is sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
-#' Data cleaning details can be found in [/data-raw/demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographics.R).
+#' Data cleaning details can be found in [\\\\data-raw\\\\demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographics.R).
 #' @format A data frame with 14,857 rows and 5 variables.
 #' \describe{
 #'   \item{country}{Country name (factor)}

@@ -18,7 +18,11 @@ Imports:
     getTBinR,
     magrittr,
     dplyr, 
-    tidyselect
+    tidyselect,
+    rnaturalearth,
+    rnaturalearthdata,
+    rlang,
+    ggplot2
 Suggests:
     spelling,
     covr,
@@ -33,7 +37,8 @@ Suggests:
     shinyWidgets,
     testthat,
     tidyverse,
-    vdiffr
+    vdiffr,
+    scales
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

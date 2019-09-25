@@ -16,6 +16,6 @@ animal_demographics
 }
 \description{
 Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the \href{http://www.fao.org/faostat/en/?#data/OA}{FAO}.
-Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R}{/data-raw/animal_demographics.R}.
+Data cleaning details can be found in \href{https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R}{\\data-raw\\animal_demographics.R}.
 }
 \keyword{datasets}

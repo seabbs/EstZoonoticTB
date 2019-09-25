@@ -2,9 +2,12 @@
 
 ## Feature updates
 
+* Added `global_map` function for plotting country level data for a single variable.
+
 
 ## Package updates
 
+* Added tests (including `{vidffr}` image tests) for `global_map`.
 
 # EstZoonoticTB 0.1.0
 
