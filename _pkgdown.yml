@@ -36,6 +36,7 @@ reference:
     - animal_demographics
   - title: Data manipulation
     desc: Functions for data manipulation.
+    contents:
     - link_data
   - title: Reporting
     desc: Package reporting functionality
