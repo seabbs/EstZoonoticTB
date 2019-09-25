@@ -48,7 +48,7 @@ remotes::install_github("seabbs/EstZoonoticTB")
 The package comes prepackaged with multiple datasets that can then be linked into a single dataset ready for analysis. This linked dataset can be accessed using the following,
 
 ```{r}
-EstZoonoticTB::link_data()
+EstZoonoticTB::link_data(verbose = FALSE)
 ```
 
 ## Shiny dashboard

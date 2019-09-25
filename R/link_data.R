@@ -41,7 +41,7 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   }
   
   if (is.null(tb_humans)) {
-    tb_humans <- EstZoonoticTB::tb_data()
+    tb_humans <- EstZoonoticTB::tb_data(verbose = FALSE)
   }
   
   

@@ -4,13 +4,15 @@
 \alias{tb_data}
 \title{Tuberculosis data from the World Health Organization (WHO).}
 \usage{
-tb_data(inc_floor = NULL, inc_rate_floor = NULL)
+tb_data(inc_floor = NULL, inc_rate_floor = NULL, ...)
 }
 \arguments{
 \item{inc_floor}{Numeric, defaults to NULL. What is the minimum incidence to keep in the data.}
 
 \item{inc_rate_floor}{Numeric, defaults to NULL. What is the minimum incidence
 rate (per 100,000) to keep in the data.}
+
+\item{...}{Additional arguments to pass to \code{getTBinR::get_tb_burden}.}
 }
 \value{
 A dataframe containing curated TB data from the WHO.

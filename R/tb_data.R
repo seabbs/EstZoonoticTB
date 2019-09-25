@@ -7,6 +7,7 @@
 #' @param inc_floor Numeric, defaults to NULL. What is the minimum incidence to keep in the data.
 #' @param inc_rate_floor Numeric, defaults to NULL. What is the minimum incidence
 #' rate (per 100,000) to keep in the data.
+#' @param ... Additional arguments to pass to `getTBinR::get_tb_burden`.
 #' @return A dataframe containing curated TB data from the WHO.
 #' @export
 #' @importFrom dplyr select mutate filter
@@ -16,7 +17,7 @@
 #' 
 #' ## Get the data
 #' tb_data()
-tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL) {
+tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL, ...) {
   ## Assign NULL for packaging
   country <- NULL; e_inc_100k <- NULL; e_inc_100k_hi <- NULL;
   e_inc_100k_lo <- NULL; e_inc_num <- NULL; e_inc_tbhiv_100k <- NULL;
@@ -25,7 +26,7 @@ tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL) {
   ep_tb_cases <- NULL; prop_tb_ep <- NULL;
   
   ## Pull data
-  tb <- EstZoonoticTB::get_tb_burden(additional_datasets = "all")
+  tb <- EstZoonoticTB::get_tb_burden(additional_datasets = "all", ...)
   
   ## Pull out a selection of data
   tb <- tb %>% 
