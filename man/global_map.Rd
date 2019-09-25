@@ -6,7 +6,7 @@
 \usage{
 global_map(data = NULL, variable = NULL, variable_label = NULL,
   trans = "identity", fill_labels = NULL,
-  viridis_palette = "viridis", show_caption = TRUE)
+  viridis_palette = "cividis", show_caption = TRUE)
 }
 \arguments{
 \item{data}{Dataframe containing variables to be mapped. Must contain a \code{country_code} variable.
@@ -25,7 +25,7 @@ transform ("identity"). Other options include log scaling ("log") and log base 1
 which can be used for percentage data.}
 
 \item{viridis_palette}{Character string indicating the \code{viridis} colour palette to use. Defaults
-to "viridis". Options include "cividis", "magma", "inferno", "plasma", and "viridis". For additional details}
+to "cividis". Options include "cividis", "magma", "inferno", "plasma", and "viridis". For additional details}
 
 \item{show_caption}{Logical, defaults to \code{TRUE}. Should the default caption be displayed.}
 }

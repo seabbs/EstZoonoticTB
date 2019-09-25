@@ -14,14 +14,14 @@
 #' @param fill_labels A function to use to allocate legend labels. An example (used below) is \code{scales::percent},
 #' which can be used for percentage data.
 #' @param viridis_palette Character string indicating the \code{viridis} colour palette to use. Defaults
-#' to "viridis". Options include "cividis", "magma", "inferno", "plasma", and "viridis". For additional details 
+#' to "cividis". Options include "cividis", "magma", "inferno", "plasma", and "viridis". For additional details 
 #' @param show_caption Logical, defaults to \code{TRUE}. Should the default caption be displayed.
 #' @seealso link_data
 #' @return A \code{ggplot2} object containing a global map.
 #' @export
 #'
 #' @importFrom rnaturalearth ne_countries
-#' @importFrom dplyr left_join select
+#' @importFrom dplyr left_join select filter
 #' @importFrom ggplot2 ggplot aes geom_sf theme_minimal theme labs waiver
 #' @importFrom rlang .data
 #' 
@@ -46,13 +46,13 @@ global_map <- function(data = NULL, variable = NULL,
                      variable_label = NULL,
                      trans = "identity",
                      fill_labels = NULL,
-                     viridis_palette = "viridis",
+                     viridis_palette = "cividis",
                      show_caption = TRUE) {
 
 
 # Prep --------------------------------------------------------------------
 
-  country <- NULL; 
+  country <- NULL; subregion <- NULL;
   
 if (is.null(data)) {
     stop("A dataset must be supplied containing at least one variable to map.")
@@ -81,12 +81,10 @@ if (is.null(fill_labels)) {
   ## Country level
   world <- rnaturalearth::ne_countries(scale='medium',
                                        returnclass = 'sf')
-  
   ## Coastlines
   continents <- rnaturalearth::ne_coastline(scale = "medium", 
                                             returnclass = "sf")
-  
-  
+
 
 # Link data and shape file ------------------------------------------------
 

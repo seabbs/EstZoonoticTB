@@ -8,6 +8,7 @@
 ## Package updates
 
 * Added tests (including `{vidffr}` image tests) for `global_map`.
+* Updated package logo.
 
 # EstZoonoticTB 0.1.0
 
