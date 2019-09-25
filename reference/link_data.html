@@ -85,7 +85,7 @@ and/or munging." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EstZoonoticTB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -103,6 +103,12 @@ and/or munging." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/data-sources.html">Data sources</a>
+    </li>
+    <li>
+      <a href="../articles/data-exploration.html">Data exploration</a>
+    </li>
+    <li>
+      <a href="../articles/data-mapping.html">Mapping data</a>
     </li>
   </ul>
 </li>
@@ -217,7 +223,7 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt; [13] "Monaco"                   "Nauru"                   
 #&gt; [15] "Northern Mariana Islands" "Palau"                   
 #&gt; [17] "San Marino"               "Tokelau"                 
-#&gt; [19] "Turks and Caicos Islands" "Tuvalu"                  </div><div class='output co'>#&gt; <span class='message'>Countries with data present for animal demographics and not demographics:</span></div><div class='output co'>#&gt; [1] "Norfolk Island"</div><div class='output co'>#&gt; <span class='message'>Joining TB incidence in humans data and zTB presence in animals data.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for TB incidence and not zTB in animals:</span></div><div class='output co'>#&gt;  [1] "American Samoa"                       
+#&gt; [19] "Turks and Caicos Islands" "Tuvalu"                  </div><div class='output co'>#&gt; <span class='message'>Countries with data present for animal demographics and not demographics:</span></div><div class='output co'>#&gt; [1] "Norfolk Island"</div><div class='output co'>#&gt; <span class='message'>Joining TB incidence in humans data and zTB presence in animals data using country codes.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for TB incidence and not zTB in animals:</span></div><div class='output co'>#&gt;  [1] "American Samoa"                       
 #&gt;  [2] "Anguilla"                             
 #&gt;  [3] "Antigua and Barbuda"                  
 #&gt;  [4] "Aruba"                                
@@ -264,9 +270,24 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt;  [5] "French Guiana"                  "Guadeloupe (France)"           
 #&gt;  [7] "Liechtenstein, Principality of" "Martinique"                    
 #&gt;  [9] "Mayotte (France)"               "Melilla"                       
-#&gt; [11] "Reunion"                        "St. Helena"                    </div><div class='output co'>#&gt; <span class='message'>Joining zTB incidence in humans data and all other TB data</span></div><div class='output co'>#&gt; # A tibble: 4,148 x 22
+#&gt; [11] "Reunion"                        "St. Helena"                    </div><div class='output co'>#&gt; <span class='message'>Joining zTB incidence in humans data and all other TB data using country names</span></div><div class='output co'>#&gt; <span class='message'>Joining TB data and demographic data using country names.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for TB not for demographics:</span></div><div class='output co'>#&gt;  [1] "Bonaire, Saint Eustatius and Saba" "Curaçao"                          
+#&gt;  [3] "Netherlands Antilles"              "Serbia &amp; Montenegro"              
+#&gt;  [5] "Sint Maarten (Dutch part)"         "West Bank and Gaza Strip"         
+#&gt;  [7] "Ceuta"                             "Chinese Taipei"                   
+#&gt;  [9] "Guadeloupe (France)"               "Liechtenstein, Principality of"   
+#&gt; [11] "Mayotte (France)"                  "Melilla"                          
+#&gt; [13] "St. Helena"                       </div><div class='output co'>#&gt; <span class='message'>Countries with data present demographics and not TB:</span></div><div class='output co'>#&gt; <span class='message'>(Some mismatches are to be expected here due to historic country names)</span></div><div class='output co'>#&gt;  [1] "Belgium-Luxembourg"              "Channel Islands"                
+#&gt;  [3] "Czechoslovakia"                  "Ethiopia PDR"                   
+#&gt;  [5] "Gibraltar"                       "Guadeloupe"                     
+#&gt;  [7] "Holy See"                        "Isle of Man"                    
+#&gt;  [9] "Liechtenstein"                   "Mayotte"                        
+#&gt; [11] NA                                "Pacific Islands Trust Territory"
+#&gt; [13] "Palestine"                       "Saint Pierre and Miquelon"      
+#&gt; [15] "Sudan (former)"                  "United States Virgin Islands"   
+#&gt; [17] "USSR"                            "Western Sahara"                 
+#&gt; [19] "Yugoslav SFR"                    "Norfolk Island"                 </div><div class='output co'>#&gt; # A tibble: 14,882 x 26
 #&gt;    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi
-#&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;    &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 Afghan… AFG          Eastern Me…  2000    38000    190       123       271
 #&gt;  2 Afghan… AFG          Eastern Me…  2001    40000    189       123       271
 #&gt;  3 Afghan… AFG          Eastern Me…  2002    42000    189       122       270
@@ -277,11 +298,13 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt;  8 Afghan… AFG          Eastern Me…  2007    50000    189       122       270
 #&gt;  9 Afghan… AFG          Eastern Me…  2008    52000    189       122       270
 #&gt; 10 Afghan… AFG          Eastern Me…  2009    53000    189       123       270
-#&gt; # … with 4,138 more rows, and 14 more variables: prop_tb_ep &lt;dbl&gt;,
-#&gt; #   prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;, dom &lt;fct&gt;,
-#&gt; #   wild &lt;fct&gt;, z_tb_id &lt;int&gt;, z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,
-#&gt; #   z_tb_multi_year_study &lt;fct&gt;, prop_tb_z &lt;dbl&gt;, prop_tb_z_lo &lt;dbl&gt;,
-#&gt; #   prop_tb_z_hi &lt;dbl&gt;, prop_tb_z_se &lt;dbl&gt;</div></pre>
+#&gt; # … with 14,872 more rows, and 18 more variables: prop_tb_ep &lt;dbl&gt;,
+#&gt; #   prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;,
+#&gt; #   z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;, z_tb_id &lt;int&gt;,
+#&gt; #   z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;, z_tb_multi_year_study &lt;fct&gt;,
+#&gt; #   tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;, tb_z_prop_hi &lt;dbl&gt;,
+#&gt; #   tb_z_prop_se &lt;dbl&gt;, population &lt;dbl&gt;, prop_rural &lt;dbl&gt;, cattle &lt;int&gt;,
+#&gt; #   cattle_per_head &lt;dbl&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

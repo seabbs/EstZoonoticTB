@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EstZoonoticTB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -58,6 +58,12 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/data-sources.html">Data sources</a>
+    </li>
+    <li>
+      <a href="../articles/data-exploration.html">Data exploration</a>
+    </li>
+    <li>
+      <a href="../articles/data-mapping.html">Mapping data</a>
     </li>
   </ul>
 </li>
@@ -212,8 +218,8 @@
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 10    10        2      288 Germany Country-wid… Country-… All notified …</span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # … with 191 more rows, and 9 more variables: study_period &lt;fct&gt;,</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; #   study_end &lt;dbl&gt;, multi_year_study &lt;fct&gt;, cases &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; #   sample_size &lt;dbl&gt;, prop_tb_z &lt;dbl&gt;, prop_tb_z_lo &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; #   prop_tb_z_hi &lt;dbl&gt;, prop_tb_z_se &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; #   sample_size &lt;dbl&gt;, tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; #   tb_z_prop_hi &lt;dbl&gt;, tb_z_prop_se &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="limitations" class="section level3">
 <h3 class="hasAnchor">
@@ -266,40 +272,40 @@
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/tb_data.html">tb_data</a></span>()</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/tb_burden.rds</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/tb_burden.rds</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/mdr_tb.rds</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/mdr_tb.rds</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Joining TB burden data and MDR TB data.</span></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Getting additional dataset: Latent TB infection</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=ltbi_estimates</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/latent_tb_infection.rds</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/latent_tb_infection.rds</span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; Getting additional dataset: Notification</span></a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=notifications</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/notification.rds</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/notification.rds</span></a>
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; Getting additional dataset: Drug resistance surveillance</span></a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=dr_surveillance</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/drug_resistance_surveillance.rds</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/drug_resistance_surveillance.rds</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; Getting additional dataset: Non-routine HIV surveillance</span></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=tbhivnonroutinesurv</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/non-routine_hiv_surveillance.rds</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/non-routine_hiv_surveillance.rds</span></a>
 <a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; Getting additional dataset: Outcomes</span></a>
 <a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=outcomes</span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/outcomes.rds</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/outcomes.rds</span></a>
 <a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; Getting additional dataset: Budget</span></a>
 <a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=budget</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/budget.rds</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/budget.rds</span></a>
 <a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; Getting additional dataset: Expenditure and utilisation</span></a>
 <a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=expenditure_utilisation</span></a>
-<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/expenditure_and_utilisation.rds</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/expenditure_and_utilisation.rds</span></a>
 <a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; Getting additional dataset: Policies and services</span></a>
 <a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=policies</span></a>
-<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/policies_and_services.rds</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/policies_and_services.rds</span></a>
 <a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; Getting additional dataset: Community engagement</span></a>
 <a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=community</span></a>
-<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/community_engagement.rds</span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/community_engagement.rds</span></a>
 <a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; Getting additional dataset: Laboratories</span></a>
 <a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt; Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=labs</span></a>
-<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; Saving data to: /tmp/Rtmp9J320I/laboratories.rds</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; Saving data to: /tmp/RtmpTLGxff/laboratories.rds</span></a>
 <a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; Joining TB burden data and additional datasets.</span></a>
 <a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; # A tibble: 4,070 x 12</span></a>
 <a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt;    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi</span></a>
@@ -326,7 +332,7 @@
 <li>The proportion of each country that is rural is also available.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">EstZoonoticTB<span class="op">::</span>demographics</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14,867 x 5</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14,729 x 5</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    country     country_code  year population prop_rural</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;              &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 Afghanistan            2  1950    7752118      0.940</span></a>
@@ -339,7 +345,7 @@
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 Afghanistan            2  1957    8535807      0.924</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 Afghanistan            2  1958    8680946      0.921</span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 Afghanistan            2  1959    8834445      0.919</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # … with 14,857 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # … with 14,719 more rows</span></a></code></pre></div>
 </div>
 </div>
 <div id="animal-demographics" class="section level1">
@@ -359,7 +365,7 @@
 <li>Additional animals that are vectors of Zoonotic TB could also be included as needed/thought appropriate</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">EstZoonoticTB<span class="op">::</span>animal_demographics</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 11,338 x 4</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 11,224 x 4</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;    country     country_code  year  cattle</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;              &lt;int&gt; &lt;int&gt;   &lt;int&gt;</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  1 Afghanistan            2  1961 2900000</span></a>
@@ -372,7 +378,7 @@
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt;  8 Afghanistan            2  1968 3633000</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;  9 Afghanistan            2  1969 3600000</span></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 10 Afghanistan            2  1970 3700000</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; # … with 11,328 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; # … with 11,214 more rows</span></a></code></pre></div>
 </div>
 </div>
   </div>

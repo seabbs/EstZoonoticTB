@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EstZoonoticTB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -58,6 +58,12 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="articles/data-sources.html">Data sources</a>
+    </li>
+    <li>
+      <a href="articles/data-exploration.html">Data exploration</a>
+    </li>
+    <li>
+      <a href="articles/data-mapping.html">Mapping data</a>
     </li>
   </ul>
 </li>
@@ -133,9 +139,9 @@
 <a href="#data" class="anchor"></a>Data</h2>
 <p>The package comes prepackaged with multiple datasets that can then be linked into a single dataset ready for analysis. This linked dataset can be accessed using the following,</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4,148 x 22</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14,882 x 26</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;  1 Afghan… AFG          Eastern Me…  2000    38000    190       123</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  2 Afghan… AFG          Eastern Me…  2001    40000    189       123</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;  3 Afghan… AFG          Eastern Me…  2002    42000    189       122</span></a>
@@ -146,12 +152,13 @@
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  8 Afghan… AFG          Eastern Me…  2007    50000    189       122</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  9 Afghan… AFG          Eastern Me…  2008    52000    189       122</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 10 Afghan… AFG          Eastern Me…  2009    53000    189       123</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # … with 4,138 more rows, and 15 more variables: tb_inc_hi &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # … with 14,872 more rows, and 19 more variables: tb_inc_hi &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; #   prop_tb_ep &lt;dbl&gt;, prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; #   prop_hiv_hi &lt;dbl&gt;, dom &lt;fct&gt;, wild &lt;fct&gt;, z_tb_id &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; #   z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; #   z_tb_multi_year_study &lt;fct&gt;, prop_tb_z &lt;dbl&gt;, prop_tb_z_lo &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; #   prop_tb_z_hi &lt;dbl&gt;, prop_tb_z_se &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; #   prop_hiv_hi &lt;dbl&gt;, z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;,</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; #   z_tb_id &lt;int&gt;, z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; #   z_tb_multi_year_study &lt;fct&gt;, tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; #   tb_z_prop_hi &lt;dbl&gt;, tb_z_prop_se &lt;dbl&gt;, population &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; #   prop_rural &lt;dbl&gt;, cattle &lt;int&gt;, cattle_per_head &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="shiny-dashboard" class="section level2">
 <h2 class="hasAnchor">
@@ -243,8 +250,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio"><img src="https://img.shields.io/badge/Launch-EstZoonoticTB-green.svg" alt="badge"></a></li>
-<li><a href="https://CRAN.R-project.org/package=EstZoonoticTB"><img src="http://www.r-pkg.org/badges/version-ago/EstZoonoticTB" alt="CRAN_Release_Badge"></a></li>
-<li><a href="https://github.com/seabbs/EstZoonoticTB"><img src="https://img.shields.io/badge/devel%20version-0.1.0-lightgrey.svg?style=flat" alt="develVersion"></a></li>
+<li><a href="https://github.com/seabbs/EstZoonoticTB"><img src="https://img.shields.io/badge/devel%20version-0.2.0-lightgrey.svg?style=flat" alt="develVersion"></a></li>
 <li><a href="https://zenodo.org/badge/latestdoi/112591837"><img src="https://zenodo.org/badge/112591837.svg" alt="DOI"></a></li>
 </ul>
 </div>
