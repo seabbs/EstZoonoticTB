@@ -319,15 +319,15 @@ zoonotic_tb_humans <- country_wide %>%
 
 zoonotic_tb_humans <- zoonotic_tb_humans %>%
   dplyr::mutate(prop_test = purrr::map2(cases, sample_size, ~ stats::prop.test(.x, .y))) %>% 
-  dplyr::mutate(prop_tb_z = purrr::map_dbl(prop_test, ~ .$estimate),
-                prop_tb_z_lo = purrr::map_dbl(prop_test, ~ .$conf.int[1]),
-                prop_tb_z_hi = purrr::map_dbl(prop_test, ~ .$conf.int[2]),
-                prop_tb_z_se = (prop_tb_z_hi - prop_tb_z_lo) / (2 * qnorm(0.975))
+  dplyr::mutate(tb_z_prop = purrr::map_dbl(prop_test, ~ .$estimate),
+                tb_z_prop_lo = purrr::map_dbl(prop_test, ~ .$conf.int[1]),
+                tb_z_prop_hi = purrr::map_dbl(prop_test, ~ .$conf.int[2]),
+                tb_z_prop_se = (tb_z_prop_lo - tb_z_prop_hi) / (2 * qnorm(0.975))
                 ) %>% 
   dplyr::select(-prop_test) %>% 
   dplyr::mutate(country = country %>% 
                   as.character %>% 
-                  replace(country %in% "United Kingdom", "United Kingdom of Great Britain and Northern Ireland") %>% 
+                  replace(country %in% "Côte d'Ivoire" , "Cote d'Ivoire") %>% 
                   replace(country %in% "Czech Republic", "Czechia") %>% 
                   replace(country %in% "Tanzania", "United Republic of Tanzania") %>% 
                   factor)

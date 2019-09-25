@@ -17,7 +17,7 @@
 #' Defaults to `EstZoonoticTB::animal_demographics`.
 #' @param verbose Logical, defaults to \code{TRUE}. Should verbose progress messages be shown.
 #'
-#' @importFrom dplyr mutate select filter full_join pull rename vars
+#' @importFrom dplyr mutate select filter full_join pull rename vars mutate_if
 #' @importFrom tidyselect everything
 #' @return A dataframe of linked data containing all available global data relevant to zTB in humans.
 #' @export
@@ -39,6 +39,7 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   geo_coverage <- NULL; id <- NULL; iso3 <- NULL; multi_year_study <- NULL;
   population <- NULL; sample_size <- NULL; sampling_strat <- NULL;
   study_end <- NULL; study_id <- NULL; study_period <- NULL; study_pop <- NULL; 
+  dom <- NULL; wild <- NULL;
   
   
   # Use default data if none is supplied ------------------------------------
@@ -96,7 +97,7 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   # Join TB data and zTB in animals data ------------------------------------
   
   if (verbose) {
-    message("Joining TB incidence in humans data and zTB presence in animals data.")
+    message("Joining TB incidence in humans data and zTB presence in animals data using country codes.")
     
     message("Countries with data present for TB incidence and not zTB in animals:")
     tb_not_animal_tb <- tb_humans %>% 
@@ -130,7 +131,8 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
                                    as.character(country.x), 
                                    as.character(country.y))) %>% 
     dplyr::select(-country.x, -country.y) %>% 
-    dplyr::select(country, tidyselect::everything())
+    dplyr::select(country, tidyselect::everything()) %>% 
+    dplyr::rename(z_tb_dom_animal = dom, z_tb_wild_animal = wild)
   
   
   
@@ -138,7 +140,7 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
 # Join zTB data to other TB data ------------------------------------------
   
   if (verbose) {
-    message("Joining zTB incidence in humans data and all other TB data")
+    message("Joining zTB incidence in humans data and all other TB data using country names")
   }
   
   z_tb_not_other_tb <- z_tb_humans %>% 
@@ -173,17 +175,27 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   
   
 # Join TB data to demographic data ----------------------------------------
+  
+  if (verbose) {
+    message("Joining TB data and demographic data using country names.")
+    
+    message("Countries with data present for TB not for demographics:")
 
-  
-  setdiff(unique(joined_tb$country), unique(demo$country))
-  
-  
-  setdiff(unique(demo$country), unique(joined_tb$country))
-  
-# Define returned objects -------------------------------------------------
-  
+    print(setdiff(unique(joined_tb$country), unique(demo$country)))
+    
+    
+    message("Countries with data present demographics and not TB:")
+    message("(Some mismatches are to be expected here due to historic country names)")
+    print(  setdiff(unique(demo$country), unique(joined_tb$country)))
 
-  out <- joined_tb
+  }
   
+  
+  out <- joined_tb %>% 
+    dplyr::full_join(demo %>% 
+                       dplyr::select(-country_code), 
+                     by = c("country", "year")) %>% 
+    dplyr::mutate_if(is.character, factor)
+
   return(out)
 }

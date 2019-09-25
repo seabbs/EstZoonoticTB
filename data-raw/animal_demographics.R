@@ -34,7 +34,20 @@ animal_demographics <- animal_demographics %>%
                   as.character() %>% 
                   replace(country %in% "Réunion", "Reunion") %>% 
                   replace(country %in% "Côte d'Ivoire", "Cote d'Ivoire") %>% 
-                  factor())
+                  factor()) %>% 
+  ## Manual link differing country names
+  ## Drop regions of china (disputed) - data already included in main china data
+  dplyr::filter(!(country %in% c(
+    "China, mainland",
+    "China, Taiwan Province of"
+  ))) %>% 
+  dplyr::mutate(
+    country = country %>% 
+      replace(country %in% "Saint Helena, Ascension and Tristan da Cunha" , "St. Helena") %>% 
+      replace(country %in% "Serbia and Montenegro" , "Serbia & Montenegro") %>% 
+      replace(country %in% "Netherlands Antilles (former)" , "Netherlands Antilles")
+  )
+
 
 # Load into package -------------------------------------------------------
 

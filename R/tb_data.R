@@ -53,5 +53,16 @@ tb_data <- function(inc_floor = NULL, inc_rate_floor = NULL, ...) {
       dplyr::filter(tb_inc >= inc_rate_floor)
   }
   
+  ## Clean country names to match other datasets
+  tb <- tb %>% 
+  dplyr::mutate(
+    country = country %>%
+      replace(country %in% "C\U00F4te d'Ivoire" , "Cote d'Ivoire") %>% 
+      replace(country %in% "United Kingdom of Great Britain and Northern Ireland", "United Kingdom" ) %>% 
+      replace(country %in% "Liechtenstein, Principality of" , "Liechtenstein") %>% 
+      replace(country %in% "Mayotte (France)" , "Mayotte") %>% 
+      replace(country %in% "Guadeloupe (France)" , "Guadeloupe") 
+  )
+  
   return(tb)
 }

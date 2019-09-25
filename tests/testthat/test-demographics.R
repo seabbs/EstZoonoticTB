@@ -9,6 +9,6 @@ test_that("Demographic data has the expected number of columns",{
   expect_equal(ncol(demographics), 5)
 })
 
-test_that("Demographic  data has at least 14,857 rows (19/09/19)",{
-  expect_true(nrow(demographics) > 14857)
+test_that("Demographic  data has at least 14,729 rows (24/09/19)",{
+  expect_true(nrow(demographics) >= 14729)
 })

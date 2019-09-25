@@ -9,6 +9,6 @@ test_that("Animal demographic data has the expected number of columns",{
   expect_equal(ncol(animal_demographics), 4)
 })
 
-test_that("Animal demographic  data has at least 11,338 rows (20/09/19)",{
-  expect_true(nrow(animal_demographics) >= 11338)
+test_that("Animal demographic  data has at least 11,224 rows (24/09/19)",{
+  expect_true(nrow(animal_demographics) >= 11224)
 })
