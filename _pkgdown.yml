@@ -18,6 +18,10 @@ navbar:
       menu:
       - text: "Data sources"
         href: articles/data-sources.html
+      - text: "Data exploration"
+        href: articles/data-exploration.html
+      - text: "Mapping data"
+        href: articles/data-mapping.html
     - text: News
       menu:
       - text: "Change log"
