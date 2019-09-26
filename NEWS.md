@@ -3,12 +3,15 @@
 ## Feature updates
 
 * Added `global_map` function for plotting country level data for a single variable.
-
+* Added`get_latest_data` conveniance function for extracting the lastest data for a given variable.
+* Added `get_latest_combined_data` conveniance function for extracting the lastest data for each variable of interest and then joining this data into a single dataframe with year flags indicating when data is from.
 
 ## Package updates
 
 * Added tests (including `{vidffr}` image tests) for `global_map`.
 * Updated package logo.
+* Update travis and Appveyor to work with `{sf}`.
+* Dropped MacOs Travis testing as not clear how to automate.
 
 # EstZoonoticTB 0.1.0
 

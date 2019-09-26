@@ -26,7 +26,10 @@
 #' 
 #' 
 #' ## Linked data relying on package defaults
-#' link_data()
+#' df <- link_data()
+#' 
+#' 
+#' df
 link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
                       demo = NULL, animal_demo = NULL,
                       verbose = TRUE) {
@@ -153,7 +156,7 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   if (length(z_tb_not_other_tb) > 0) {
     stop("The following countries in the zTB dataset do not match with countries in other TB datasets: ",
          paste(z_tb_not_other_tb, collapse = ", "),
-         "\n Adjust data inputs and rerun this funciton.")
+         "\n Adjust data inputs and rerun this function.")
   }
 
   

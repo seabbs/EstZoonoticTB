@@ -6,8 +6,6 @@
 \alias{EstZoonoticTB-package}
 \title{EstZoonoticTB: Estimate and Visualise Zoonotic Tuberculosis}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
-
 Estimate and visualise zoonotic tuberculosis.
 }
 \seealso{

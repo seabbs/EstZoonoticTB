@@ -24,6 +24,7 @@ Imports:
     rlang,
     ggplot2
 Suggests:
+    rgdal,
     spelling,
     covr,
     devtools,

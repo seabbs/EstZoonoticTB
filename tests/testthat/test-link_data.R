@@ -24,6 +24,6 @@ test_that("Linking data can produce verbose progress messages",{
       is.data.frame(link_data(verbose = TRUE)
       )
     )
-    )
+  )
   )
 })

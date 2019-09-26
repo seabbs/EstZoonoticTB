@@ -37,5 +37,8 @@ and/or munging.
 
 
 ## Linked data relying on package defaults
-link_data()
+df <- link_data()
+
+
+df
 }

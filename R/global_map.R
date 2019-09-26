@@ -29,13 +29,7 @@
 #' 
 #' ## Filter data to get the latest study in each country on zTB
 #' data <- EstZoonoticTB::link_data(verbose = FALSE) %>% 
-#' dplyr::mutate(country = country %>% 
-#'               as.character) %>% 
-#' dplyr::filter(!is.na(tb_z_prop)) %>% 
-#' dplyr::group_by(country) %>% 
-#' dplyr::arrange(desc(year)) %>% 
-#' dplyr::slice(1) %>% 
-#' dplyr::ungroup()
+#' EstZoonoticTB::get_latest_data(tb_z_prop)
 #' 
 #' ## Plot a global map of zTB
 #' global_map(data, variable = "tb_z_prop", 

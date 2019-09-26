@@ -20,7 +20,6 @@ addons:
 jobs:
   include:
   - r: devel
-  - os: osx
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
