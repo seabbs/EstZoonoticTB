@@ -26,10 +26,10 @@ continents <- rnaturalearth::ne_coastline(scale = "medium",
                                           returnclass = "sf") 
 
 ## Remake package map
-map <- global_map(data, variable = "tb_z_prop", 
-                  trans = "sqrt",
-                  show_caption = FALSE, 
-                  viridis_palette = "cividis")$data %>% 
+map <- EstZoonoticTB::global_map(data, variable = "tb_z_prop", 
+                                 trans = "sqrt",
+                                 show_caption = FALSE, 
+                                 viridis_palette = "cividis")$data %>% 
         ggplot() +
         geom_sf(ggplot2::aes(fill = tb_z_prop), col = "white", size = 0.05) +
         geom_sf(data = continents, col = "darkgrey", alpha = 0.6, size = 0.05) +

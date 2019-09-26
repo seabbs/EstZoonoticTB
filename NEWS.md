@@ -12,6 +12,7 @@
 * Updated package logo.
 * Update travis and Appveyor to work with `{sf}`.
 * Dropped MacOs Travis testing as not clear how to automate.
+* Added required packages to suggests for using `{sf}`.
 
 # EstZoonoticTB 0.1.0
 
