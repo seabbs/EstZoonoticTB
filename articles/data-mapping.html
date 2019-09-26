@@ -171,14 +171,14 @@
 <a class="sourceLine" id="cb2-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">prop_map</span>(latest_data)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-3-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-3-1.png" width="3960"></p>
 <div id="country-wide-studies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#country-wide-studies" class="anchor"></a>Country-wide studies</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(z_tb_geo_coverage <span class="op">%in%</span><span class="st"> "Country-wide data"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">prop_map</span>()</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-4-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-4-1.png" width="3960"></p>
 </div>
 <div id="non-country-wide-studies" class="section level3">
 <h3 class="hasAnchor">
@@ -186,7 +186,7 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(z_tb_geo_coverage <span class="op">%in%</span><span class="st"> "Non-country-wide data"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">prop_map</span>()</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-5-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-5-1.png" width="3960"></p>
 </div>
 </div>
 <div id="tb-incidence-rates" class="section level2">
@@ -198,7 +198,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"tb_inc"</span>, </a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"TB incidence rate (per 100,000)"</span>,</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">          <span class="dt">trans =</span> <span class="st">"sqrt"</span>)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-6-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-6-1.png" width="3960"></p>
 </div>
 <div id="proportion-of-tb-cases-that-are-extra-pulmonary-only" class="section level2">
 <h2 class="hasAnchor">
@@ -209,7 +209,7 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"prop_tb_ep"</span>, </a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"% of TB cases that are extra-pulmonary only"</span>,</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-7-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-7-1.png" width="3960"></p>
 </div>
 <div id="proportion-of-tb-cases-that-are-hiv-positive" class="section level2">
 <h2 class="hasAnchor">
@@ -221,7 +221,7 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"% of TB cases that are HIV positive"</span>,</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">         <span class="dt">trans =</span> <span class="st">"sqrt"</span>,</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-8-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-8-1.png" width="3960"></p>
 </div>
 <div id="presence-of-zoonotic-tb-in-animals" class="section level2">
 <h2 class="hasAnchor">
@@ -234,7 +234,7 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"z_tb_dom_animal"</span>, </a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"Presence of zoonotic TB"</span>,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">         <span class="dt">viridis_palette =</span> <span class="st">"viridis"</span>)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-9-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-9-1.png" width="3960"></p>
 </div>
 <div id="wild-animals" class="section level3">
 <h3 class="hasAnchor">
@@ -243,7 +243,7 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"z_tb_wild_animal"</span>, </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"Presence of zoonotic TB"</span>,</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">         <span class="dt">viridis_palette =</span> <span class="st">"viridis"</span>)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-10-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-10-1.png" width="3960"></p>
 </div>
 </div>
 <div id="demographics" class="section level2">
@@ -258,7 +258,7 @@
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"prop_rural"</span>, </a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"% of population that is rural"</span>,</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-11-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-11-1.png" width="3960"></p>
 </div>
 <div id="animal-demographics" class="section level2">
 <h2 class="hasAnchor">
@@ -271,7 +271,7 @@
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"cattle_per_head"</span>, </a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">                <span class="dt">trans =</span> <span class="st">"sqrt"</span>,</a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">                <span class="dt">variable_label =</span> <span class="st">"Number of cattle per person"</span>)</a></code></pre></div>
-<p><img src="data-mapping_files/figure-html/unnamed-chunk-12-1.png" width="2640"></p>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-12-1.png" width="3960"></p>
 </div>
 </div>
   </div>
