@@ -42,30 +42,35 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   geo_coverage <- NULL; id <- NULL; iso3 <- NULL; multi_year_study <- NULL;
   population <- NULL; sample_size <- NULL; sampling_strat <- NULL;
   study_end <- NULL; study_id <- NULL; study_period <- NULL; study_pop <- NULL; 
-  dom <- NULL; wild <- NULL;
+  dom <- NULL; wild <- NULL; g_whoregion <- NULL;
   
   
   # Use default data if none is supplied ------------------------------------
   
   if (is.null(z_tb_humans)) {
-    z_tb_humans <- EstZoonoticTB::zoonotic_tb_humans
+    z_tb_humans <- EstZoonoticTB::zoonotic_tb_humans %>% 
+      dplyr::mutate(country = as.character(country))
   }
   
   if (is.null(tb_humans)) {
-    tb_humans <- EstZoonoticTB::tb_data(verbose = FALSE)
+    tb_humans <- EstZoonoticTB::tb_data(verbose = FALSE) %>% 
+      dplyr::mutate(country = as.character(country))
   }
   
   
   if (is.null(z_tb_animals)) {
-    z_tb_animals <- EstZoonoticTB::zoonotic_tb_animals
+    z_tb_animals <- EstZoonoticTB::zoonotic_tb_animals %>% 
+      dplyr::mutate(country = as.character(country))
   }
   
   if (is.null(demo)) {
-    demo <- EstZoonoticTB::demographics
+    demo <- EstZoonoticTB::demographics %>% 
+      dplyr::mutate(country = as.character(country))
   }
   
   if (is.null(animal_demo)) {
-    animal_demo <- EstZoonoticTB::animal_demographics
+    animal_demo <- EstZoonoticTB::animal_demographics %>% 
+      dplyr::mutate(country = as.character(country))
   }
   
   
@@ -128,7 +133,10 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   joined_tb <- suppressWarnings(
     tb_humans %>% 
     dplyr::rename(country_code = iso3) %>% 
-    dplyr::full_join(z_tb_animals, by = c("country_code", "year")) 
+    dplyr::mutate(country_code = as.character(country_code)) %>% 
+    dplyr::full_join(z_tb_animals %>% 
+                       dplyr::mutate(country_code = as.character(country_code)),
+                     by = c("country_code", "year")) 
   ) %>% 
     dplyr::mutate(country = ifelse(!is.na(country.x), 
                                    as.character(country.x), 
@@ -162,18 +170,31 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   
   ## Joining datasets
   ## Dropping not essential zTB data
+  z_tb_humans <- z_tb_humans %>% 
+    dplyr::rename(year = study_end) %>% 
+    dplyr::rename_at(.vars = dplyr::vars(id, geo_coverage,
+                                         study_pop, multi_year_study
+    ),
+    ~ paste0("z_tb_", .)) %>% 
+    dplyr::select(-study_id, -dirty_id,
+                  -cases, -sample_size, -study_period, 
+                  -sampling_strat) %>% 
+    dplyr::mutate(country = as.character(country))
+  
+  
+  ## Link in country_codes (controls for years without data)
+  z_tb_humans <- z_tb_humans %>% 
+    dplyr::full_join(joined_tb %>% 
+                       dplyr::select(country, country_code, g_whoregion) %>% 
+                       unique,
+                     by = c("country"))
+
+
+  ## Link using country codes and year
   joined_tb <- suppressWarnings(
     joined_tb %>% 
-    dplyr::full_join(z_tb_humans %>% 
-                    dplyr::rename(year = study_end) %>% 
-                    dplyr::rename_at(.vars = dplyr::vars(id, geo_coverage,
-                                                         study_pop, multi_year_study
-                                                         ),
-                                     ~ paste0("z_tb_", .)) %>% 
-                dplyr::select(-study_id, -dirty_id,
-                              -cases, -sample_size, -study_period, 
-                              -sampling_strat),
-              by = c("country", "year"))
+    dplyr::full_join(z_tb_humans,
+              by = c("country", "country_code", "year", "g_whoregion"))
   )
   
   
@@ -189,15 +210,23 @@ link_data <- function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
     
     message("Countries with data present demographics and not TB:")
     message("(Some mismatches are to be expected here due to historic country names)")
-    print(  setdiff(unique(demo$country), unique(joined_tb$country)))
+    print(setdiff(unique(demo$country), unique(joined_tb$country)))
 
   }
   
   
+  ## Link in country_codes (controls for years without data)
+  demo <- demo %>% 
+    dplyr::select(-country_code) %>% 
+    dplyr::full_join(joined_tb %>% 
+                       dplyr::select(country, country_code, g_whoregion) %>% 
+                       unique,
+                     by = c("country"))
+  
+  
   out <- joined_tb %>% 
-    dplyr::full_join(demo %>% 
-                       dplyr::select(-country_code), 
-                     by = c("country", "year")) %>% 
+    dplyr::full_join(demo, 
+                     by = c("country", "country_code", "year", "g_whoregion")) %>% 
     dplyr::mutate_if(is.character, factor)
 
   return(out)

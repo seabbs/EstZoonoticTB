@@ -330,6 +330,7 @@ zoonotic_tb_humans <- zoonotic_tb_humans %>%
                   replace(country %in% "Côte d'Ivoire" , "Cote d'Ivoire") %>% 
                   replace(country %in% "Czech Republic", "Czechia") %>% 
                   replace(country %in% "Tanzania", "United Republic of Tanzania") %>% 
+                  replace(country %in% "Liechtenstein, Principality of" , "Liechtenstein") %>% 
                   factor)
 
 summary(zoonotic_tb_humans)

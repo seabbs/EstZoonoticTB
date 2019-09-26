@@ -100,7 +100,14 @@ zoonotic_tb_animals <- zoonotic_tb_animals %>%
   dplyr::select(-`1`, -`2`) %>% 
   tidyr::pivot_wider(names_from = animal,
                      values_from = "present",
-                     names_prefix = "")
+                     names_prefix = "") %>% 
+  dplyr::mutate(country = country %>% 
+                  as.character %>% 
+                  replace(country %in% "Côte d'Ivoire" , "Cote d'Ivoire") %>% 
+                  replace(country %in% "Czech Republic", "Czechia") %>% 
+                  replace(country %in% "Tanzania", "United Republic of Tanzania") %>% 
+                  replace(country %in% "Liechtenstein, Principality of" , "Liechtenstein") %>% 
+                  factor)
 
   
 # Load into package -------------------------------------------------------
