@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Animal demographic data — animal_demographics • EstZoonoticTB</title>
+<title>Generate a global map for a single variable. — global_map • EstZoonoticTB</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,9 @@
 
 
 
-<meta property="og:title" content="Animal demographic data — animal_demographics" />
-<meta property="og:description" content="Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the FAO.
-Data cleaning details can be found in \data-raw\animal_demographics.R." />
+<meta property="og:title" content="Generate a global map for a single variable. — global_map" />
+<meta property="og:description" content="This general purpose function can be used to generate a global map for a single variable. It has few defaults but
+the data supplied must contain a country_code variable (that uses the iso3 standard) for linking to mapping data." />
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,34 +157,85 @@ Data cleaning details can be found in \data-raw\animal_demographics.R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Animal demographic data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/animal_demographics.R'><code>R/animal_demographics.R</code></a></small>
-    <div class="hidden name"><code>animal_demographics.Rd</code></div>
+    <h1>Generate a global map for a single variable.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/global_map.R'><code>R/global_map.R</code></a></small>
+    <div class="hidden name"><code>global_map.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the <a href='http://www.fao.org/faostat/en/?#data/OA'>FAO</a>.
-Data cleaning details can be found in <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R'>\data-raw\animal_demographics.R</a>.</p>
+    <p>This general purpose function can be used to generate a global map for a single variable. It has few defaults but
+the data supplied must contain a <code>country_code</code> variable (that uses the iso3 standard) for linking to mapping data.</p>
     </div>
 
-    <pre class="usage"><span class='no'>animal_demographics</span></pre>
+    <pre class="usage"><span class='fu'>global_map</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>fill_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>viridis_palette</span> <span class='kw'>=</span> <span class='st'>"cividis"</span>, <span class='kw'>show_caption</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>Dataframe containing variables to be mapped. Must contain a <code>country_code</code> variable.
+This must use iso3 standard country codes. See <code><a href='link_data.html'>link_data</a></code> for an example dataframe.</p></td>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <td><p>A character string indicating the variable to map data for. This must be supplied.</p></td>
+    </tr>
+    <tr>
+      <th>variable_label</th>
+      <td><p>A character string indicating the variable label to use. If not supplied then the underlying
+variable name is used.</p></td>
+    </tr>
+    <tr>
+      <th>trans</th>
+      <td><p>A character string specifying the transform to use on the specified metric. Defaults to no
+transform ("identity"). Other options include log scaling ("log") and log base 10 scaling
+("log10"). For a complete list of options see <code>ggplot2::continous_scale</code>.</p></td>
+    </tr>
+    <tr>
+      <th>fill_labels</th>
+      <td><p>A function to use to allocate legend labels. An example (used below) is <code><a href='https://rdrr.io/pkg/scales/man/number_format.html'>scales::percent</a></code>,
+which can be used for percentage data.</p></td>
+    </tr>
+    <tr>
+      <th>viridis_palette</th>
+      <td><p>Character string indicating the <code>viridis</code> colour palette to use. Defaults
+to "cividis". Options include "cividis", "magma", "inferno", "plasma", and "viridis". For additional details</p></td>
+    </tr>
+    <tr>
+      <th>show_caption</th>
+      <td><p>Logical, defaults to <code>TRUE</code>. Should the default caption be displayed.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 14,857 rows and 4 variables.</p><dl class='dl-horizontal'>
-<dt>country</dt><dd><p>Country name (factor)</p></dd>
-<dt>country_code</dt><dd><p>Country code (numeric)</p></dd>
-<dt>year</dt><dd><p>Year (numeric)</p></dd>
-<dt>cattle</dt><dd><p>Estimated number of cattle (numeric)</p></dd>
+    <p>A <code>ggplot2</code> object containing a global map.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-</dl>
+    <div class='dont-index'><p>link_data</p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>## Filter data to get the latest study in each country on zTB</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>EstZoonoticTB</span><span class='kw ns'>::</span><span class='fu'><a href='samabbott.co.uk/EstZoonoticTB//reference/link_data.html'>link_data</a></span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
+<span class='kw pkg'>EstZoonoticTB</span><span class='kw ns'>::</span><span class='fu'><a href='samabbott.co.uk/EstZoonoticTB//reference/get_latest_data.html'>get_latest_data</a></span>(<span class='no'>tb_z_prop</span>)
+
+<span class='co'>## Plot a global map of zTB</span>
+<span class='fu'>global_map</span>(<span class='no'>data</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='st'>"tb_z_prop"</span>,
+         <span class='kw'>variable_label</span> <span class='kw'>=</span> <span class='st'>"% of TB cases that are zoonotic"</span>,
+         <span class='kw'>trans</span> <span class='kw'>=</span> <span class='st'>"sqrt"</span>, <span class='kw'>fill_labels</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/scales/man/number_format.html'>percent</a></span>)</div><div class='img'><img src='global_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

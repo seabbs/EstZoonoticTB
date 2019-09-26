@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Animal demographic data — animal_demographics • EstZoonoticTB</title>
+<title>Extract the Lastest Data for Each Variable of Interest — get_latest_combined_data • EstZoonoticTB</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,8 @@
 
 
 
-<meta property="og:title" content="Animal demographic data — animal_demographics" />
-<meta property="og:description" content="Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the FAO.
-Data cleaning details can be found in \data-raw\animal_demographics.R." />
+<meta property="og:title" content="Extract the Lastest Data for Each Variable of Interest — get_latest_combined_data" />
+<meta property="og:description" content="Extract the Lastest Data for Each Variable of Interest" />
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,34 +156,65 @@ Data cleaning details can be found in \data-raw\animal_demographics.R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Animal demographic data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/animal_demographics.R'><code>R/animal_demographics.R</code></a></small>
-    <div class="hidden name"><code>animal_demographics.Rd</code></div>
+    <h1>Extract the Lastest Data for Each Variable of Interest</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/R/get_latest_combined_data.R'><code>R/get_latest_combined_data.R</code></a></small>
+    <div class="hidden name"><code>get_latest_combined_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Country level animal demographic data (relevant to zoonotic TB) from 1950 to the current day. Data is sourced from the <a href='http://www.fao.org/faostat/en/?#data/OA'>FAO</a>.
-Data cleaning details can be found in <a href='https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R'>\data-raw\animal_demographics.R</a>.</p>
+    <p>Extract the Lastest Data for Each Variable of Interest</p>
     </div>
 
-    <pre class="usage"><span class='no'>animal_demographics</span></pre>
+    <pre class="usage"><span class='fu'>get_latest_combined_data</span>(<span class='no'>data</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>Dataframe containing variables to be mapped. Must contain a <code>country_code</code> variable.
+This must use iso3 standard country codes. See <code><a href='link_data.html'>link_data</a></code> for an example dataframe.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 14,857 rows and 4 variables.</p><dl class='dl-horizontal'>
-<dt>country</dt><dd><p>Country name (factor)</p></dd>
-<dt>country_code</dt><dd><p>Country code (numeric)</p></dd>
-<dt>year</dt><dd><p>Year (numeric)</p></dd>
-<dt>cattle</dt><dd><p>Estimated number of cattle (numeric)</p></dd>
+    <p>A dataframe containing the latest data on each variable of interest - along with a flag
+indicating which year the data is from.</p>
 
-</dl>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='link_data.html'>link_data</a></span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
+<span class='fu'>get_latest_combined_data</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; # A tibble: 260 x 30
+#&gt;    country country_code g_whoregion tb_year tb_cases tb_inc tb_inc_lo tb_inc_hi
+#&gt;    &lt;chr&gt;   &lt;fct&gt;        &lt;fct&gt;         &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 Afghan… AFG          Eastern Me…    2017    67000  189      122        270  
+#&gt;  2 Albania ALB          Europe         2017      580   20       17         23  
+#&gt;  3 Algeria DZA          Africa         2017    29000   70       53         88  
+#&gt;  4 Americ… ASM          Western Pa…    2017        6   10        8.8       12  
+#&gt;  5 Andorra AND          Europe         2017        1    1.5      1.3        1.7
+#&gt;  6 Angola  AGO          Africa         2017   107000  359      232        512  
+#&gt;  7 Anguil… AIA          Americas       2017        3   22       14         31  
+#&gt;  8 Antigu… ATG          Americas       2017        1    1.1      0.96       1.3
+#&gt;  9 Argent… ARG          Americas       2017    12000   26       23         31  
+#&gt; 10 Armenia ARM          Europe         2017     1100   36       27         45  
+#&gt; # … with 250 more rows, and 22 more variables: prop_tb_ep &lt;dbl&gt;,
+#&gt; #   prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;, z_tb_year &lt;dbl&gt;,
+#&gt; #   z_tb_id &lt;int&gt;, z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,
+#&gt; #   z_tb_multi_year_study &lt;fct&gt;, tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;,
+#&gt; #   tb_z_prop_hi &lt;dbl&gt;, tb_z_prop_se &lt;dbl&gt;, z_tb_animal_year &lt;dbl&gt;,
+#&gt; #   z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;, demo_year &lt;dbl&gt;,
+#&gt; #   population &lt;dbl&gt;, prop_rural &lt;dbl&gt;, animal_year &lt;dbl&gt;, cattle &lt;int&gt;,
+#&gt; #   cattle_per_head &lt;dbl&gt;</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

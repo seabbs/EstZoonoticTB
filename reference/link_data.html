@@ -214,7 +214,7 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
     <pre class="examples"><div class='input'>
 
 <span class='co'>## Linked data relying on package defaults</span>
-<span class='fu'>link_data</span>()</div><div class='output co'>#&gt; <span class='message'>Joining human and animal demographic data.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for demographics and not animal demographics:</span></div><div class='output co'>#&gt;  [1] "Andorra"                  "Anguilla"                
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>link_data</span>()</div><div class='output co'>#&gt; <span class='message'>Joining human and animal demographic data.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for demographics and not animal demographics:</span></div><div class='output co'>#&gt;  [1] "Andorra"                  "Anguilla"                
 #&gt;  [3] "Aruba"                    "Channel Islands"         
 #&gt;  [5] "China, Macao SAR"         "Gibraltar"               
 #&gt;  [7] "Holy See"                 "Isle of Man"             
@@ -285,7 +285,9 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt; [13] "Palestine"                       "Saint Pierre and Miquelon"      
 #&gt; [15] "Sudan (former)"                  "United States Virgin Islands"   
 #&gt; [17] "USSR"                            "Western Sahara"                 
-#&gt; [19] "Yugoslav SFR"                    "Norfolk Island"                 </div><div class='output co'>#&gt; # A tibble: 14,882 x 26
+#&gt; [19] "Yugoslav SFR"                    "Norfolk Island"                 </div><div class='input'>
+
+<span class='no'>df</span></div><div class='output co'>#&gt; # A tibble: 14,882 x 26
 #&gt;    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi
 #&gt;    &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 Afghan… AFG          Eastern Me…  2000    38000    190       123       271
