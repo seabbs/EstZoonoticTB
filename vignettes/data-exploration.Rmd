@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
 	fig.width = 14,
 	fig.height = 10,
 	echo = TRUE,
-	results = "asis",
 	warning = TRUE
 )
 ```
@@ -39,7 +38,7 @@ ggplot2::theme_set(theme_minimal())
 
 ## Data
 
-Latest data available used by default - if updated data is available add to `link_data` or roll your own linking function. To instead explore the complete dataset comment out the `get_latest_combined_data` call and rerun the analysis. 
+Latest data available used by default - see [data sources](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-sources.html) and [data linkage](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-linkage.html) for details. To instead explore the complete dataset comment out the `get_latest_combined_data` call and rerun the analysis. 
 
 This step also drops variables that are unlikely to be of interest in an initial EDA. This includes: confidence intervals, standard error, country names, country codes, and regions. On top of this countries with fewer than 100 TB cases have been removed, along with countries with incidence rates below 1 per 100,000 population (effective TB elimination). This has been done as data for these countries is unlikely to provide meaningful insights for a global model of zoonotic TB incidence.
 
@@ -51,10 +50,9 @@ latest_data <- link_data(verbose = FALSE) %>%
   dplyr::select(-z_tb_study_pop, -contains("_lo"), -tb_inc_hi, -prop_hiv_hi, 
                 -tb_z_prop_hi, -tb_z_prop_se, -country, -country_code, -g_whoregion)
 
-summary(latest_data)
 ```
 
-## Overview
+## Summary
 
 ### Data table summary
 

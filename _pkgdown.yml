@@ -18,6 +18,8 @@ navbar:
       menu:
       - text: "Data sources"
         href: articles/data-sources.html
+      - text: "Data linkage"
+        href: articles/data-linkage.html
       - text: "Data exploration"
         href: articles/data-exploration.html
       - text: "Data mapping"
@@ -45,6 +47,10 @@ reference:
     - link_data
     - get_latest_data
     - get_latest_combined_data
+  - title: Data visualisation
+    desc: Functions for visualising data.
+    contents:
+    - global_map
   - title: Reporting
     desc: Package reporting functionality
     contents:

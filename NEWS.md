@@ -8,6 +8,7 @@
 * Improved quality of data linkage so that fewer zoonotic TB proportion studies are implicitly dropped.
 * Added content to the`data-exploration`and `data-mapping` vignettes.
 * Updated package description and README to intoduce the package properly.
+* Added a data linkage vignette.
 
 ## Package updates
 

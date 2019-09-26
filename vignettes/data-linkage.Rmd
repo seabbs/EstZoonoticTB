@@ -1,0 +1,59 @@
+---
+title: "Data linkage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data linkage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+This vignette outlines the data linkage process used to link various packaged - and potentially user supplied - datasets. Further details are provided in the linked function documentation.
+
+
+## Linkage
+
+The datasets outlined in the [data sources](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-sources.html) vignette are linked using country code (ISO3) where available and country name (using an automated approach with manual checks). This results in a single dataset which includes data on zoonotic TB and various correlated variables. Data completeness is low with some datasets spanning multiple decades (from the 1950's) and some representing only a single year of data. Default datasets can be updated by passing datasets in the required format to arguments of `link_data` (see [`?link_data`](https://www.samabbott.co.uk/EstZoonoticTB/reference/link_data.html) for details).
+
+### Code
+
+```{r}
+EstZoonoticTB::link_data
+```
+
+### Data
+
+```{r}
+all_data <- EstZoonoticTB::link_data(verbose = TRUE)
+
+all_data
+```
+
+### Latest data
+
+As many of the packaged datasets are highly missing a more useful dataset for analysis may be one that includes the most recent estimate in each country for each variable. This can be extracted using `get_latest_combined_data`.
+
+### Code
+
+```{r}
+EstZoonoticTB::get_latest_combined_data
+
+
+EstZoonoticTB::get_latest_data
+```
+
+### Data
+
+```{r}
+latest_data <- EstZoonoticTB::get_latest_combined_data(all_data)
+
+latest_data
+```

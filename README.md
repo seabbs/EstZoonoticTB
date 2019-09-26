@@ -45,6 +45,8 @@ documentation](https://img.shields.io/badge/Documentation-development-lightblue.
 [![Data
 sources](https://img.shields.io/badge/Documentation-data%20sources-lightgrey.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-sources.html)
 [![Data
+linkage](https://img.shields.io/badge/Documentation-data%20linkage-red.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-linkage.html)
+[![Data
 exploration](https://img.shields.io/badge/Documentation-data%20exploration-blue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-exploration.html)
 [![Data
 mapping](https://img.shields.io/badge/Documentation-data%20mapping-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-mapping.html)

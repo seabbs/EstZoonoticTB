@@ -18,12 +18,16 @@ knitr::opts_chunk$set(
 library(EstZoonoticTB)
 ```
 
+## Overview
 
-# Bovine tuberculosis (TB) incidence estimates
+This vignette outlines the data sources for the packaged datasets. It also summarises the cleaning process used for each dataset - although it is recommended that these details are checked against the coded implementations.
 
-## Humans
 
-### Raw data
+## Bovine tuberculosis (TB) incidence estimates
+
+### Humans
+
+#### Raw data
 
 * Source from [this systematic review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/) by Muller et al.
 * Data represents a list of studies estimating the proportion of overall TB cases that have zoonotic TB. Data includes zoonotic TB cases,  and sample size (TB cases).
@@ -31,9 +35,9 @@ library(EstZoonoticTB)
 * Data quality is extremely low with multiple issues. 
 
 
-### Data cleaning
+#### Data cleaning
 
-#### Initial data cleaning
+##### Initial data cleaning
 
 * Added a logical variable capturing if studies are multi-year.
 * Standardized missing data to be listed as `NA`.
@@ -41,7 +45,7 @@ library(EstZoonoticTB)
 * Extract the study end date by assuming (with some manual post processing) that the last 4 digits in the study period are the final year of the study.
 * Replace `NA` with 0 zoonotic TB cases for studies that have no TB cases.
 
-#### Exclusions
+##### Exclusions
 
 * Replace missing sample size data with TB case data.
 * If the number of zoonotic TB cases is unknown attempt to back calculate using the sample size and proportion of cases that have zoonotic TB.
@@ -57,21 +61,21 @@ library(EstZoonoticTB)
 * Split data-set into country-wide and non-country wide studies for further cleaning.
 
 
-#### Country-wide data
+##### Country-wide data
 
 * Excluded studies in sub-populations or high risk populations via manual inspection.
 * Dropped data from New Zealand as a study is duplicated with differing sample sizes.
 * Excluded duplicate entries for France and Ireland.
 * Final data-set has data from 36 countries across 18 years (1990 - 2007)
 
-#### Non-country wide data
+##### Non-country wide data
 
 
 * No exclusions based on sub-populations as all studies are effectively sampling sub-populations (risk, location, etc). This needs to be appropriately adjusted for at the analysis stage.
 * Excluded duplicate entries from Sierra Leone and Argentina
 * Final data-set has data from 14 countries across 15 years (1991 - 2008).
 
-### Cleaned data
+#### Cleaned data
 
 * Country-wide and non-country wide data-sets joined
 * Manually adjusted country names to map to those found in other TB incidence datasets. See `EstZoonoticTB::link_data` for error checking of this.
@@ -83,12 +87,12 @@ library(EstZoonoticTB)
 EstZoonoticTB::zoonotic_tb_humans
 ```
 
-### Limitations
+#### Limitations
 
 * Studies are often not representative of overall TB and zoonotic TB incidence.
 * Zoonotic TB incidence is highly heterogeneous, being more likely to occur in rural areas and in populations that routinely eat raw dairy.
 
-## Animals
+### Animals
 
 * Sourced from the [OIE](https://www.oie.int) via personal communication
 * Data cleaning details can be found in [/data-raw/zoonotic_tb_animals.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/zoonotic_tb_animals.R)
@@ -103,7 +107,7 @@ EstZoonoticTB::zoonotic_tb_humans
 EstZoonoticTB::zoonotic_tb_animals
 ```
 
-# Tuberculosis (TB) incidence
+## Tuberculosis (TB) incidence
 
 * Sourced from the [WHO](http://www.who.int/tb/country/data/download/en/) using [`{getTBinR}`](https://www.samabbott.co.uk/getTBinR/index.html).
 * Extracted TB incidence, TB incidence rates (+ CI's), proportion with extra-pulmonary TB, and proportion HIV positive (+ CI's).
@@ -116,7 +120,7 @@ EstZoonoticTB::tb_data()
 ```
 
 
-## Demographics
+### Demographics
 
 * Sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
 * Data cleaning can be found in [/data-raw/demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/demographoics.R).
@@ -129,9 +133,9 @@ EstZoonoticTB::demographics
 ```
    
    
-# Animal Demographics
+## Animal Demographics
 
-## Domesticated
+### Domesticated
 
 * Sourced from the [FAO](http://www.fao.org/faostat/en/?#data/OA). 
 * Data cleaning can be found in [/data-raw/animal_demographics.R](https://github.com/seabbs/EstZoonoticTB/blob/master/data-raw/animal_demographics.R).
