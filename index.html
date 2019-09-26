@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estimate and Visualise Zoonotic Tuberculosis • EstZoonoticTB</title>
+<title>Explore, Visualise and Estimate the Global Zoonotic Tuberculosis Burden • EstZoonoticTB</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -18,8 +18,18 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Estimate and Visualise Zoonotic Tuberculosis">
-<meta property="og:description" content="Estimate and visualise zoonotic tuberculosis.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Explore, Visualise and Estimate the Global Zoonotic Tuberculosis Burden">
+<meta property="og:description" content="EstZoonoticTB is an R package containing data relevant to global
+        zoonotic tuberculosis (TB), tools for manipulating and visualising this data, and
+        analysis aiming to improve country level estimates of zoonotic TB. Packaged 
+        datasets include: cleaned data from a recent systematic review 
+        (&lt;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/&gt;); data on the country 
+        specific epidemiology of TB; demographic data (including data on the rural
+        populations); animal demographic data; and data on the presence of zoonotic TB 
+        in animal populations (both domesticated and wild). Tooling includes functions
+        for linking the built in datasets (built with the aim of accommodating
+        external data sources), data mappping functions, and conveniance functions for
+        manipulating the linked datasets. See the package vignettes for further details. ">
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -63,7 +73,7 @@
       <a href="articles/data-exploration.html">Data exploration</a>
     </li>
     <li>
-      <a href="articles/data-mapping.html">Mapping data</a>
+      <a href="articles/data-mapping.html">Data mapping</a>
     </li>
   </ul>
 </li>
@@ -112,11 +122,12 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="estzoonotictb-an-r-package-for-estimating-and-visualising-zoonotic-tb" class="section level1">
+<div id="estzoonotictb-an-r-package-for-exploring-visualising-and-estimating-the-global-zoonotic-tuberculosis-burden" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#estzoonotictb-an-r-package-for-estimating-and-visualising-zoonotic-tb" class="anchor"></a>EstZoonoticTB: an R package for estimating and visualising zoonotic TB <img src="reference/figures/logo.png" align="right" alt="" width="120">
+<a href="#estzoonotictb-an-r-package-for-exploring-visualising-and-estimating-the-global-zoonotic-tuberculosis-burden" class="anchor"></a><code>{EstZoonoticTB}</code>: an R package for exploring, visualising and estimating the global zoonotic tuberculosis burden <img src="reference/figures/logo.png" align="right" alt="" width="120">
 </h1></div>
 
+<p><code>{EstZoonoticTB}</code> is an R package containing data relevant to global zoonotic tuberculosis (TB), tools for manipulating and visualising this data, and analysis aiming to improve country level estimates of zoonotic TB. Packaged datasets include: cleaned data from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/">a recent systematic review</a>; data on the country specific epidemiology of TB; demographic data (including data on the rural populations); animal demographic data; and data on the presence of zoonotic TB in animal populations (both domesticated and wild). Tooling includes functions for linking the built in datasets (built with the aim of accommodating external data sources), data mappping functions, and conveniance functions for manipulating the linked datasets. See the package vignettes for further details.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -127,7 +138,16 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p><a href="https://www.samabbott.co.uk/EstZoonoticTB/"><img src="https://img.shields.io/badge/Documentation-release-lightgrey.svg?style=flat" alt="Documentation"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/dev"><img src="https://img.shields.io/badge/Documentation-development-lightblue.svg?style=flat" alt="Development documentation"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/index.html"><img src="https://img.shields.io/badge/Documentation-functions-orange.svg?style=flat" alt="Functions"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html"><img src="https://img.shields.io/badge/Documentation-data%20sources-green.svg?style=flat" alt="Data sources"></a></p>
+<div id="overview" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h3>
+<p><a href="https://www.samabbott.co.uk/EstZoonoticTB/"><img src="https://img.shields.io/badge/Documentation-release-lightgrey.svg?style=flat" alt="Documentation"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/dev"><img src="https://img.shields.io/badge/Documentation-development-lightblue.svg?style=flat" alt="Development documentation"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/index.html"><img src="https://img.shields.io/badge/Documentation-functions-orange.svg?style=flat" alt="Functions"></a></p>
+</div>
+<div id="vignettes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<p><a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html"><img src="https://img.shields.io/badge/Documentation-data%20sources-lightgrey.svg?style=flat" alt="Data sources"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/data-exploration.html"><img src="https://img.shields.io/badge/Documentation-data%20exploration-blue.svg?style=flat" alt="Data exploration"></a> <a href="https://www.samabbott.co.uk/EstZoonoticTB/reference/data-mapping.html"><img src="https://img.shields.io/badge/Documentation-data%20mapping-green.svg?style=flat" alt="Data mapping"></a></p>
+</div>
 </div>
 <div id="testing" class="section level2">
 <h2 class="hasAnchor">
@@ -139,7 +159,7 @@
 <a href="#data" class="anchor"></a>Data</h2>
 <p>The package comes prepackaged with multiple datasets that can then be linked into a single dataset ready for analysis. This linked dataset can be accessed using the following,</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14,882 x 26</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 15,061 x 26</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;  1 Afghan… AFG          Eastern Me…  2000    38000    190       123</span></a>
@@ -152,17 +172,19 @@
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  8 Afghan… AFG          Eastern Me…  2007    50000    189       122</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  9 Afghan… AFG          Eastern Me…  2008    52000    189       122</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 10 Afghan… AFG          Eastern Me…  2009    53000    189       123</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # … with 14,872 more rows, and 19 more variables: tb_inc_hi &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # … with 15,051 more rows, and 19 more variables: tb_inc_hi &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; #   prop_tb_ep &lt;dbl&gt;, prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; #   prop_hiv_hi &lt;dbl&gt;, z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;,</span></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; #   z_tb_id &lt;int&gt;, z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,</span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; #   z_tb_multi_year_study &lt;fct&gt;, tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; #   tb_z_prop_hi &lt;dbl&gt;, tb_z_prop_se &lt;dbl&gt;, population &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; #   prop_rural &lt;dbl&gt;, cattle &lt;int&gt;, cattle_per_head &lt;dbl&gt;</span></a></code></pre></div>
+<p>See the package vignettes for details.</p>
 </div>
 <div id="shiny-dashboard" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-dashboard" class="anchor"></a>Shiny dashboard</h2>
+<p><em>Work in progress</em></p>
 <p>To explore the package functionality in an interactive session, or to investigate Zoonotic TB without having to code extensively in R, a shiny dashboard has been built into the package. This can either be used locally using,</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">EstZoonoticTB<span class="op">::</span><span class="kw"><a href="samabbott.co.uk/EstZoonoticTB//reference/dashboard.html">dashboard</a></span>()</a></code></pre></div>
 <p>Or accessed online.</p>

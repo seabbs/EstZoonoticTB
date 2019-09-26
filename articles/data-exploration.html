@@ -63,7 +63,7 @@
       <a href="../articles/data-exploration.html">Data exploration</a>
     </li>
     <li>
-      <a href="../articles/data-mapping.html">Mapping data</a>
+      <a href="../articles/data-mapping.html">Data mapping</a>
     </li>
   </ul>
 </li>
@@ -123,11 +123,206 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(EstZoonoticTB)</a></code></pre></div>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>In this vignette the lastest data for the proportion of TB cases that are zoonotic, along with data on potential correlates, is rapidly explored using an EDA approach modelled on that used in the <code>{DataExplorer}</code> package. This analysis is indicative only and any findings should be evaluated more carefully using more robust techniques.</p>
+</div>
+<div id="data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data" class="anchor"></a>Data</h2>
+<p>Latest data available used by default - if updated data is available add to <code>link_data</code> or roll your own linking function. To instead explore the complete dataset comment out the <code>get_latest_combined_data</code> call and rerun the analysis.</p>
+<p>This step also drops variables that are unlikely to be of interest in an initial EDA. This includes: confidence intervals, standard error, country names, country codes, and regions. On top of this countries with fewer than 100 TB cases have been removed, along with countries with incidence rates below 1 per 100,000 population (effective TB elimination). This has been done as data for these countries is unlikely to provide meaningful insights for a global model of zoonotic TB incidence.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">latest_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/get_latest_combined_data.html">get_latest_combined_data</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(tb_cases <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>, tb_inc <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>z_tb_study_pop, <span class="op">-</span><span class="kw">contains</span>(<span class="st">"_lo"</span>), <span class="op">-</span>tb_inc_hi, <span class="op">-</span>prop_hiv_hi, </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">                <span class="op">-</span>tb_z_prop_hi, <span class="op">-</span>tb_z_prop_se, <span class="op">-</span>country, <span class="op">-</span>country_code, <span class="op">-</span>g_whoregion)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">latest_data</a></code></pre></div>
+</div>
+<div id="a-tibble-172-x-19" class="section level1">
+<h1 class="hasAnchor">
+<a href="#a-tibble-172-x-19" class="anchor"></a>A tibble: 172 x 19</h1>
+<p>tb_year tb_cases tb_inc prop_tb_ep prop_hiv z_tb_year z_tb_id <dbl><int><dbl><dbl><dbl><dbl><int> 1 2017 67000 189 0.184 0.00312 NA NA 2 2017 580 20 0.264 0.0085 NA NA 3 2017 29000 70 0.531 0.00614 NA NA 4 2017 107000 359 0.0312 0.167 NA NA 5 2017 12000 26 0.135 0.131 2006 182 6 2017 1100 36 0.152 0.0722 NA NA 7 2017 1700 6.8 0.308 0.0206 2007 112 8 2017 650 7.4 0.206 0.0446 2007 1 9 2017 6500 67 0.142 0.0164 NA NA 10 2017 170 12 0.329 0.0458 NA NA # … with 162 more rows, and 12 more variables: z_tb_geo_coverage <fct>, # z_tb_multi_year_study <fct>, tb_z_prop <dbl>, z_tb_animal_year <dbl>, # z_tb_dom_animal <fct>, z_tb_wild_animal <fct>, demo_year <dbl>, # population <dbl>, prop_rural <dbl>, animal_year <dbl>, cattle <int>, # cattle_per_head <dbl></dbl></int></dbl></dbl></dbl></dbl></fct></fct></dbl></dbl></fct></fct></int></dbl></dbl></dbl></dbl></int></dbl></p>
+<div id="overview-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview-1" class="anchor"></a>Overview</h2>
+<div id="data-table-summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-table-summary" class="anchor"></a>Data table summary</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/introduce.html">introduce</a></span>(latest_data)), </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">             <span class="dt">row.names =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">             <span class="dt">col.names =</span> <span class="st">""</span>, </a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">             <span class="dt">format.args =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">big.mark =</span> <span class="st">","</span>))</a></code></pre></div>
+<table class="table"><tbody>
+<tr class="odd">
+<td align="left">rows</td>
+<td align="right">172</td>
+</tr>
+<tr class="even">
+<td align="left">columns</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="left">discrete_columns</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">continuous_columns</td>
+<td align="right">15</td>
+</tr>
+<tr class="odd">
+<td align="left">all_missing_columns</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">total_missing_values</td>
+<td align="right">798</td>
+</tr>
+<tr class="odd">
+<td align="left">complete_rows</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">total_observations</td>
+<td align="right">3,268</td>
+</tr>
+<tr class="odd">
+<td align="left">memory_usage</td>
+<td align="right">28,736</td>
+</tr>
+</tbody></table>
+</div>
+<div id="data-figure-summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-figure-summary" class="anchor"></a>Data figure summary</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_intro.html">plot_intro</a></span>(latest_data)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-intro-1.png" width="960"></p>
+</div>
+</div>
+<div id="missing-values" class="section level2">
+<h2 class="hasAnchor">
+<a href="#missing-values" class="anchor"></a>Missing values</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_missing.html">plot_missing</a></span>(latest_data, <span class="dt">geom_label_args =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">label.padding =</span> <span class="kw">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>)))</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-missing-1.png" width="768"></p>
+</div>
+<div id="distributions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#distributions" class="anchor"></a>Distributions</h2>
+<div id="bar-charts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bar-charts" class="anchor"></a>Bar Charts</h3>
+<div id="frequency-distributions-for-all-discrete-features" class="section level4">
+<h4 class="hasAnchor">
+<a href="#frequency-distributions-for-all-discrete-features" class="anchor"></a>Frequency distributions for all discrete features</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_bar.html">plot_bar</a></span>(latest_data, <span class="dt">theme_config =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"text"</span> =<span class="st"> </span><span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)), <span class="dt">nrow =</span> 4L, <span class="dt">ncol =</span> 3L)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-bar-run-1.png" width="1152"></p>
+</div>
+<div id="discrete-features-by-the-proportion-of-tb-cases-that-have-zoonotic-tb" class="section level4">
+<h4 class="hasAnchor">
+<a href="#discrete-features-by-the-proportion-of-tb-cases-that-have-zoonotic-tb" class="anchor"></a>Discrete features by the proportion of TB cases that have zoonotic TB</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_bar.html">plot_bar</a></span>(latest_data, <span class="dt">with =</span> <span class="st">"tb_z_prop"</span>, <span class="dt">theme_config =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"text"</span> =<span class="st"> </span><span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)))</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-bar-with-run-1.png" width="768"></p>
+</div>
+</div>
+<div id="histograms" class="section level3">
+<h3 class="hasAnchor">
+<a href="#histograms" class="anchor"></a>Histograms</h3>
+<div id="visualize-distributions-for-all-continuous-features" class="section level4">
+<h4 class="hasAnchor">
+<a href="#visualize-distributions-for-all-continuous-features" class="anchor"></a>Visualize distributions for all continuous features</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>(DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_histogram.html">plot_histogram</a></span>(latest_data, <span class="dt">nrow =</span> 3L, <span class="dt">ncol =</span> 3L))</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-histogram-1.png" width="768"><img src="data-exploration_files/figure-html/eda-plot-histogram-2.png" width="768"></p>
+</div>
+</div>
+</div>
+<div id="correlation-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#correlation-analysis" class="anchor"></a>Correlation Analysis</h2>
+<div id="visualize-correlation-heatmap-for-all-non-missing-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#visualize-correlation-heatmap-for-all-non-missing-features" class="anchor"></a>Visualize correlation heatmap for all non-missing features</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_correlation.html">plot_correlation</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(latest_data), <span class="dt">maxcat =</span> 5L)</a></code></pre></div>
+<pre><code>## Warning in cor(x = structure(list(tb_year = c(2017, 2017, 2017, 2017,
+## 2017, : the standard deviation is zero</code></pre>
+<p><img src="data-exploration_files/figure-html/eda-plot-correlation-1.png" width="1152"></p>
+</div>
+<div id="only-continuous-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#only-continuous-features" class="anchor"></a>Only continuous features</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">plot &lt;-<span class="st"> </span>DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_correlation.html">plot_correlation</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(latest_data), <span class="dt">type =</span> <span class="st">"c"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<pre><code>## Warning in cor(x = structure(list(tb_year = c(2017, 2017, 2017, 2017,
+## 2017, : the standard deviation is zero</code></pre>
+<pre><code>## Warning: Removed 100 rows containing missing values (geom_text).</code></pre>
+<p><img src="data-exploration_files/figure-html/eda-plot-correlation-con-1.png" width="1344"></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">plot</a></code></pre></div>
+<pre><code>## Warning: Removed 100 rows containing missing values (geom_text).</code></pre>
+<p><img src="data-exploration_files/figure-html/eda-plot-correlation-con-2.png" width="1344"></p>
+</div>
+<div id="only-discrete-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#only-discrete-features" class="anchor"></a>Only discrete features</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_correlation.html">plot_correlation</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(latest_data), <span class="dt">type =</span> <span class="st">"d"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-correlation-dis-1.png" width="1152"><img src="data-exploration_files/figure-html/eda-plot-correlation-dis-2.png" width="1152"></p>
+</div>
+</div>
+<div id="principal-component-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#principal-component-analysis" class="anchor"></a>Principal Component Analysis</h2>
+<p>Drop all factor based variables, as well as time variables and raw incidence variables (as all just correlates of population).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">pca_df &lt;-<span class="st"> </span>latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">contains</span>(<span class="st">"year"</span>), <span class="op">-</span>population, <span class="op">-</span>tb_cases, <span class="op">-</span>z_tb_id,</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">                <span class="op">-</span>population, <span class="op">-</span>cattle, <span class="op">-</span>z_tb_geo_coverage, <span class="op">-</span>z_tb_wild_animal, </a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">                <span class="op">-</span>z_tb_dom_animal) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span>na.omit</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_prcomp.html">plot_prcomp</a></span>(pca_df, <span class="dt">variance_cap =</span> <span class="fl">0.9</span>, <span class="dt">nrow =</span> 2L, <span class="dt">ncol =</span> 2L)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-prcomp-1.png" width="768"><img src="data-exploration_files/figure-html/eda-plot-prcomp-2.png" width="768"></p>
+</div>
+<div id="by-cases-with-zoonotic-tb" class="section level2">
+<h2 class="hasAnchor">
+<a href="#by-cases-with-zoonotic-tb" class="anchor"></a>By % cases with zoonotic TB</h2>
+<div id="boxplots" class="section level3">
+<h3 class="hasAnchor">
+<a href="#boxplots" class="anchor"></a>Boxplots</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">## Call boxplot function</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_boxplot.html">plot_boxplot</a></span>(pca_df, <span class="dt">by =</span> <span class="st">"tb_z_prop"</span>)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-boxplot-template-1.png" width="1344"></p>
+</div>
+<div id="scatterplots" class="section level3">
+<h3 class="hasAnchor">
+<a href="#scatterplots" class="anchor"></a>Scatterplots</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_scatterplot.html">plot_scatterplot</a></span>(pca_df, <span class="dt">by =</span> <span class="st">"tb_z_prop"</span>, <span class="dt">sampled_rows =</span> 1000L)</a></code></pre></div>
+<p><img src="data-exploration_files/figure-html/eda-plot-scatterplot-template-1.png" width="1344"></p>
+</div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#data">Data</a></li>
+      <li>
+<a href="#a-tibble-172-x-19">A tibble: 172 x 19</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#overview-1">Overview</a></li>
+      <li><a href="#missing-values">Missing values</a></li>
+      <li><a href="#distributions">Distributions</a></li>
+      <li><a href="#correlation-analysis">Correlation Analysis</a></li>
+      <li><a href="#principal-component-analysis">Principal Component Analysis</a></li>
+      <li><a href="#by-cases-with-zoonotic-tb">By % cases with zoonotic TB</a></li>
+      </ul>
+</li>
+      </ul>
+</div>
       </div>
 
 </div>

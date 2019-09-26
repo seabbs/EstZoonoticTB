@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapping data • EstZoonoticTB</title>
+<title>Data mapping • EstZoonoticTB</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Mapping data">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Data mapping">
 <meta property="og:description" content="">
 <meta property="og:image" content="samabbott.co.uk/EstZoonoticTB/logo.png">
 <meta name="twitter:card" content="summary">
@@ -63,7 +63,7 @@
       <a href="../articles/data-exploration.html">Data exploration</a>
     </li>
     <li>
-      <a href="../articles/data-mapping.html">Mapping data</a>
+      <a href="../articles/data-mapping.html">Data mapping</a>
     </li>
   </ul>
 </li>
@@ -113,7 +113,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Mapping data</h1>
+      <h1>Data mapping</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/seabbs/EstZoonoticTB/blob/master/vignettes/data-mapping.Rmd"><code>vignettes/data-mapping.Rmd</code></a></small>
@@ -123,11 +123,177 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(EstZoonoticTB)</a></code></pre></div>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>In this vignette the global distribution of zoonotic TB and variables thought to be related to zoonotic TB is explored using global maps. This includes TB incidence rates, the proportion of TB cases that are extra-pulmonary, the proportion of TB cases that are HIV postive, the presence of zoonotic TB in domesticated/wild animal populations, and the proportion of the population that is rural. Note that conclusions drawn from these maps require support from other forms of analysis as maps can be difficult to interpret (due to country size inducing visual bias).</p>
+</div>
+<div id="data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data" class="anchor"></a>Data</h2>
+<p>Use the latest available data for each variable. Note that this may introduce some bias - as TB incidence rates etc. have been changing over time. See the data exploration vignette for further details on data structure.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">latest_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/get_latest_combined_data.html">get_latest_combined_data</a></span>()</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">latest_data</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; # A tibble: 246 x 30</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;    country country_code g_whoregion tb_year tb_cases tb_inc tb_inc_lo</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;    &lt;chr&gt;   &lt;fct&gt;        &lt;fct&gt;         &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;  1 Afghan… AFG          Eastern Me…    2017    67000  189      122   </span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;  2 Albania ALB          Europe         2017      580   20       17   </span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  3 Algeria DZA          Africa         2017    29000   70       53   </span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  4 Americ… ASM          Western Pa…    2017        6   10        8.8 </span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;  5 Andorra AND          Europe         2017        1    1.5      1.3 </span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt;  6 Angola  AGO          Africa         2017   107000  359      232   </span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt;  7 Anguil… AIA          Americas       2017        3   22       14   </span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt;  8 Antigu… ATG          Americas       2017        1    1.1      0.96</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt;  9 Argent… ARG          Americas       2017    12000   26       23   </span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 10 Armenia ARM          Europe         2017     1100   36       27   </span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; # … with 236 more rows, and 23 more variables: tb_inc_hi &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; #   prop_tb_ep &lt;dbl&gt;, prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; #   prop_hiv_hi &lt;dbl&gt;, z_tb_year &lt;dbl&gt;, z_tb_id &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; #   z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;,</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; #   z_tb_multi_year_study &lt;fct&gt;, tb_z_prop &lt;dbl&gt;, tb_z_prop_lo &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; #   tb_z_prop_hi &lt;dbl&gt;, tb_z_prop_se &lt;dbl&gt;, z_tb_animal_year &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; #   z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;, demo_year &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; #   population &lt;dbl&gt;, prop_rural &lt;dbl&gt;, animal_year &lt;dbl&gt;, cattle &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt; #   cattle_per_head &lt;dbl&gt;</span></a></code></pre></div>
+</div>
+<div id="proportion-of-tuberculosis-tb-that-is-zoonotic" class="section level2">
+<h2 class="hasAnchor">
+<a href="#proportion-of-tuberculosis-tb-that-is-zoonotic" class="anchor"></a>Proportion of tuberculosis (TB) that is zoonotic</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">prop_map &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  map &lt;-<span class="st"> </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(df, <span class="dt">variable =</span> <span class="st">"tb_z_prop"</span>, </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"% of TB cases that are zoonotic"</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">          <span class="dt">trans =</span> <span class="st">"sqrt"</span>, <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(map)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">prop_map</span>(latest_data)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-3-1.png" width="2640"></p>
+<div id="country-wide-studies" class="section level3">
+<h3 class="hasAnchor">
+<a href="#country-wide-studies" class="anchor"></a>Country-wide studies</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(z_tb_geo_coverage <span class="op">%in%</span><span class="st"> "Country-wide data"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">prop_map</span>()</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-4-1.png" width="2640"></p>
+</div>
+<div id="non-country-wide-studies" class="section level3">
+<h3 class="hasAnchor">
+<a href="#non-country-wide-studies" class="anchor"></a>Non-Country-wide studies</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(z_tb_geo_coverage <span class="op">%in%</span><span class="st"> "Non-country-wide data"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">prop_map</span>()</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-5-1.png" width="2640"></p>
+</div>
+</div>
+<div id="tb-incidence-rates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tb-incidence-rates" class="anchor"></a>TB incidence rates</h2>
+<p>Incidence rate data is from 2017 for consitancy.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2017</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"tb_inc"</span>, </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"TB incidence rate (per 100,000)"</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">          <span class="dt">trans =</span> <span class="st">"sqrt"</span>)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-6-1.png" width="2640"></p>
+</div>
+<div id="proportion-of-tb-cases-that-are-extra-pulmonary-only" class="section level2">
+<h2 class="hasAnchor">
+<a href="#proportion-of-tb-cases-that-are-extra-pulmonary-only" class="anchor"></a>Proportion of TB cases that are extra-pulmonary only</h2>
+<p>Data is again from 2017 only.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2017</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"prop_tb_ep"</span>, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"% of TB cases that are extra-pulmonary only"</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-7-1.png" width="2640"></p>
+</div>
+<div id="proportion-of-tb-cases-that-are-hiv-positive" class="section level2">
+<h2 class="hasAnchor">
+<a href="#proportion-of-tb-cases-that-are-hiv-positive" class="anchor"></a>Proportion of TB cases that are HIV positive</h2>
+<p>Data is again from 2017 only.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/link_data.html">link_data</a></span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2017</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"prop_hiv"</span>, </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">         <span class="dt">variable_label =</span> <span class="st">"% of TB cases that are HIV positive"</span>,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">         <span class="dt">trans =</span> <span class="st">"sqrt"</span>,</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-8-1.png" width="2640"></p>
+</div>
+<div id="presence-of-zoonotic-tb-in-animals" class="section level2">
+<h2 class="hasAnchor">
+<a href="#presence-of-zoonotic-tb-in-animals" class="anchor"></a>Presence of zoonotic TB in animals</h2>
+<p>Data is latest from 2018 only.</p>
+<div id="domesitcated-animals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#domesitcated-animals" class="anchor"></a>Domesitcated animals</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"z_tb_dom_animal"</span>, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"Presence of zoonotic TB"</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">         <span class="dt">viridis_palette =</span> <span class="st">"viridis"</span>)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-9-1.png" width="2640"></p>
+</div>
+<div id="wild-animals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#wild-animals" class="anchor"></a>Wild animals</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"z_tb_wild_animal"</span>, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"Presence of zoonotic TB"</span>,</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">         <span class="dt">viridis_palette =</span> <span class="st">"viridis"</span>)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-10-1.png" width="2640"></p>
+</div>
+</div>
+<div id="demographics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#demographics" class="anchor"></a>Demographics</h2>
+<p>Data is latest available.</p>
+</div>
+<div id="proportion-of-the-population-that-is-rural-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#proportion-of-the-population-that-is-rural-" class="anchor"></a>Proportion of the population that is rural.</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"prop_rural"</span>, </a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">         <span class="dt">variable_label =</span> <span class="st">"% of population that is rural"</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">         <span class="dt">fill_labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-11-1.png" width="2640"></p>
+</div>
+<div id="animal-demographics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#animal-demographics" class="anchor"></a>Animal demographics</h2>
+<p>Data is latest available.</p>
+<div id="cattle-per-person" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cattle-per-person" class="anchor"></a>Cattle per person</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">latest_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">     </span><span class="kw"><a href="../reference/global_map.html">global_map</a></span>(<span class="dt">variable =</span> <span class="st">"cattle_per_head"</span>, </a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">                <span class="dt">trans =</span> <span class="st">"sqrt"</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">                <span class="dt">variable_label =</span> <span class="st">"Number of cattle per person"</span>)</a></code></pre></div>
+<p><img src="data-mapping_files/figure-html/unnamed-chunk-12-1.png" width="2640"></p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#proportion-of-tuberculosis-tb-that-is-zoonotic">Proportion of tuberculosis (TB) that is zoonotic</a></li>
+      <li><a href="#tb-incidence-rates">TB incidence rates</a></li>
+      <li><a href="#proportion-of-tb-cases-that-are-extra-pulmonary-only">Proportion of TB cases that are extra-pulmonary only</a></li>
+      <li><a href="#proportion-of-tb-cases-that-are-hiv-positive">Proportion of TB cases that are HIV positive</a></li>
+      <li><a href="#presence-of-zoonotic-tb-in-animals">Presence of zoonotic TB in animals</a></li>
+      <li><a href="#demographics">Demographics</a></li>
+      <li><a href="#proportion-of-the-population-that-is-rural-">Proportion of the population that is rural.</a></li>
+      <li><a href="#animal-demographics">Animal demographics</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
