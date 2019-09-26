@@ -3,7 +3,7 @@
 
 [![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-green.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
 [![develVersion](https://img.shields.io/badge/devel%20version-0.2.0-lightgrey.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
-[![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
+[![DOI](https://zenodo.org/badge/209318552.svg)](https://zenodo.org/badge/latestdoi/209318552)
 
 `{EstZoonoticTB}` is an R package containing data relevant to global
 zoonotic tuberculosis (TB), tools for manipulating and visualising these
