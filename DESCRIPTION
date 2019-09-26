@@ -18,7 +18,7 @@ Description: 'EstZoonoticTB' is an R package containing data relevant to global
         for linking the built in datasets (built with the aim of accommodating
         external data sources), data mappping functions, and conveniance functions for
         manipulating the linked datasets. See the package vignettes for further details. 
-License: GPL-3
+License: GPL-3 | file LICENSE
 URL: https://www.samabbott.co.uk/EstZoonoticTB,
     https://github.com/seabbs/EstZoonoticTB
 BugReports: https://github.com/seabbs/EstZoonoticTB/issues

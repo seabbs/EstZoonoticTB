@@ -20,3 +20,5 @@
 ^\.github$
 ^binder$
 pkgdown$
+^vignettes/data-exploration\.Rmd$
+^vignettes/data-mapping\.Rmd$
