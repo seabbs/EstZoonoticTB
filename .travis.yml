@@ -10,12 +10,12 @@ fortran: true
 addons:
   apt:
     sources:
-      - sourceline: 'ppa:ubuntugis/ppa'
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
     packages:
-      - libudunits2-dev
+      - libudunits2-dev 
+      - libgdal-dev 
+      - libgeos-dev 
       - libproj-dev
-      - libgeos-dev
-      - libgdal-dev
       
 jobs:
   include:
