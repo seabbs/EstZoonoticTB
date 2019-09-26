@@ -3,11 +3,11 @@
 ## Feature updates
 
 * Added `global_map` function for plotting country level data for a single variable.
-* Added`get_latest_data` conveniance function for extracting the lastest data for a given variable.
-* Added `get_latest_combined_data` conveniance function for extracting the lastest data for each variable of interest and then joining this data into a single dataframe with year flags indicating when data is from.
+* Added`get_latest_data` conveniance function for extracting the latest data for a given variable.
+* Added `get_latest_combined_data` convenience function for extracting the latest data for each variable of interest and then joining this data into a single dataframe with year flags indicating when data is from.
 * Improved quality of data linkage so that fewer zoonotic TB proportion studies are implicitly dropped.
 * Added content to the`data-exploration`and `data-mapping` vignettes.
-* Updated package description and README to intoduce the package properly.
+* Updated package description and README to introduce the package properly.
 * Added a data linkage vignette.
 
 ## Package updates

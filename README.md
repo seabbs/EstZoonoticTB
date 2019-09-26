@@ -15,12 +15,12 @@ data on rural populations); animal demographic data; and data on the
 presence of zoonotic TB in animal populations (both domesticated and
 wild). Tooling includes functions for linking the built in datasets
 (built with the aim of accommodating external data sources), data
-mappping functions, and conveniance functions for manipulating the
-linked datasets. The long term aim of the package is to provide a suite
-of data and tools that can be used to iteratively improve the estimation
-of global zoonotic TB burden. A secondary aim is to provide a user
-friendly interface to zoonotic TB relevant data in order to help spread
-awareness of zoonotic TB. See the package vignettes for further details.
+mapping functions, and convenience functions for manipulating the linked
+datasets. The long term aim of the package is to provide a suite of data
+and tools that can be used to iteratively improve the estimation of
+global zoonotic TB burden. A secondary aim is to provide a user friendly
+interface to zoonotic TB relevant data in order to help spread awareness
+of zoonotic TB. See the package vignettes for further details.
 
 ## Installation
 

@@ -8,19 +8,19 @@ link_data(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
   demo = NULL, animal_demo = NULL, verbose = TRUE)
 }
 \arguments{
-\item{z_tb_humans}{Data on zoonotic TB in humans - formated as \code{EstZoonoticTB::zoonotic_tb_humans}.
+\item{z_tb_humans}{Data on zoonotic TB in humans - formatted as \code{EstZoonoticTB::zoonotic_tb_humans}.
 Defaults to \code{EstZoonoticTB::zoonotic_tb_humans}.}
 
-\item{tb_humans}{Data on  TB in humans - formated as \code{EstZoonoticTB::tb_data()}.
+\item{tb_humans}{Data on  TB in humans - formatted as \code{EstZoonoticTB::tb_data()}.
 Defaults to \code{EstZoonoticTB::tb_data()}.}
 
-\item{z_tb_animals}{Data on zoonotic TB in animals - formated as \code{EstZoonoticTB::zoonotic_tb_animals}.
+\item{z_tb_animals}{Data on zoonotic TB in animals - formatted as \code{EstZoonoticTB::zoonotic_tb_animals}.
 Defaults to \code{EstZoonoticTB::zoonotic_tb_humans}.}
 
-\item{demo}{Data on demographics - formated as \code{EstZoonoticTB::demographics}.
+\item{demo}{Data on demographics - formatted as \code{EstZoonoticTB::demographics}.
 Defaults to \code{EstZoonoticTB::demographics}.}
 
-\item{animal_demo}{Data on demographics in animals - formated as \code{EstZoonoticTB::animal_demographics}.
+\item{animal_demo}{Data on demographics in animals - formatted as \code{EstZoonoticTB::animal_demographics}.
 Defaults to \code{EstZoonoticTB::animal_demographics}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose progress messages be shown.}

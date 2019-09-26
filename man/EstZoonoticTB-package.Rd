@@ -17,7 +17,7 @@
         populations); animal demographic data; and data on the presence of zoonotic TB 
         in animal populations (both domesticated and wild). Tooling includes functions
         for linking the built in datasets (built with the aim of accommodating
-        external data sources), data mappping functions, and conveniance functions for
+        external data sources), data mapping functions, and conveneance functions for
         manipulating the linked datasets. See the package vignettes for further details.
 }
 \seealso{

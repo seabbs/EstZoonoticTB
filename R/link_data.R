@@ -5,15 +5,15 @@
 #' maximises preserved data so any analysis with this data may need additional exclusions
 #' and/or munging.
 #' 
-#' @param z_tb_humans Data on zoonotic TB in humans - formated as `EstZoonoticTB::zoonotic_tb_humans`. 
+#' @param z_tb_humans Data on zoonotic TB in humans - formatted as `EstZoonoticTB::zoonotic_tb_humans`. 
 #' Defaults to `EstZoonoticTB::zoonotic_tb_humans`.
-#' @param tb_humans Data on  TB in humans - formated as `EstZoonoticTB::tb_data()`. 
+#' @param tb_humans Data on  TB in humans - formatted as `EstZoonoticTB::tb_data()`. 
 #' Defaults to `EstZoonoticTB::tb_data()`.
-#' @param z_tb_animals Data on zoonotic TB in animals - formated as `EstZoonoticTB::zoonotic_tb_animals`. 
+#' @param z_tb_animals Data on zoonotic TB in animals - formatted as `EstZoonoticTB::zoonotic_tb_animals`. 
 #' Defaults to `EstZoonoticTB::zoonotic_tb_humans`. 
-#' @param demo Data on demographics - formated as `EstZoonoticTB::demographics`. 
+#' @param demo Data on demographics - formatted as `EstZoonoticTB::demographics`. 
 #' Defaults to `EstZoonoticTB::demographics`.
-#' @param animal_demo Data on demographics in animals - formated as `EstZoonoticTB::animal_demographics`. 
+#' @param animal_demo Data on demographics in animals - formatted as `EstZoonoticTB::animal_demographics`. 
 #' Defaults to `EstZoonoticTB::animal_demographics`.
 #' @param verbose Logical, defaults to \code{TRUE}. Should verbose progress messages be shown.
 #'

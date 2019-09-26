@@ -16,7 +16,7 @@ This must use iso3 standard country codes. See \code{\link[EstZoonoticTB]{link_d
 A tibble containing the most recent estimates, by country, of the proportion of TB cases that are zoonotic
 }
 \description{
-This conveniance function works with output from \code{[EstZoonoticTB]{link_data}} to extract
+This convenience function works with output from \code{[EstZoonoticTB]{link_data}} to extract
 the most recent data from each country for a given variable
 }
 \examples{

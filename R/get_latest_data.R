@@ -1,7 +1,7 @@
 #' Extract the Latest Data for a Variable
 #'
 #'
-#' @description This conveniance function works with output from \code{[EstZoonoticTB]{link_data}} to extract
+#' @description This convenience function works with output from \code{[EstZoonoticTB]{link_data}} to extract
 #' the most recent data from each country for a given variable
 #' @param variable An unquoted variable name to select the most recent data for.
 #' @return A tibble containing the most recent estimates, by country, of the proportion of TB cases that are zoonotic
