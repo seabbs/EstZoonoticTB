@@ -11,7 +11,7 @@ data, and analysis aiming to improve country level estimates of zoonotic
 TB. Packaged datasets include: cleaned data from [a recent systematic
 review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/); data on
 the country specific epidemiology of TB; demographic data (including
-data on the rural populations); animal demographic data; and data on the
+data on rural populations); animal demographic data; and data on the
 presence of zoonotic TB in animal populations (both domesticated and
 wild). Tooling includes functions for linking the built in datasets
 (built with the aim of accommodating external data sources), data
@@ -127,13 +127,14 @@ citation("EstZoonoticTB")
 #> 
 #> To cite EstZoonoticTB in publications use:
 #> 
-#>   Sam Abbott (2019). EstZoonoticTB: an R package for estimating
-#>   and visualising zoonotic TB
+#>   Sam Abbott (2019). EstZoonoticTB: an R package for exploring,
+#>   visualising and estimating the global zoonotic tuberculosis
+#>   burden
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Article{,
-#>     title = {EstZoonoticTB: an R package for estimating and visualising zoonotic TB},
+#>     title = {EstZoonoticTB: an R package for exploring, visualising and estimating the global zoonotic tuberculosis burden},
 #>     author = {Sam Abbott},
 #>     journal = {-},
 #>     year = {-},

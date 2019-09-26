@@ -34,6 +34,7 @@ reference:
   - title: Datasets
     desc: These datasets are either built in or sourced on demand
     contents:
+    - zoonotic_tb_humans
     - tb_data
     - zoonotic_tb_animals
     - demographics

@@ -51,7 +51,7 @@ latest_data <- link_data(verbose = FALSE) %>%
   dplyr::select(-z_tb_study_pop, -contains("_lo"), -tb_inc_hi, -prop_hiv_hi, 
                 -tb_z_prop_hi, -tb_z_prop_se, -country, -country_code, -g_whoregion)
 
-latest_data
+summary(latest_data)
 ```
 
 ## Overview

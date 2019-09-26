@@ -1,7 +1,7 @@
 citHeader("To cite EstZoonoticTB in publications use:")
 
 citEntry(entry = "Article",
-  title        = "EstZoonoticTB: an R package for estimating and visualising zoonotic TB",
+  title        = "EstZoonoticTB: an R package for exploring, visualising and estimating the global zoonotic tuberculosis burden",
   author       = personList(as.person("Sam Abbott")),
   journal      = "-",
   year         = "-",
@@ -12,7 +12,7 @@ citEntry(entry = "Article",
 
   textVersion  =
   paste("Sam Abbott (2019).",
-        "EstZoonoticTB: an R package for estimating and visualising zoonotic TB",
+        "EstZoonoticTB: an R package for exploring, visualising and estimating the global zoonotic tuberculosis burden",
         "",
         "")
 )

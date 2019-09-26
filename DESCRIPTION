@@ -12,7 +12,7 @@ Description: 'EstZoonoticTB' is an R package containing data relevant to global
         analysis aiming to improve country level estimates of zoonotic TB. Packaged 
         datasets include: cleaned data from a recent systematic review 
         (<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/>); data on the country 
-        specific epidemiology of TB; demographic data (including data on the rural
+        specific epidemiology of TB; demographic data (including data on rural
         populations); animal demographic data; and data on the presence of zoonotic TB 
         in animal populations (both domesticated and wild). Tooling includes functions
         for linking the built in datasets (built with the aim of accommodating
