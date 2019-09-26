@@ -265,29 +265,28 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt; [40] "Turks and Caicos Islands"             
 #&gt; [41] "Tuvalu"                               
 #&gt; [42] "Wallis and Futuna Islands"            
-#&gt; [43] "Yemen"                                </div><div class='output co'>#&gt; <span class='message'>Countries with data present for zTB in animals and not TB incidence:</span></div><div class='output co'>#&gt;  [1] "Ceuta"                          "Chinese Taipei"                
-#&gt;  [3] "Falkland Islands (Malvinas)"    "Faroe Islands"                 
-#&gt;  [5] "French Guiana"                  "Guadeloupe (France)"           
-#&gt;  [7] "Liechtenstein, Principality of" "Martinique"                    
-#&gt;  [9] "Mayotte (France)"               "Melilla"                       
-#&gt; [11] "Reunion"                        "St. Helena"                    </div><div class='output co'>#&gt; <span class='message'>Joining zTB incidence in humans data and all other TB data using country names</span></div><div class='output co'>#&gt; <span class='message'>Joining TB data and demographic data using country names.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for TB not for demographics:</span></div><div class='output co'>#&gt;  [1] "Bonaire, Saint Eustatius and Saba" "Curaçao"                          
+#&gt; [43] "Yemen"                                </div><div class='output co'>#&gt; <span class='message'>Countries with data present for zTB in animals and not TB incidence:</span></div><div class='output co'>#&gt;  [1] "Ceuta"                       "Chinese Taipei"             
+#&gt;  [3] "Falkland Islands (Malvinas)" "Faroe Islands"              
+#&gt;  [5] "French Guiana"               "Guadeloupe (France)"        
+#&gt;  [7] "Liechtenstein"               "Martinique"                 
+#&gt;  [9] "Mayotte (France)"            "Melilla"                    
+#&gt; [11] "Reunion"                     "St. Helena"                 </div><div class='output co'>#&gt; <span class='message'>Joining zTB incidence in humans data and all other TB data using country names</span></div><div class='output co'>#&gt; <span class='message'>Joining TB data and demographic data using country names.</span></div><div class='output co'>#&gt; <span class='message'>Countries with data present for TB not for demographics:</span></div><div class='output co'>#&gt;  [1] "Bonaire, Saint Eustatius and Saba" "Curaçao"                          
 #&gt;  [3] "Netherlands Antilles"              "Serbia &amp; Montenegro"              
 #&gt;  [5] "Sint Maarten (Dutch part)"         "West Bank and Gaza Strip"         
 #&gt;  [7] "Ceuta"                             "Chinese Taipei"                   
-#&gt;  [9] "Guadeloupe (France)"               "Liechtenstein, Principality of"   
-#&gt; [11] "Mayotte (France)"                  "Melilla"                          
-#&gt; [13] "St. Helena"                       </div><div class='output co'>#&gt; <span class='message'>Countries with data present demographics and not TB:</span></div><div class='output co'>#&gt; <span class='message'>(Some mismatches are to be expected here due to historic country names)</span></div><div class='output co'>#&gt;  [1] "Belgium-Luxembourg"              "Channel Islands"                
+#&gt;  [9] "Guadeloupe (France)"               "Mayotte (France)"                 
+#&gt; [11] "Melilla"                           "St. Helena"                       </div><div class='output co'>#&gt; <span class='message'>Countries with data present demographics and not TB:</span></div><div class='output co'>#&gt; <span class='message'>(Some mismatches are to be expected here due to historic country names)</span></div><div class='output co'>#&gt;  [1] "Belgium-Luxembourg"              "Channel Islands"                
 #&gt;  [3] "Czechoslovakia"                  "Ethiopia PDR"                   
 #&gt;  [5] "Gibraltar"                       "Guadeloupe"                     
 #&gt;  [7] "Holy See"                        "Isle of Man"                    
-#&gt;  [9] "Liechtenstein"                   "Mayotte"                        
-#&gt; [11] NA                                "Pacific Islands Trust Territory"
-#&gt; [13] "Palestine"                       "Saint Pierre and Miquelon"      
-#&gt; [15] "Sudan (former)"                  "United States Virgin Islands"   
-#&gt; [17] "USSR"                            "Western Sahara"                 
-#&gt; [19] "Yugoslav SFR"                    "Norfolk Island"                 </div><div class='input'>
+#&gt;  [9] "Mayotte"                         NA                               
+#&gt; [11] "Pacific Islands Trust Territory" "Palestine"                      
+#&gt; [13] "Saint Pierre and Miquelon"       "Sudan (former)"                 
+#&gt; [15] "United States Virgin Islands"    "USSR"                           
+#&gt; [17] "Western Sahara"                  "Yugoslav SFR"                   
+#&gt; [19] "Norfolk Island"                 </div><div class='input'>
 
-<span class='no'>df</span></div><div class='output co'>#&gt; # A tibble: 14,882 x 26
+<span class='no'>df</span></div><div class='output co'>#&gt; # A tibble: 15,061 x 26
 #&gt;    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi
 #&gt;    &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt;       &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 Afghan… AFG          Eastern Me…  2000    38000    190       123       271
@@ -300,7 +299,7 @@ Defaults to <code><a href='animal_demographics.html'>EstZoonoticTB::animal_demog
 #&gt;  8 Afghan… AFG          Eastern Me…  2007    50000    189       122       270
 #&gt;  9 Afghan… AFG          Eastern Me…  2008    52000    189       122       270
 #&gt; 10 Afghan… AFG          Eastern Me…  2009    53000    189       123       270
-#&gt; # … with 14,872 more rows, and 18 more variables: prop_tb_ep &lt;dbl&gt;,
+#&gt; # … with 15,051 more rows, and 18 more variables: prop_tb_ep &lt;dbl&gt;,
 #&gt; #   prop_hiv &lt;dbl&gt;, prop_hiv_lo &lt;dbl&gt;, prop_hiv_hi &lt;dbl&gt;,
 #&gt; #   z_tb_dom_animal &lt;fct&gt;, z_tb_wild_animal &lt;fct&gt;, z_tb_id &lt;int&gt;,
 #&gt; #   z_tb_geo_coverage &lt;fct&gt;, z_tb_study_pop &lt;fct&gt;, z_tb_multi_year_study &lt;fct&gt;,
