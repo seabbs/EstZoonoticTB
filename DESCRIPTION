@@ -1,6 +1,6 @@
 Type: Package
 Package: EstZoonoticTB
-Title: Explore, Visualise and Estimate te Global Zoonotic Tuberculosis Burden
+Title: Explore, Visualise and Estimate the Global Zoonotic Tuberculosis Burden
 Version: 0.2.0
 Authors@R: 
     person(given = "Sam Abbott",

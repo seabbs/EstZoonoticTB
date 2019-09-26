@@ -4,7 +4,7 @@
 \name{EstZoonoticTB-package}
 \alias{EstZoonoticTB}
 \alias{EstZoonoticTB-package}
-\title{EstZoonoticTB: Explore, Visualise and Estimate te Global Zoonotic Tuberculosis Burden}
+\title{EstZoonoticTB: Explore, Visualise and Estimate the Global Zoonotic Tuberculosis Burden}
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
