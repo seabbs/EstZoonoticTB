@@ -1,9 +1,22 @@
 
-# EstZoonoticTB: an R package for estimating and visualising zoonotic TB <img src="man/figures/logo.png" align="right" alt="" width="120" />
+# `{EstZoonoticTB}`: an R package for exploring, visualising and estimating the global zoonotic tuberculosis burden <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![badge](https://img.shields.io/badge/Launch-EstZoonoticTB-green.svg)](https://mybinder.org/v2/gh/seabbs/EstZoonoticTB/master?urlpath=rstudio)
 [![develVersion](https://img.shields.io/badge/devel%20version-0.2.0-lightgrey.svg?style=flat)](https://github.com/seabbs/EstZoonoticTB)
 [![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
+
+`{EstZoonoticTB}` is an R package containing data relevant to global
+zoonotic tuberculosis (TB), tools for manipulating and visualising this
+data, and analysis aiming to improve country level estimates of zoonotic
+TB. Packaged datasets include: cleaned data from [a recent systematic
+review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/); data on
+the country specific epidemiology of TB; demographic data (including
+data on the rural populations); animal demographic data; and data on the
+presence of zoonotic TB in animal populations (both domesticated and
+wild). Tooling includes functions for linking the built in datasets
+(built with the aim of accommodating external data sources), data
+mappping functions, and conveniance functions for manipulating the
+linked datasets. See the package vignettes for further details.
 
 ## Installation
 
@@ -16,12 +29,21 @@ remotes::install_github("seabbs/EstZoonoticTB")
 
 ## Documentation
 
+### Overview
+
 [![Documentation](https://img.shields.io/badge/Documentation-release-lightgrey.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/)
 [![Development
 documentation](https://img.shields.io/badge/Documentation-development-lightblue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/dev)
 [![Functions](https://img.shields.io/badge/Documentation-functions-orange.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/index.html)
+
+### Vignettes
+
 [![Data
-sources](https://img.shields.io/badge/Documentation-data%20sources-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
+sources](https://img.shields.io/badge/Documentation-data%20sources-lightgrey.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
+[![Data
+exploration](https://img.shields.io/badge/Documentation-data%20exploration-blue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-exploration.html)
+[![Data
+mapping](https://img.shields.io/badge/Documentation-data%20mapping-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-mapping.html)
 
 ## Testing
 
@@ -40,7 +62,7 @@ be accessed using the following,
 
 ``` r
 EstZoonoticTB::link_data(verbose = FALSE)
-#> # A tibble: 14,882 x 26
+#> # A tibble: 15,061 x 26
 #>    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo
 #>    <fct>   <fct>        <fct>       <dbl>    <int>  <dbl>     <dbl>
 #>  1 Afghan… AFG          Eastern Me…  2000    38000    190       123
@@ -53,7 +75,7 @@ EstZoonoticTB::link_data(verbose = FALSE)
 #>  8 Afghan… AFG          Eastern Me…  2007    50000    189       122
 #>  9 Afghan… AFG          Eastern Me…  2008    52000    189       122
 #> 10 Afghan… AFG          Eastern Me…  2009    53000    189       123
-#> # … with 14,872 more rows, and 19 more variables: tb_inc_hi <dbl>,
+#> # … with 15,051 more rows, and 19 more variables: tb_inc_hi <dbl>,
 #> #   prop_tb_ep <dbl>, prop_hiv <dbl>, prop_hiv_lo <dbl>,
 #> #   prop_hiv_hi <dbl>, z_tb_dom_animal <fct>, z_tb_wild_animal <fct>,
 #> #   z_tb_id <int>, z_tb_geo_coverage <fct>, z_tb_study_pop <fct>,
@@ -62,7 +84,11 @@ EstZoonoticTB::link_data(verbose = FALSE)
 #> #   prop_rural <dbl>, cattle <int>, cattle_per_head <dbl>
 ```
 
+See the package vignettes for details.
+
 ## Shiny dashboard
+
+*Work in progress*
 
 To explore the package functionality in an interactive session, or to
 investigate Zoonotic TB without having to code extensively in R, a shiny

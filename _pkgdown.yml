@@ -20,7 +20,7 @@ navbar:
         href: articles/data-sources.html
       - text: "Data exploration"
         href: articles/data-exploration.html
-      - text: "Mapping data"
+      - text: "Data mapping"
         href: articles/data-mapping.html
     - text: News
       menu:

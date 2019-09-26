@@ -1,8 +1,8 @@
 ---
-title: "Mapping data"
+title: "Data mapping"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mapping data}
+  %\VignetteIndexEntry{Data mapping}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,10 +10,150 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8, 
+  fig.height = 8,
+  dpi = 330
 )
 ```
 
-```{r setup}
+## Overview
+
+In this vignette the global distribution of zoonotic TB and variables thought to be related to zoonotic TB is explored using global maps. This includes TB incidence rates, the proportion of TB cases that are extra-pulmonary, the proportion of TB cases that are HIV postive, the presence of zoonotic TB in domesticated/wild animal populations, and the proportion of the population that is rural. Note that conclusions drawn from these maps require support from other forms of analysis as maps can be difficult to interpret (due to country size inducing visual bias).
+
+
+## Data 
+
+Use the latest available data for each variable. Note that this may introduce some bias - as TB incidence rates etc. have been changing over time. See the data exploration vignette for further details on data structure.
+
+```{r setup, include = FALSE}
 library(EstZoonoticTB)
+library(ggplot2)
+library(dplyr)
+```
+
+
+```{r}
+latest_data <- link_data(verbose = FALSE) %>% 
+  get_latest_combined_data()
+
+latest_data
+```
+
+
+## Proportion of tuberculosis (TB) that is zoonotic
+
+```{r}
+prop_map <- function(df) {
+  map <- global_map(df, variable = "tb_z_prop", 
+         variable_label = "% of TB cases that are zoonotic",
+          trans = "sqrt", fill_labels = scales::percent)
+  
+  return(map)
+}
+
+prop_map(latest_data)
+```
+
+### Country-wide studies
+
+```{r}
+latest_data %>% 
+  filter(z_tb_geo_coverage %in% "Country-wide data") %>% 
+  prop_map()
+```
+
+### Non-Country-wide studies
+
+```{r}
+latest_data %>% 
+  filter(z_tb_geo_coverage %in% "Non-country-wide data") %>% 
+  prop_map()
+```
+
+## TB incidence rates
+
+Incidence rate data is from 2017 for consitancy.
+
+```{r}
+link_data(verbose = FALSE) %>% 
+  filter(year == 2017) %>% 
+   global_map(variable = "tb_inc", 
+         variable_label = "TB incidence rate (per 100,000)",
+          trans = "sqrt")
+```
+
+## Proportion of TB cases that are extra-pulmonary only
+
+Data is again from 2017 only.
+
+```{r}
+link_data(verbose = FALSE) %>% 
+  filter(year == 2017) %>% 
+   global_map(variable = "prop_tb_ep", 
+         variable_label = "% of TB cases that are extra-pulmonary only",
+         fill_labels = scales::percent)
+```
+
+
+## Proportion of TB cases that are HIV positive
+
+Data is again from 2017 only.
+
+```{r}
+link_data(verbose = FALSE) %>% 
+  filter(year == 2017) %>% 
+   global_map(variable = "prop_hiv", 
+         variable_label = "% of TB cases that are HIV positive",
+         trans = "sqrt",
+         fill_labels = scales::percent)
+```
+
+## Presence of zoonotic TB in animals
+
+Data is latest from 2018 only.
+
+### Domesitcated animals
+
+```{r}
+latest_data %>% 
+     global_map(variable = "z_tb_dom_animal", 
+         variable_label = "Presence of zoonotic TB",
+         viridis_palette = "viridis")
+```
+
+
+### Wild animals
+
+```{r}
+latest_data %>% 
+     global_map(variable = "z_tb_wild_animal", 
+         variable_label = "Presence of zoonotic TB",
+         viridis_palette = "viridis")
+```
+
+## Demographics
+
+Data is latest available.
+
+## Proportion of the population that is rural.
+
+```{r}
+latest_data %>% 
+     global_map(variable = "prop_rural", 
+         variable_label = "% of population that is rural",
+         fill_labels = scales::percent)
+```
+
+## Animal demographics
+
+Data is latest available.
+
+### Cattle per person
+
+```{r}
+latest_data %>% 
+     global_map(variable = "cattle_per_head", 
+                trans = "sqrt",
+                variable_label = "Number of cattle per person")
 ```

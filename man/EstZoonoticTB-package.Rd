@@ -4,11 +4,21 @@
 \name{EstZoonoticTB-package}
 \alias{EstZoonoticTB}
 \alias{EstZoonoticTB-package}
-\title{EstZoonoticTB: Estimate and Visualise Zoonotic Tuberculosis}
+\title{EstZoonoticTB: Explore, Visualise and Estimate te Global Zoonotic Tuberculosis Burden}
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
-Estimate and visualise zoonotic tuberculosis.
+'EstZoonoticTB' is an R package containing data relevant to global
+        zoonotic tuberculosis (TB), tools for manipulating and visualising this data, and
+        analysis aiming to improve country level estimates of zoonotic TB. Packaged 
+        datasets include: cleaned data from a recent systematic review 
+        (<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/>); data on the country 
+        specific epidemiology of TB; demographic data (including data on the rural
+        populations); animal demographic data; and data on the presence of zoonotic TB 
+        in animal populations (both domesticated and wild). Tooling includes functions
+        for linking the built in datasets (built with the aim of accommodating
+        external data sources), data mappping functions, and conveniance functions for
+        manipulating the linked datasets. See the package vignettes for further details.
 }
 \seealso{
 Useful links:

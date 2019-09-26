@@ -322,7 +322,7 @@ zoonotic_tb_humans <- zoonotic_tb_humans %>%
   dplyr::mutate(tb_z_prop = purrr::map_dbl(prop_test, ~ .$estimate),
                 tb_z_prop_lo = purrr::map_dbl(prop_test, ~ .$conf.int[1]),
                 tb_z_prop_hi = purrr::map_dbl(prop_test, ~ .$conf.int[2]),
-                tb_z_prop_se = (tb_z_prop_lo - tb_z_prop_hi) / (2 * qnorm(0.975))
+                tb_z_prop_se = (tb_z_prop_hi - tb_z_prop_lo) / (2 * qnorm(0.975))
                 ) %>% 
   dplyr::select(-prop_test) %>% 
   dplyr::mutate(country = country %>% 

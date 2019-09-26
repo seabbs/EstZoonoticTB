@@ -6,6 +6,8 @@
 * Added`get_latest_data` conveniance function for extracting the lastest data for a given variable.
 * Added `get_latest_combined_data` conveniance function for extracting the lastest data for each variable of interest and then joining this data into a single dataframe with year flags indicating when data is from.
 * Improved quality of data linkage so that fewer zoonotic TB proportion studies are implicitly dropped.
+* Added content to the`data-exploration`and `data-mapping` vignettes.
+* Updated package description and README to intoduce the package properly.
 
 ## Package updates
 
@@ -14,6 +16,7 @@
 * Update travis and Appveyor to work with `{sf}`.
 * Dropped MacOs Travis testing as not clear how to automate.
 * Added required packages to suggests for using `{sf}`.
+* Added vignettes to README.
 
 # EstZoonoticTB 0.1.0
 
