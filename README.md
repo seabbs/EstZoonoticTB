@@ -6,7 +6,7 @@
 [![DOI](https://zenodo.org/badge/112591837.svg)](https://zenodo.org/badge/latestdoi/112591837)
 
 `{EstZoonoticTB}` is an R package containing data relevant to global
-zoonotic tuberculosis (TB), tools for manipulating and visualising this
+zoonotic tuberculosis (TB), tools for manipulating and visualising these
 data, and analysis aiming to improve country level estimates of zoonotic
 TB. Packaged datasets include: cleaned data from [a recent systematic
 review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4816377/); data on
@@ -16,7 +16,11 @@ presence of zoonotic TB in animal populations (both domesticated and
 wild). Tooling includes functions for linking the built in datasets
 (built with the aim of accommodating external data sources), data
 mappping functions, and conveniance functions for manipulating the
-linked datasets. See the package vignettes for further details.
+linked datasets. The long term aim of the package is to provide a suite
+of data and tools that can be used to iteratively improve the estimation
+of global zoonotic TB burden. A secondary aim is to provide a user
+friendly interface to zoonotic TB relevant data in order to help spread
+awareness of zoonotic TB. See the package vignettes for further details.
 
 ## Installation
 
@@ -39,11 +43,11 @@ documentation](https://img.shields.io/badge/Documentation-development-lightblue.
 ### Vignettes
 
 [![Data
-sources](https://img.shields.io/badge/Documentation-data%20sources-lightgrey.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-sources.html)
+sources](https://img.shields.io/badge/Documentation-data%20sources-lightgrey.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-sources.html)
 [![Data
-exploration](https://img.shields.io/badge/Documentation-data%20exploration-blue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-exploration.html)
+exploration](https://img.shields.io/badge/Documentation-data%20exploration-blue.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-exploration.html)
 [![Data
-mapping](https://img.shields.io/badge/Documentation-data%20mapping-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/reference/data-mapping.html)
+mapping](https://img.shields.io/badge/Documentation-data%20mapping-green.svg?style=flat)](https://www.samabbott.co.uk/EstZoonoticTB/articles/data-mapping.html)
 
 ## Testing
 
