@@ -155,7 +155,7 @@
 <table class="table"><tbody>
 <tr class="odd">
 <td align="left">rows</td>
-<td align="right">172</td>
+<td align="right">170</td>
 </tr>
 <tr class="even">
 <td align="left">columns</td>
@@ -175,19 +175,19 @@
 </tr>
 <tr class="even">
 <td align="left">total_missing_values</td>
-<td align="right">798</td>
+<td align="right">784</td>
 </tr>
 <tr class="odd">
 <td align="left">complete_rows</td>
-<td align="right">34</td>
+<td align="right">33</td>
 </tr>
 <tr class="even">
 <td align="left">total_observations</td>
-<td align="right">3,268</td>
+<td align="right">3,230</td>
 </tr>
 <tr class="odd">
 <td align="left">memory_usage</td>
-<td align="right">28,736</td>
+<td align="right">28,488</td>
 </tr>
 </tbody></table>
 </div>
@@ -241,8 +241,8 @@
 <h3 class="hasAnchor">
 <a href="#visualize-correlation-heatmap-for-all-non-missing-features" class="anchor"></a>Visualize correlation heatmap for all non-missing features</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_correlation.html">plot_correlation</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(latest_data), <span class="dt">maxcat =</span> 5L)</a></code></pre></div>
-<pre><code>## Warning in cor(x = structure(list(tb_year = c(2017, 2017, 2017, 2017,
-## 2017, : the standard deviation is zero</code></pre>
+<pre><code>## Warning in cor(x = structure(list(tb_year = c(2018, 2018, 2018, 2018,
+## 2018, : the standard deviation is zero</code></pre>
 <p><img src="data-exploration_files/figure-html/eda-plot-correlation-1.png" width="1152"></p>
 </div>
 <div id="only-continuous-features" class="section level3">
@@ -250,8 +250,8 @@
 <a href="#only-continuous-features" class="anchor"></a>Only continuous features</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">plot &lt;-<span class="st"> </span>DataExplorer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DataExplorer/man/plot_correlation.html">plot_correlation</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(latest_data), <span class="dt">type =</span> <span class="st">"c"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
-<pre><code>## Warning in cor(x = structure(list(tb_year = c(2017, 2017, 2017, 2017,
-## 2017, : the standard deviation is zero</code></pre>
+<pre><code>## Warning in cor(x = structure(list(tb_year = c(2018, 2018, 2018, 2018,
+## 2018, : the standard deviation is zero</code></pre>
 <pre><code>## Warning: Removed 100 rows containing missing values (geom_text).</code></pre>
 <p><img src="data-exploration_files/figure-html/eda-plot-correlation-con-1.png" width="1344"></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">plot</a></code></pre></div>
