@@ -13,8 +13,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
@@ -249,7 +249,7 @@
 <a class="sourceLine" id="cb1-109" data-line-number="109"><span class="co">#&gt;         factor)</span></a>
 <a class="sourceLine" id="cb1-110" data-line-number="110"><span class="co">#&gt;     return(out)</span></a>
 <a class="sourceLine" id="cb1-111" data-line-number="111"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb1-112" data-line-number="112"><span class="co">#&gt; &lt;bytecode: 0x61af228&gt;</span></a>
+<a class="sourceLine" id="cb1-112" data-line-number="112"><span class="co">#&gt; &lt;bytecode: 0x51e8c28&gt;</span></a>
 <a class="sourceLine" id="cb1-113" data-line-number="113"><span class="co">#&gt; &lt;environment: namespace:EstZoonoticTB&gt;</span></a></code></pre></div>
 </div>
 <div id="data" class="section level3">
@@ -430,7 +430,7 @@
 <a class="sourceLine" id="cb3-48" data-line-number="48"><span class="co">#&gt;         dplyr::full_join(cattle, by = c("country", "country_code"))</span></a>
 <a class="sourceLine" id="cb3-49" data-line-number="49"><span class="co">#&gt;     return(out)</span></a>
 <a class="sourceLine" id="cb3-50" data-line-number="50"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb3-51" data-line-number="51"><span class="co">#&gt; &lt;bytecode: 0xdc129f8&gt;</span></a>
+<a class="sourceLine" id="cb3-51" data-line-number="51"><span class="co">#&gt; &lt;bytecode: 0xcc5e080&gt;</span></a>
 <a class="sourceLine" id="cb3-52" data-line-number="52"><span class="co">#&gt; &lt;environment: namespace:EstZoonoticTB&gt;</span></a>
 <a class="sourceLine" id="cb3-53" data-line-number="53"></a>
 <a class="sourceLine" id="cb3-54" data-line-number="54"></a>
@@ -445,7 +445,7 @@
 <a class="sourceLine" id="cb3-63" data-line-number="63"><span class="co">#&gt;         dplyr::filter(!is.na(!!variable)) %&gt;% dplyr::group_by(country) %&gt;% </span></a>
 <a class="sourceLine" id="cb3-64" data-line-number="64"><span class="co">#&gt;         dplyr::arrange(desc(year)) %&gt;% dplyr::slice(1) %&gt;% dplyr::ungroup()</span></a>
 <a class="sourceLine" id="cb3-65" data-line-number="65"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb3-66" data-line-number="66"><span class="co">#&gt; &lt;bytecode: 0xdc7d550&gt;</span></a>
+<a class="sourceLine" id="cb3-66" data-line-number="66"><span class="co">#&gt; &lt;bytecode: 0xccc7338&gt;</span></a>
 <a class="sourceLine" id="cb3-67" data-line-number="67"><span class="co">#&gt; &lt;environment: namespace:EstZoonoticTB&gt;</span></a></code></pre></div>
 </div>
 <div id="data-1" class="section level3">
