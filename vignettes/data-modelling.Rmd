@@ -1,0 +1,189 @@
+---
+title: "Data modelling"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data mapping}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 12, 
+  fig.height = 8,
+  dpi = 330
+)
+```
+
+## Overview
+
+
+*Work in progress*
+
+## Method
+
+### Data 
+
+
+```{r setup, include = FALSE}
+library(EstZoonoticTB)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(mgcv)
+library(gratia)
+library(truncnorm)
+```
+
+* Get all data
+
+```{r}
+all_data <- link_data(verbose = FALSE)
+
+all_data
+```
+
+* Filter down to just countries with data on zoonotic TB presence from 2000 onwards.
+
+```{r}
+df_with_ztb <- all_data %>% 
+  tidyr::drop_na(tb_z_prop, tb_z_prop_se) %>% 
+  dplyr::filter(year >= 2000)
+
+df_with_ztb
+```
+
+* Drop countries with a TB incidence rate of less than 1 in 100,000 or with incidence of less than 100.
+
+```{r}
+df_with_ztb_filt_tb <- df_with_ztb %>% 
+  dplyr::filter(tb_cases >= 100, tb_inc >= 1)
+
+df_with_ztb_filt_tb 
+```
+
+* Drop data on presence/absence of zoonotic TB in animals. Drop variables not used in further analysis. 
+
+```{r}
+analysis_df <- df_with_ztb_filt_tb %>% 
+  dplyr::select(-z_tb_dom_animal, -z_tb_wild_animal, 
+                -country_code, - tb_cases, -tb_inc, 
+                -tb_inc_lo, -tb_inc_hi, -z_tb_id, -z_tb_geo_coverage,
+                -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi, -population,
+                -cattle) %>% 
+  dplyr::mutate(id = 1:n())
+                
+
+
+
+analysis_df 
+```
+
+* Check data structure
+
+```{r}
+analysis_df %>% 
+  summary
+```
+
+
+### Bootstrapping
+
+
+* Simulate 10000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed.
+
+
+```{r}
+samples <- 10000
+
+bootstrapped_df <- analysis_df %>% 
+  ## Add noise for variables that we have information about
+  mutate(prop_hiv = purrr::map2(prop_hiv, prop_hiv_hi, ~ rtruncnorm(samples, a = 0, b = 1, mean = .x, sd = (.y - .x) / 1.96)),
+         tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ rtruncnorm(samples, a = 0, b = 1, mean = .x, sd = .y))) %>% 
+  ## Add a 2.5% SE normal noise for numeric variables with no noise.
+  mutate_at(.vars = vars(cattle_per_head), 
+            ~ purrr::map(., ~ rtruncnorm(samples, a = 0, mean = ., sd = . * 0.025))) %>% 
+  mutate_at(.vars = vars(prop_tb_ep, prop_rural), 
+            ~ purrr::map(., ~ rtruncnorm(samples, a = 0, b = 1, mean = ., sd = . * 0.025))) %>% 
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
+  tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, prop_rural, cattle_per_head))
+
+bootstrapped_df
+```
+
+* Split data into training and test
+
+```{r}
+training <- bootstrapped_df  %>% 
+  dplyr::filter(year < 2007)
+
+summary(training)
+```
+
+```{r}
+test <- bootstrapped_df %>% 
+  dplyr::filter(year >= 2007)
+
+summary(test)
+```
+
+### Modelling
+
+* Initial model using all covariates, selected using penalised regression.
+
+```{r}
+# K chosen for each covariate using gam.check
+basic_model <- bam(tb_z_prop ~
+                  s(year, k = 5) +
+                  s(prop_tb_ep, k = 15) + 
+                  s(prop_hiv, k = 10) +
+                  s(prop_rural, k = 15) + 
+                  s(cattle_per_head, k = 15),
+                  data = training, 
+                  family = "gaussian", 
+                  method = "fREML", 
+                  select = TRUE,
+                  samfrac = 0.1)
+
+
+summary(basic_model)
+
+draw(basic_model)
+```
+
+* Complex model using all pairwise interactions. Again penalised to remove confounders.
+
+```{r}
+complex_model <- bam(tb_z_prop ~
+                  s(year, k = 5) +
+                  s(prop_tb_ep, k = 15) + 
+                  s(prop_hiv, k = 10) +
+                  s(prop_rural, k = 15) + 
+                  s(cattle_per_head, k = 15) +
+                  ## Interactions with year
+                  ti(year, prop_tb_ep) +
+                  ti(year, prop_hiv) + 
+                  ti(year, prop_rural) +
+                  ti(year, cattle_per_head) +
+                  ## Interactions with proportion ep
+                  ti(prop_tb_ep, prop_hiv) +
+                  ti(prop_tb_ep, prop_rural) + 
+                  ti(prop_tb_ep, cattle_per_head) +
+                  ## Interactions with proportion HIV
+                  ti(prop_hiv, prop_rural) +
+                  ti(prop_hiv, cattle_per_head) + 
+                  ## Interactions with proportion rural
+                  ti(prop_rural, cattle_per_head),
+                  data = training, 
+                  family = "gaussian", 
+                  method = "fREML", 
+                  select = TRUE,
+                  samfrac = 0.1)
+
+
+summary(complex_model)
+
+draw(complex_model)
+```
