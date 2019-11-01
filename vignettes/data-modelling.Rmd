@@ -74,7 +74,7 @@ analysis_df <- df_with_ztb_filt_tb %>%
                 -country_code, - tb_cases, -tb_inc, 
                 -tb_inc_lo, -tb_inc_hi, -z_tb_id, -z_tb_geo_coverage,
                 -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi, -population,
-                -cattle) %>% 
+                -cattle, -country, -g_whoregion, -z_tb_multi_year_study) %>% 
   dplyr::mutate(id = 1:n())
                 
 
@@ -98,187 +98,209 @@ analysis_df %>%
 
 
 ```{r}
-samples <- 5
+samples <- 2
 
 bootstrapped_df <- analysis_df %>% 
-  ## Add noise for variables that we have information about
-  mutate(prop_hiv = purrr::map2(prop_hiv, prop_hiv_hi, ~ rtruncnorm(samples, a = 0, b = 1, mean = .x, sd = (.y - .x) / 1.96)),
-         tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ rtruncnorm(samples, a = 0, b = 1, mean = .x, sd = .y))) %>% 
-  ## Add a 2.5% SE normal noise for numeric variables with no noise.
-  mutate_at(.vars = vars(cattle_per_head), 
-            ~ purrr::map(., ~ rtruncnorm(samples, a = 0, mean = ., sd = . * 0.025))) %>% 
-  mutate_at(.vars = vars(prop_tb_ep, prop_rural), 
-            ~ purrr::map(., ~ rtruncnorm(samples, a = 0, b = 1, mean = ., sd = . * 0.025))) %>% 
-  mutate(sample = list(tibble::tibble(sample = factor(1:samples)))) %>% 
-  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
-  tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, prop_rural, cattle_per_head, sample))
+  ## Move proportions away from 0 and 1 by a small amount for beta distribution
+  mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-5, 
+                            ifelse(tb_z_prop == 1, 1 - 1e-5, tb_z_prop))) %>% 
+  ## Hold out the original data as a point estimate sample
+  {bind_rows(mutate(., sample = 0),
+               ## Add noise for variables that we have information about
+                mutate(., prop_hiv = purrr::map2(prop_hiv, prop_hiv_hi, ~ 
+                                                   rtruncnorm(samples - 1, a = 0, b = 1,
+                                                              mean = .x, sd = (.y - .x) / 1.96)),
+                       tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ 
+                                                 rtruncnorm(samples - 1, a = 1e-5, b = (1 - 1e-5), 
+                                                            mean = .x, sd = .y))) %>% 
+                ## Add a 2.5% SE normal noise for numeric variables with no noise.
+                mutate_at(.vars = vars(cattle_per_head), 
+                          ~ purrr::map(., ~ rtruncnorm(samples - 1, a = 0, 
+                                                       mean = ., sd = . * 0.025))) %>% 
+                mutate_at(.vars = vars(prop_tb_ep, prop_rural), 
+                          ~ purrr::map(., ~ rtruncnorm(samples - 1, a = 0, b = 1, 
+                                                       mean = ., sd = . * 0.025))) %>% 
+                mutate(sample = list(tibble::tibble(sample = 1:(samples - 1)))) %>% 
+                tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, 
+                                       prop_rural, cattle_per_head, sample)),
+             )} %>% 
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se)
 
 bootstrapped_df
 ```
 
-* Split data into training and test
-
-```{r}
-training <- bootstrapped_df  %>% 
-  dplyr::filter(year < 2007)
-
-summary(training)
-```
-
-```{r}
-test <- bootstrapped_df %>% 
-  dplyr::filter(year >= 2007)
-
-summary(test)
-```
-
 ### Modelling
 
+Method derived from here: https://link.springer.com/article/10.1007%2Fs11222-016-9649-y
 
-* Evaluation of `brms` measurement model approach.
+
+* Using WAIC/LOO gives a nearly unbiased assessment of performance so can drop training and test.
+* Variance in these measures may still result in overfitting if not used in a principled manner.
+* Using LOO etc for choosing model size rather than parameter combinations greatly reduces over fitting.   
+
+#### Models to be fitted
+
+* All explanatory confounders, using horseshoe priors for regularisation.
+* All explanatory confounders with pairwise interactions, using horseshoe priors for regularisation.
+* All explanatory confounders, using penalised splines.
+* All explanatory confounders and pairwise interactions, using penalised splines
+
 
 ```{r}
-analysis_df <- analysis_df %>% 
-  mutate(weights.norm = 1/(tb_z_prop_se^2/mean(tb_z_prop_se^2))) %>% 
-  mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-10, tb_z_prop),
-         prop_hiv_se = (prop_hiv_hi - prop_hiv) / 1.96)
+## Define models
+models <- tibble(
+  model = c(
+    "linear", 
+    "linear_int",
+    "spline",
+    "spline_int"
+  ),
+  formula = c(
+    "bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head)",
+    "bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head + 
+    year:prop_tb_ep + year:prop_hiv + year:prop_rural + year:cattle_per_head + 
+    prop_tb_ep:prop_hiv + prop_tb_ep:prop_rural + prop_tb_ep:cattle_per_head + 
+    prop_hiv:prop_rural + prop_hiv:cattle_per_head + prop_rural:cattle_per_head)",
+    "bf(tb_z_prop ~ s(year, k = 5) + s(prop_tb_ep) + s(prop_hiv) + s(prop_rural) + s(cattle_per_head))",
+    "bf(tb_z_prop ~ t2(year, prop_tb_ep, prop_hiv, prop_rural, cattle_per_head))"
+  )
+) %>% 
+  mutate(formula = stringr::str_replace(formula, "\\n  ", ""))
+```
 
+
+#### Model fitting
+
+
+* Set up model fitting and convergance checking
+
+```{r}
 ## Split sampled data into seperate data.frames
 split_df <- bootstrapped_df %>% 
-    mutate_if(is.numeric, scale) %>% 
+    mutate_at(.vars = vars(year, prop_tb_ep, prop_hiv, prop_rural, cattle_per_head), scale) %>% 
     group_split(sample) %>% 
     purrr::map(as.data.frame)
- 
 
+
+## Fit a model for each sample and aggregate using Rubins rules (process originally designed for imputed data).
+fit_model <- purrr::partial(
+  brm_multiple,
+  data = split_df,
+  family = Beta(link = "logit", link_phi = "log"),
+  control = list(adapt_delta = 0.999, max_treedepth = 20),
+  sample_prior = "yes",
+  iter = 200,
+  warmup = 100,
+  prior = c(prior(horseshoe(1), class = "b")),
+  future = TRUE,
+  refresh = 0,
+  chains = 2
+)
+
+
+check_convergence <- function(model = NULL) {
+  large_rhat <- model$rhats %>% 
+  summarise_all(max) %>% 
+  t() %>% 
+  as_tibble(rownames = "variable") %>% 
+  filter(V1 > 1.1)
+
+if (nrow(large_rhat) > 0) {
+  warning("Model may not have converged")
+  return(large_rhat)
+}else{
+    return(NULL)
+  }
+}
+```
+
+* Fit all models
+
+```{r}
 ## Set up parallel processing
 plan(multiprocess)
 
-brms_model <- brm(
-  bf(tb_z_prop ~ s(year, k = 5) + s(me(prop_hiv, prop_hiv_se)),
-  phi ~ -1 + s(weights.norm)),
-  data = analysis_df,
-  family = Beta(link = "logit", link_phi = "log"),
-  control = list(adapt_delta = 0.99, max_treedepth = 20),
-  prior = c(prior(horseshoe(1), class = "b"))
-)
-
-## Fit a model for each sample and aggregate using Rubins rules (process originally designed for imputed data).
-brms_model <- brm_multiple(
-  bf(tb_z_prop  ~ 
-                  s(year, k = 5) +
-                  s(prop_tb_ep) + 
-                  s(prop_hiv) +
-                  s(prop_rural) + 
-                  s(cattle_per_head)),
-  data = split_df,
-  family = Beta(link = "logit", link_phi = "log"),
-  control = list(adapt_delta = 0.99, max_treedepth = 20),
-  sample_prior = "yes",
-  iter = 2000,
-  prior = c(prior(horseshoe(1), class = "b")),
-  chains = 2)
+## Fit models (silenced output)
+results <- models %>% 
+  ## Fit each model across multiple samples
+  mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))),
+         ## Check convergence by looking at maximum Rhats across sampled fits. 
+         convergence = map(formula, ~ check_convergence(fits)))
 ```
 
-* Summarise `brms` model
+
+### Evaluate best fit
+
+* Check posterior predictions
 
 ```{r}
-summary(brms_model)
+pp_plot <- function(model) {
+  plot <- suppressMessages(pp_check(model, resp = "prop_z_tb", nsamples = 20) +
+  scale_x_sqrt() +
+  scale_y_sqrt())
+  
+  return(plot)
+}
+
+results <- results %>% 
+  mutate(pp_check = purrr::map(fit, pp_plot))
+
+results$pp_check
 ```
 
-* `brms` plot model
+* Check fit via loo
 
-```{r} 
-plot(brms_model, ask = FALSE)
+```{r}
+loo(results$fit)
 ```
+
+
+### Explore best fitting model
 
 * `brms` maginal_effects
 
 ```{r}
-marginal_effects(brms_model, ask = FALSE)
-```
-* `brms` model convergence.
-
-```{r}
-brms_model$rhats %>% 
-  summarise_all(max) %>% 
-  t()
-```
-
-* Initial model using all covariates, selected using penalised regression.
-
-```{r, eval = FALSE}
-# upper limit on k chosen for each covariate using gam.check
-basic_model <- bam(tb_z_prop ~
-                  ## Global smooths
-                  s(year, k = 5) +
-                  s(prop_tb_ep, k = 10) + 
-                  s(prop_hiv, k = 10) +
-                  s(prop_rural, k = 10) + 
-                  s(cattle_per_head, k = 10) +
-                  ## Sample level smooths
-                  s(year, sample, k = 5, bs = "fs") +
-                  s(prop_tb_ep, sample, k = 10, bs = "fs") + 
-                  s(prop_hiv, sample, k = 10, bs = "fs") +
-                  s(prop_rural, sample, k = 10, bs = "fs") + 
-                  s(cattle_per_head, sample, k = 10, bs = "fs"),
-                  data = training, 
-                  family = "betar", 
-                  method = "fREML", 
-                  select = TRUE)
-
-
-summary(basic_model)
-
-draw(basic_model)
-```
-
-```{r, eval = FALSE}
-gam.check(basic_model)
-```
-
-* Complex model using all pairwise interactions. Again penalised to remove confounders.
-
-```{r, eval = FALSE}
-complex_model <- bam(tb_z_prop ~
-                  ## Global smooths
-                  s(year, k = 5) +
-                  s(prop_tb_ep, k = 10) + 
-                  s(prop_hiv, k = 10) +
-                  s(prop_rural, k = 10) + 
-                  s(cattle_per_head, k = 10) +
-                  ## Sample level smooths
-                  s(year, sample, k = 5, bs = "fs") +
-                  s(prop_tb_ep, sample, k = 10, bs = "fs") + 
-                  s(prop_hiv, sample, k = 10, bs = "fs") +
-                  s(prop_rural, sample, k = 10, bs = "fs") + 
-                  s(cattle_per_head, sample, k = 10, bs = "fs") +
-                  ## Interactions with year
-                  ti(year, prop_tb_ep) +
-                  ti(year, prop_hiv) + 
-                  ti(year, prop_rural) +
-                  ti(year, cattle_per_head) +
-                  ## Interactions with proportion ep
-                  ti(prop_tb_ep, prop_hiv) +
-                  ti(prop_tb_ep, prop_rural) + 
-                  ti(prop_tb_ep, cattle_per_head) +
-                  ## Interactions with proportion HIV
-                  ti(prop_hiv, prop_rural) +
-                  ti(prop_hiv, cattle_per_head) + 
-                  ## Interactions with proportion rural
-                  ti(prop_rural, cattle_per_head),
-                  data = training, 
-                  family = "betar", 
-                  method = "fREML", 
-                  select = TRUE,
-                  samfrac = 0.1)
-
-
-summary(complex_model)
-
-draw(complex_model)
+plot_var_effect <- function(model, var = NULL, var_name = NULL,
+                            outcome_name = "Proportion of TB cases that are zoonotic",
+                            x_is_prop = FALSE) {
+  
+  if (is.null(var_name)) {
+    var_name <- var
+  }
+  p <- marginal_effects(model, effects  = var,
+                        probs = c(0.25, 0.75),
+                        ask = FALSE)
+  
+  p <- suppressWarnings(plot(p, plot = FALSE)[[1]] +
+    theme_minimal() +
+    labs(y = outcome_name,
+         x = var_name)) +
+    scale_y_continuous(labels = scales::percent)
+  
+  if (x_is_prop) {
+    p <- p +
+      scale_x_continuous(labels = scales::percent)
+  }
+  
+  return(suppressMessages(p))
+}
 ```
 
 
 ```{r, eval = FALSE}
-gam.check(complex_model)
+## By year
+plot_var_effect(spline_model, var = "year", 
+                var_name = "Year")
+## By Extra-pulmonary status
+plot_var_effect(spline_model, var = "prop_tb_ep", x_is_prop = TRUE,
+                var_name = "Proportion of TB cases with extra-pulmonary TB")
+##  By HIV status
+plot_var_effect(spline_model, var = "prop_hiv", x_is_prop = TRUE,
+                var_name = "Proportion of TB cases with HIV")
+## By the proportion of the population that is rural
+plot_var_effect(spline_model, var = "prop_rural", x_is_prop = TRUE,
+                var_name = "Proportion of the population that is rural")
+##  By cattle per head
+plot_var_effect(spline_model, var = "cattle_per_head", 
+                var_name = "Cattle per person")
 ```
