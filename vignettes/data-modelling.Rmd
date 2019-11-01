@@ -35,6 +35,8 @@ library(tidyr)
 library(mgcv)
 library(gratia)
 library(truncnorm)
+library(brms)
+library(future)
 ```
 
 * Get all data
@@ -92,11 +94,11 @@ analysis_df %>%
 ### Bootstrapping
 
 
-* Simulate 10000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed.
+* Simulate 1000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed.
 
 
 ```{r}
-samples <- 10000
+samples <- 5
 
 bootstrapped_df <- analysis_df %>% 
   ## Add noise for variables that we have information about
@@ -107,8 +109,9 @@ bootstrapped_df <- analysis_df %>%
             ~ purrr::map(., ~ rtruncnorm(samples, a = 0, mean = ., sd = . * 0.025))) %>% 
   mutate_at(.vars = vars(prop_tb_ep, prop_rural), 
             ~ purrr::map(., ~ rtruncnorm(samples, a = 0, b = 1, mean = ., sd = . * 0.025))) %>% 
+  mutate(sample = list(tibble::tibble(sample = factor(1:samples)))) %>% 
   dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
-  tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, prop_rural, cattle_per_head))
+  tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, prop_rural, cattle_per_head, sample))
 
 bootstrapped_df
 ```
@@ -131,21 +134,97 @@ summary(test)
 
 ### Modelling
 
-* Initial model using all covariates, selected using penalised regression.
+
+* Evaluation of `brms` measurement model approach.
 
 ```{r}
-# K chosen for each covariate using gam.check
-basic_model <- bam(tb_z_prop ~
+analysis_df <- analysis_df %>% 
+  mutate(weights.norm = 1/(tb_z_prop_se^2/mean(tb_z_prop_se^2))) %>% 
+  mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-10, tb_z_prop),
+         prop_hiv_se = (prop_hiv_hi - prop_hiv) / 1.96)
+
+## Split sampled data into seperate data.frames
+split_df <- bootstrapped_df %>% 
+    mutate_if(is.numeric, scale) %>% 
+    group_split(sample) %>% 
+    purrr::map(as.data.frame)
+ 
+
+## Set up parallel processing
+plan(multiprocess)
+
+brms_model <- brm(
+  bf(tb_z_prop ~ s(year, k = 5) + s(me(prop_hiv, prop_hiv_se)),
+  phi ~ -1 + s(weights.norm)),
+  data = analysis_df,
+  family = Beta(link = "logit", link_phi = "log"),
+  control = list(adapt_delta = 0.99, max_treedepth = 20),
+  prior = c(prior(horseshoe(1), class = "b"))
+)
+
+## Fit a model for each sample and aggregate using Rubins rules (process originally designed for imputed data).
+brms_model <- brm_multiple(
+  bf(tb_z_prop  ~ 
                   s(year, k = 5) +
-                  s(prop_tb_ep, k = 15) + 
+                  s(prop_tb_ep) + 
+                  s(prop_hiv) +
+                  s(prop_rural) + 
+                  s(cattle_per_head)),
+  data = split_df,
+  family = Beta(link = "logit", link_phi = "log"),
+  control = list(adapt_delta = 0.99, max_treedepth = 20),
+  sample_prior = "yes",
+  iter = 2000,
+  prior = c(prior(horseshoe(1), class = "b")),
+  chains = 2)
+```
+
+* Summarise `brms` model
+
+```{r}
+summary(brms_model)
+```
+
+* `brms` plot model
+
+```{r} 
+plot(brms_model, ask = FALSE)
+```
+
+* `brms` maginal_effects
+
+```{r}
+marginal_effects(brms_model, ask = FALSE)
+```
+* `brms` model convergence.
+
+```{r}
+brms_model$rhats %>% 
+  summarise_all(max) %>% 
+  t()
+```
+
+* Initial model using all covariates, selected using penalised regression.
+
+```{r, eval = FALSE}
+# upper limit on k chosen for each covariate using gam.check
+basic_model <- bam(tb_z_prop ~
+                  ## Global smooths
+                  s(year, k = 5) +
+                  s(prop_tb_ep, k = 10) + 
                   s(prop_hiv, k = 10) +
-                  s(prop_rural, k = 15) + 
-                  s(cattle_per_head, k = 15),
+                  s(prop_rural, k = 10) + 
+                  s(cattle_per_head, k = 10) +
+                  ## Sample level smooths
+                  s(year, sample, k = 5, bs = "fs") +
+                  s(prop_tb_ep, sample, k = 10, bs = "fs") + 
+                  s(prop_hiv, sample, k = 10, bs = "fs") +
+                  s(prop_rural, sample, k = 10, bs = "fs") + 
+                  s(cattle_per_head, sample, k = 10, bs = "fs"),
                   data = training, 
-                  family = "gaussian", 
+                  family = "betar", 
                   method = "fREML", 
-                  select = TRUE,
-                  samfrac = 0.1)
+                  select = TRUE)
 
 
 summary(basic_model)
@@ -153,15 +232,26 @@ summary(basic_model)
 draw(basic_model)
 ```
 
+```{r, eval = FALSE}
+gam.check(basic_model)
+```
+
 * Complex model using all pairwise interactions. Again penalised to remove confounders.
 
-```{r}
+```{r, eval = FALSE}
 complex_model <- bam(tb_z_prop ~
+                  ## Global smooths
                   s(year, k = 5) +
-                  s(prop_tb_ep, k = 15) + 
+                  s(prop_tb_ep, k = 10) + 
                   s(prop_hiv, k = 10) +
-                  s(prop_rural, k = 15) + 
-                  s(cattle_per_head, k = 15) +
+                  s(prop_rural, k = 10) + 
+                  s(cattle_per_head, k = 10) +
+                  ## Sample level smooths
+                  s(year, sample, k = 5, bs = "fs") +
+                  s(prop_tb_ep, sample, k = 10, bs = "fs") + 
+                  s(prop_hiv, sample, k = 10, bs = "fs") +
+                  s(prop_rural, sample, k = 10, bs = "fs") + 
+                  s(cattle_per_head, sample, k = 10, bs = "fs") +
                   ## Interactions with year
                   ti(year, prop_tb_ep) +
                   ti(year, prop_hiv) + 
@@ -177,7 +267,7 @@ complex_model <- bam(tb_z_prop ~
                   ## Interactions with proportion rural
                   ti(prop_rural, cattle_per_head),
                   data = training, 
-                  family = "gaussian", 
+                  family = "betar", 
                   method = "fREML", 
                   select = TRUE,
                   samfrac = 0.1)
@@ -186,4 +276,9 @@ complex_model <- bam(tb_z_prop ~
 summary(complex_model)
 
 draw(complex_model)
+```
+
+
+```{r, eval = FALSE}
+gam.check(complex_model)
 ```
