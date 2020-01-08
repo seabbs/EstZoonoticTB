@@ -22,10 +22,7 @@ knitr::opts_chunk$set(
 
 *Work in progress*
 
-## Method
-
-### Data 
-
+## Data preparation
 
 ```{r setup, include = FALSE}
 library(EstZoonoticTB)
@@ -37,6 +34,7 @@ library(gratia)
 library(truncnorm)
 library(brms)
 library(future)
+library(mice)
 library(tidylog)
 ```
 
@@ -48,42 +46,29 @@ all_data <- link_data(verbose = FALSE)
 all_data
 ```
 
-* Filter down to just countries with data on zoonotic TB presence from 2000 onwards.
+* Drop countries with a TB incidence rate of less than 1 in 100,000 or with incidence of less than 100. Restrict dataset to 2000 onwards.
 
 ```{r}
-df_with_ztb <- all_data %>% 
-  tidyr::drop_na(tb_z_prop, tb_z_prop_se) %>% 
+df_with_filt_tb <- all_data %>% 
+  dplyr::filter(tb_cases >= 100, tb_inc >= 1) %>% 
   dplyr::filter(year >= 2000)
 
-df_with_ztb
-```
-
-* Drop countries with a TB incidence rate of less than 1 in 100,000 or with incidence of less than 100.
-
-```{r}
-df_with_ztb_filt_tb <- df_with_ztb %>% 
-  dplyr::filter(tb_cases >= 100, tb_inc >= 1)
-
-df_with_ztb_filt_tb 
+df_with_filt_tb 
 ```
 
 * Drop data on presence/absence of zoonotic TB in animals. Drop variables not used in further analysis. 
 
 ```{r}
-analysis_df <- df_with_ztb_filt_tb %>% 
+analysis_df <- df_with_filt_tb %>% 
   dplyr::select(-z_tb_dom_animal, -z_tb_wild_animal, 
                 -country_code, - tb_cases, -tb_inc, 
                 -tb_inc_lo, -tb_inc_hi, -z_tb_id, -z_tb_geo_coverage,
                 -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi, -population,
-                -cattle, -country, -g_whoregion, -z_tb_multi_year_study) %>% 
+                -cattle, -g_whoregion, -z_tb_multi_year_study) %>% 
   dplyr::mutate(id = 1:n())
                 
-
-
-
-analysis_df 
+analysis_df
 ```
-
 * Check data structure
 
 ```{r}
@@ -91,17 +76,16 @@ analysis_df %>%
   summary
 ```
 
+## Bootstrapping
 
-### Bootstrapping
 
-
-* Simulate 1000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed.
+* Simulate 1000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed. Use multiple imputation to deal with any missing data in each sample.
 
 
 ```{r}
 samples <- 2
 
-bootstrapped_df <- analysis_df %>% 
+bootstrapped_df_all <- analysis_df %>% 
   ## Move proportions away from 0 and 1 by a small amount for beta distribution
   mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-5, 
                             ifelse(tb_z_prop == 1, 1 - 1e-5, tb_z_prop))) %>% 
@@ -125,12 +109,31 @@ bootstrapped_df <- analysis_df %>%
                 tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, 
                                        prop_rural, cattle_per_head, sample)),
              )} %>% 
-  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se)
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
+  group_split(sample) %>% 
+  purrr::map(~ dplyr::bind_cols(dplyr::select(., tb_z_prop),
+                                dplyr::select(., -tb_z_prop) %>% 
+                                  mice::mice(m = 1, maxit = 20) %>% 
+                                  mice::complete()
+                    )) %>% 
+  bind_rows()
+
+bootstrapped_df_all
+```
+
+
+
+* Filter down to just countries with data on zoonotic TB presence from 2000 onwards.
+
+```{r}
+bootstrapped_df <- bootstrapped_df_all %>% 
+  tidyr::drop_na(tb_z_prop)
 
 bootstrapped_df
 ```
 
-### Modelling
+
+## Modelling
 
 Method derived from here: https://link.springer.com/article/10.1007%2Fs11222-016-9649-y
 
@@ -139,7 +142,7 @@ Method derived from here: https://link.springer.com/article/10.1007%2Fs11222-016
 * Variance in these measures may still result in overfitting if not used in a principled manner.
 * Using LOO etc for choosing model size rather than parameter combinations greatly reduces over fitting.   
 
-#### Models to be fitted
+### Models to be fitted
 
 * All explanatory confounders, using horseshoe priors for regularisation.
 * All explanatory confounders with pairwise interactions, using horseshoe priors for regularisation.
@@ -175,7 +178,7 @@ models <- tibble(
 ```
 
 
-#### Model fitting
+### Model fitting
 
 
 * Set up model fitting and convergance checking
@@ -205,6 +208,7 @@ fit_model <- purrr::partial(
 
 
 check_convergence <- function(model = NULL) {
+  
   large_rhat <- model$rhats %>% 
   summarise_all(max) %>% 
   t() %>% 
@@ -229,13 +233,16 @@ plan(multiprocess)
 ## Fit models (silenced output)
 results <- models %>% 
   ## Fit each model across multiple samples
-  mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))),
+  dplyr::mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))))
+
+## Check convergance
+results <- results %>% 
          ## Check convergence by looking at maximum Rhats across sampled fits. 
-         convergence = purrr::map(formula, ~ check_convergence(fit)))
+         dplyr::mutate(convergence = purrr::map(fit, ~ check_convergence(.)))
 ```
 
 
-### Evaluate best fit
+## Model comparison
 
 * Check posterior predictions
 
@@ -268,7 +275,13 @@ brms::loo(results$fit[[1]], results$fit[[2]],
 model <- results$fit[[1]]
 ```
 
-### Explore best fitting model
+## Explore best fitting model
+
+* Model summary
+
+```{r}
+summary(model)
+```
 
 * `brms` maginal_effects
 
@@ -316,4 +329,15 @@ plot_var_effect(model, var = "prop_rural", x_is_prop = TRUE,
 ##  By cattle per head
 plot_var_effect(model, var = "cattle_per_head", 
                 var_name = "Cattle per person")
+```
+
+## Predicting zTB incidence
+
+
+```{r}
+bootstrapped_predictions <- bootstrapped_df_all %>% 
+  dplyr::group_split(sample) %>% 
+  purrr::map(~ predict(model, newdata = .))
+
+
 ```

@@ -54,7 +54,8 @@ Suggests:
     DataExplorer,
     gratia, 
     tidylog,
-    truncnorm
+    truncnorm,
+    mice
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
