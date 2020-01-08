@@ -37,6 +37,7 @@ library(gratia)
 library(truncnorm)
 library(brms)
 library(future)
+library(tidylog)
 ```
 
 * Get all data
@@ -143,10 +144,16 @@ Method derived from here: https://link.springer.com/article/10.1007%2Fs11222-016
 * All explanatory confounders, using horseshoe priors for regularisation.
 * All explanatory confounders with pairwise interactions, using horseshoe priors for regularisation.
 * All explanatory confounders, using penalised splines.
-* All explanatory confounders and pairwise interactions, using penalised splines
+* All explanatory confounders using penalised splines and linear pairwise interactions.
 
 
 ```{r}
+
+## Interaction terms
+interactions <- "year:prop_tb_ep + year:prop_hiv + year:prop_rural + year:cattle_per_head + 
+    prop_tb_ep:prop_hiv + prop_tb_ep:prop_rural + prop_tb_ep:cattle_per_head + 
+    prop_hiv:prop_rural + prop_hiv:cattle_per_head + prop_rural:cattle_per_head"
+
 ## Define models
 models <- tibble(
   model = c(
@@ -157,12 +164,11 @@ models <- tibble(
   ),
   formula = c(
     "bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head)",
-    "bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head + 
-    year:prop_tb_ep + year:prop_hiv + year:prop_rural + year:cattle_per_head + 
-    prop_tb_ep:prop_hiv + prop_tb_ep:prop_rural + prop_tb_ep:cattle_per_head + 
-    prop_hiv:prop_rural + prop_hiv:cattle_per_head + prop_rural:cattle_per_head)",
+    paste0("bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head + 
+    ", interactions, ")"),
     "bf(tb_z_prop ~ s(year, k = 5) + s(prop_tb_ep) + s(prop_hiv) + s(prop_rural) + s(cattle_per_head))",
-    "bf(tb_z_prop ~ t2(year, prop_tb_ep, prop_hiv, prop_rural, cattle_per_head))"
+    paste0("bf(tb_z_prop ~  s(year, k = 5) + s(prop_tb_ep) + s(prop_hiv) + s(prop_rural) + s(cattle_per_head) + 
+    ", interactions, ")")
   )
 ) %>% 
   mutate(formula = stringr::str_replace(formula, "\\n  ", ""))
@@ -187,10 +193,10 @@ fit_model <- purrr::partial(
   brm_multiple,
   data = split_df,
   family = Beta(link = "logit", link_phi = "log"),
-  control = list(adapt_delta = 0.999, max_treedepth = 20),
+  control = list(adapt_delta = 0.99, max_treedepth = 20),
   sample_prior = "yes",
-  iter = 200,
-  warmup = 100,
+  iter = 1000,
+  warmup = 500,
   prior = c(prior(horseshoe(1), class = "b")),
   future = TRUE,
   refresh = 0,
@@ -209,7 +215,7 @@ if (nrow(large_rhat) > 0) {
   warning("Model may not have converged")
   return(large_rhat)
 }else{
-    return(NULL)
+    return(1)
   }
 }
 ```
@@ -225,7 +231,7 @@ results <- models %>%
   ## Fit each model across multiple samples
   mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))),
          ## Check convergence by looking at maximum Rhats across sampled fits. 
-         convergence = map(formula, ~ check_convergence(fits)))
+         convergence = purrr::map(formula, ~ check_convergence(fit)))
 ```
 
 
@@ -251,9 +257,16 @@ results$pp_check
 * Check fit via loo
 
 ```{r}
-loo(results$fit)
+brms::loo(results$fit[[1]], results$fit[[2]],
+          results$fit[[3]], results$fit[[4]], 
+          model_names = results$model)
 ```
 
+* Define best fitting model
+
+```{r}
+model <- results$fit[[1]]
+```
 
 ### Explore best fitting model
 
@@ -289,18 +302,18 @@ plot_var_effect <- function(model, var = NULL, var_name = NULL,
 
 ```{r, eval = FALSE}
 ## By year
-plot_var_effect(spline_model, var = "year", 
+plot_var_effect(model, var = "year", 
                 var_name = "Year")
 ## By Extra-pulmonary status
-plot_var_effect(spline_model, var = "prop_tb_ep", x_is_prop = TRUE,
+plot_var_effect(model, var = "prop_tb_ep", x_is_prop = TRUE,
                 var_name = "Proportion of TB cases with extra-pulmonary TB")
 ##  By HIV status
-plot_var_effect(spline_model, var = "prop_hiv", x_is_prop = TRUE,
+plot_var_effect(model, var = "prop_hiv", x_is_prop = TRUE,
                 var_name = "Proportion of TB cases with HIV")
 ## By the proportion of the population that is rural
-plot_var_effect(spline_model, var = "prop_rural", x_is_prop = TRUE,
+plot_var_effect(model, var = "prop_rural", x_is_prop = TRUE,
                 var_name = "Proportion of the population that is rural")
 ##  By cattle per head
-plot_var_effect(spline_model, var = "cattle_per_head", 
+plot_var_effect(model, var = "cattle_per_head", 
                 var_name = "Cattle per person")
 ```
