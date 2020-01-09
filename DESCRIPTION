@@ -51,7 +51,11 @@ Suggests:
     tidyverse,
     vdiffr,
     scales,
-    DataExplorer
+    DataExplorer,
+    gratia, 
+    tidylog,
+    truncnorm,
+    mice
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

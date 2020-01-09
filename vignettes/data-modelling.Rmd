@@ -1,0 +1,342 @@
+---
+title: "Data modelling"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data mapping}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 12, 
+  fig.height = 8,
+  dpi = 330,
+  eval = FALSE
+)
+```
+
+## Overview
+
+
+*Work in progress*
+
+## Data preparation
+
+```{r setup, include = FALSE}
+library(EstZoonoticTB)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(mgcv)
+library(gratia)
+library(truncnorm)
+library(brms)
+library(future)
+library(mice)
+library(tidylog)
+```
+
+* Get all data
+
+```{r}
+all_data <- link_data(verbose = FALSE)
+
+all_data
+```
+
+* Drop countries with a TB incidence rate of less than 1 in 100,000 or with incidence of less than 100. Restrict dataset to 2000 onwards.
+
+```{r}
+df_with_filt_tb <- all_data %>% 
+  dplyr::filter(tb_cases >= 100, tb_inc >= 1) %>% 
+  dplyr::filter(year >= 2000)
+
+df_with_filt_tb 
+```
+
+* Drop data on presence/absence of zoonotic TB in animals. Drop variables not used in further analysis. 
+
+```{r}
+analysis_df <- df_with_filt_tb %>% 
+  dplyr::select(-z_tb_dom_animal, -z_tb_wild_animal, 
+                -country_code, - tb_cases, -tb_inc, 
+                -tb_inc_lo, -tb_inc_hi, -z_tb_id, -z_tb_geo_coverage,
+                -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi, -population,
+                -cattle, -g_whoregion, -z_tb_multi_year_study) %>% 
+  dplyr::mutate(id = 1:n())
+                
+analysis_df
+```
+* Check data structure
+
+```{r}
+analysis_df %>% 
+  summary
+```
+
+## Bootstrapping
+
+
+* Simulate 1000 data points per row using all variable uncertainty. For variables that have no measure of uncertainty a standard error of 2.5% has been assumed. Use multiple imputation to deal with any missing data in each sample.
+
+
+```{r}
+samples <- 2
+
+bootstrapped_df_all <- analysis_df %>% 
+  ## Move proportions away from 0 and 1 by a small amount for beta distribution
+  mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-5, 
+                            ifelse(tb_z_prop == 1, 1 - 1e-5, tb_z_prop))) %>% 
+  ## Hold out the original data as a point estimate sample
+  {bind_rows(mutate(., sample = 0),
+               ## Add noise for variables that we have information about
+                mutate(., prop_hiv = purrr::map2(prop_hiv, prop_hiv_hi, ~ 
+                                                   rtruncnorm(samples - 1, a = 0, b = 1,
+                                                              mean = .x, sd = (.y - .x) / 1.96)),
+                       tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ 
+                                                 rtruncnorm(samples - 1, a = 1e-5, b = (1 - 1e-5), 
+                                                            mean = .x, sd = .y))) %>% 
+                ## Add a 2.5% SE normal noise for numeric variables with no noise.
+                mutate_at(.vars = vars(cattle_per_head), 
+                          ~ purrr::map(., ~ rtruncnorm(samples - 1, a = 0, 
+                                                       mean = ., sd = . * 0.025))) %>% 
+                mutate_at(.vars = vars(prop_tb_ep, prop_rural), 
+                          ~ purrr::map(., ~ rtruncnorm(samples - 1, a = 0, b = 1, 
+                                                       mean = ., sd = . * 0.025))) %>% 
+                mutate(sample = list(tibble::tibble(sample = 1:(samples - 1)))) %>% 
+                tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, 
+                                       prop_rural, cattle_per_head, sample)),
+             )} %>% 
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
+  group_split(sample) %>% 
+  purrr::map(~ dplyr::bind_cols(dplyr::select(., tb_z_prop),
+                                dplyr::select(., -tb_z_prop) %>% 
+                                  mice::mice(m = 1, maxit = 20) %>% 
+                                  mice::complete()
+                    )) %>% 
+  bind_rows()
+
+bootstrapped_df_all
+```
+
+
+
+* Filter down to just countries with data on zoonotic TB presence from 2000 onwards.
+
+```{r}
+bootstrapped_df <- bootstrapped_df_all %>% 
+  tidyr::drop_na(tb_z_prop)
+
+bootstrapped_df
+```
+
+
+## Modelling
+
+Method derived from here: https://link.springer.com/article/10.1007%2Fs11222-016-9649-y
+
+
+* Using WAIC/LOO gives a nearly unbiased assessment of performance so can drop training and test.
+* Variance in these measures may still result in overfitting if not used in a principled manner.
+* Using LOO etc for choosing model size rather than parameter combinations greatly reduces over fitting.   
+
+### Models to be fitted
+
+* All explanatory confounders, using horseshoe priors for regularisation.
+* All explanatory confounders with pairwise interactions, using horseshoe priors for regularisation.
+* All explanatory confounders, using penalised splines.
+* All explanatory confounders using penalised splines and linear pairwise interactions.
+
+
+```{r}
+
+## Interaction terms
+interactions <- "year:prop_tb_ep + year:prop_hiv + year:prop_rural + year:cattle_per_head + 
+    prop_tb_ep:prop_hiv + prop_tb_ep:prop_rural + prop_tb_ep:cattle_per_head + 
+    prop_hiv:prop_rural + prop_hiv:cattle_per_head + prop_rural:cattle_per_head"
+
+## Define models
+models <- tibble(
+  model = c(
+    "linear", 
+    "linear_int",
+    "spline",
+    "spline_int"
+  ),
+  formula = c(
+    "bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head)",
+    paste0("bf(tb_z_prop ~  year + prop_tb_ep + prop_hiv + prop_rural + cattle_per_head + 
+    ", interactions, ")"),
+    "bf(tb_z_prop ~ s(year, k = 5) + s(prop_tb_ep) + s(prop_hiv) + s(prop_rural) + s(cattle_per_head))",
+    paste0("bf(tb_z_prop ~  s(year, k = 5) + s(prop_tb_ep) + s(prop_hiv) + s(prop_rural) + s(cattle_per_head) + 
+    ", interactions, ")")
+  )
+) %>% 
+  mutate(formula = stringr::str_replace(formula, "\\n  ", ""))
+```
+
+
+### Model fitting
+
+
+* Set up model fitting and convergance checking
+
+```{r}
+## Split sampled data into seperate data.frames
+split_df <- bootstrapped_df %>% 
+    mutate_at(.vars = vars(year, prop_tb_ep, prop_hiv, prop_rural, cattle_per_head), scale) %>% 
+    group_split(sample) %>% 
+    purrr::map(as.data.frame)
+
+
+## Fit a model for each sample and aggregate using Rubins rules (process originally designed for imputed data).
+fit_model <- purrr::partial(
+  brm_multiple,
+  data = split_df,
+  family = Beta(link = "logit", link_phi = "log"),
+  control = list(adapt_delta = 0.99, max_treedepth = 20),
+  sample_prior = "yes",
+  iter = 1000,
+  warmup = 500,
+  prior = c(prior(horseshoe(1), class = "b")),
+  future = TRUE,
+  refresh = 0,
+  chains = 2
+)
+
+
+check_convergence <- function(model = NULL) {
+  
+  large_rhat <- model$rhats %>% 
+  summarise_all(max) %>% 
+  t() %>% 
+  as_tibble(rownames = "variable") %>% 
+  filter(V1 > 1.1)
+
+if (nrow(large_rhat) > 0) {
+  warning("Model may not have converged")
+  return(large_rhat)
+}else{
+    return(1)
+  }
+}
+```
+
+* Fit all models
+
+```{r}
+## Set up parallel processing
+plan(multiprocess)
+
+## Fit models (silenced output)
+results <- models %>% 
+  ## Fit each model across multiple samples
+  dplyr::mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))))
+
+## Check convergance
+results <- results %>% 
+         ## Check convergence by looking at maximum Rhats across sampled fits. 
+         dplyr::mutate(convergence = purrr::map(fit, ~ check_convergence(.)))
+```
+
+
+## Model comparison
+
+* Check posterior predictions
+
+```{r}
+pp_plot <- function(model) {
+  plot <- suppressMessages(pp_check(model, resp = "prop_z_tb", nsamples = 20) +
+  scale_x_sqrt() +
+  scale_y_sqrt())
+  
+  return(plot)
+}
+
+results <- results %>% 
+  mutate(pp_check = purrr::map(fit, pp_plot))
+
+results$pp_check
+```
+
+* Check fit via loo
+
+```{r}
+brms::loo(results$fit[[1]], results$fit[[2]],
+          results$fit[[3]], results$fit[[4]], 
+          model_names = results$model)
+```
+
+* Define best fitting model
+
+```{r}
+model <- results$fit[[1]]
+```
+
+## Explore best fitting model
+
+* Model summary
+
+```{r}
+summary(model)
+```
+
+* `brms` maginal_effects
+
+```{r}
+plot_var_effect <- function(model, var = NULL, var_name = NULL,
+                            outcome_name = "Proportion of TB cases that are zoonotic",
+                            x_is_prop = FALSE) {
+  
+  if (is.null(var_name)) {
+    var_name <- var
+  }
+  p <- marginal_effects(model, effects  = var,
+                        probs = c(0.25, 0.75),
+                        ask = FALSE)
+  
+  p <- suppressWarnings(plot(p, plot = FALSE)[[1]] +
+    theme_minimal() +
+    labs(y = outcome_name,
+         x = var_name)) +
+    scale_y_continuous(labels = scales::percent)
+  
+  if (x_is_prop) {
+    p <- p +
+      scale_x_continuous(labels = scales::percent)
+  }
+  
+  return(suppressMessages(p))
+}
+```
+
+
+```{r, eval = FALSE}
+## By year
+plot_var_effect(model, var = "year", 
+                var_name = "Year")
+## By Extra-pulmonary status
+plot_var_effect(model, var = "prop_tb_ep", x_is_prop = TRUE,
+                var_name = "Proportion of TB cases with extra-pulmonary TB")
+##  By HIV status
+plot_var_effect(model, var = "prop_hiv", x_is_prop = TRUE,
+                var_name = "Proportion of TB cases with HIV")
+## By the proportion of the population that is rural
+plot_var_effect(model, var = "prop_rural", x_is_prop = TRUE,
+                var_name = "Proportion of the population that is rural")
+##  By cattle per head
+plot_var_effect(model, var = "cattle_per_head", 
+                var_name = "Cattle per person")
+```
+
+## Predicting zTB incidence
+
+
+```{r}
+bootstrapped_predictions <- bootstrapped_df_all %>% 
+  dplyr::group_split(sample) %>% 
+  purrr::map(~ predict(model, newdata = .))
+```
