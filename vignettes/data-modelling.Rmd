@@ -338,6 +338,4 @@ plot_var_effect(model, var = "cattle_per_head",
 bootstrapped_predictions <- bootstrapped_df_all %>% 
   dplyr::group_split(sample) %>% 
   purrr::map(~ predict(model, newdata = .))
-
-
 ```
