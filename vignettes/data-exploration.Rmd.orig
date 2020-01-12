@@ -7,7 +7,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+	fig.width = 14,
+	fig.height = 10,
+	echo = TRUE,
+	warning = TRUE
+)
+```
 
 
 ## Overview
@@ -16,7 +23,18 @@ vignette: >
 In this vignette the lastest data for the proportion of TB cases that are zoonotic, along with data on potential correlates, is rapidly explored using an EDA approach modelled on that used in the `{DataExplorer}` package. This analysis is indicative only and any findings should be evaluated more carefully using more robust techniques.
 
 
+```{r setup, include = FALSE}
+## Load libraries
+library(rmarkdown)
+library(knitr)
+library(ggplot2)
+library(DataExplorer)
+library(tidyverse)
+library(EstZoonoticTB)
 
+## Set plot theme
+ggplot2::theme_set(theme_minimal())
+```
 
 ## Data
 
@@ -25,21 +43,20 @@ Latest data available used by default - see [data sources](https://www.samabbott
 This step also drops variables that are unlikely to be of interest in an initial EDA. This includes: confidence intervals, standard error, country names, country codes, and regions. On top of this countries with fewer than 100 TB cases have been removed, along with countries with incidence rates below 1 per 100,000 population (effective TB elimination). This has been done as data for these countries is unlikely to provide meaningful insights for a global model of zoonotic TB incidence.
 
 
-
-```r
+```{r get-data}
 latest_data <- link_data(verbose = FALSE) %>% 
   get_latest_combined_data() %>% 
   dplyr::filter(tb_cases > 100, tb_inc > 1) %>% 
   dplyr::select(-z_tb_study_pop, -contains("_lo"), -tb_inc_hi, -prop_hiv_hi, 
                 -tb_z_prop_hi, -tb_z_prop_se, -country, -country_code, -g_whoregion)
+
 ```
 
 ## Summary
 
 ### Data table summary
 
-
-```r
+```{r eda-introduce-run}
 knitr::kable(t(DataExplorer::introduce(latest_data)), 
              row.names = TRUE, 
              col.names = "", 
@@ -47,37 +64,17 @@ knitr::kable(t(DataExplorer::introduce(latest_data)),
 ```
 
 
-
-|                     |       |
-|:--------------------|------:|
-|rows                 |    170|
-|columns              |     19|
-|discrete_columns     |      4|
-|continuous_columns   |     15|
-|all_missing_columns  |      0|
-|total_missing_values |    784|
-|complete_rows        |     33|
-|total_observations   |  3,230|
-|memory_usage         | 28,488|
-
-
 ### Data figure summary
 
-
-```r
+```{r eda-plot-intro, fig.width=10, fig.height=8}
 DataExplorer::plot_intro(latest_data)
 ```
 
-![plot of chunk eda-plot-intro](figure/eda-plot-intro-1.png)
-
 ## Missing values
 
-
-```r
+```{r eda-plot-missing, fig.width=8, fig.height=8}
 DataExplorer::plot_missing(latest_data, geom_label_args = list(size = 3, label.padding = unit(0.1, "lines")))
 ```
-
-![plot of chunk eda-plot-missing](figure/eda-plot-missing-1.png)
 
 ## Distributions
 
@@ -85,95 +82,54 @@ DataExplorer::plot_missing(latest_data, geom_label_args = list(size = 3, label.p
 
 #### Frequency distributions for all discrete features
 
-
-```r
+```{r eda-plot-bar-run,fig.width=12, fig.height=12}
 DataExplorer::plot_bar(latest_data, theme_config = list("text" = element_text(size = 12)), nrow = 4L, ncol = 3L)
 ```
 
-![plot of chunk eda-plot-bar-run](figure/eda-plot-bar-run-1.png)
-
 #### Discrete features by the proportion of TB cases that have zoonotic TB
 
-
-```r
+```{r eda-plot-bar-with-run, fig.width=8, fig.height=10}
 DataExplorer::plot_bar(latest_data, with = "tb_z_prop", theme_config = list("text" = element_text(size = 12)))
 ```
-
-![plot of chunk eda-plot-bar-with-run](figure/eda-plot-bar-with-run-1.png)
 
 ### Histograms
 
 #### Visualize distributions for all continuous features
 
-
-```r
+```{r eda-plot-histogram, fig.width=8}
 suppressWarnings(DataExplorer::plot_histogram(latest_data, nrow = 3L, ncol = 3L))
 ```
-
-![plot of chunk eda-plot-histogram](figure/eda-plot-histogram-1.png)![plot of chunk eda-plot-histogram](figure/eda-plot-histogram-2.png)
 
 
 ## Correlation Analysis
 
 ### Visualize correlation heatmap for all non-missing features
 
-
-```r
+```{r eda-plot-correlation, fig.width=12, fig.height=12}
 DataExplorer::plot_correlation(na.omit(latest_data), maxcat = 5L)
 ```
 
-```
-## Warning in cor(x = structure(list(tb_year = c(2018, 2018, 2018, 2018, 2018, :
-## the standard deviation is zero
-```
-
-![plot of chunk eda-plot-correlation](figure/eda-plot-correlation-1.png)
-
 ### Only continuous features
 
-
-```r
+```{r eda-plot-correlation-con}
 plot <- DataExplorer::plot_correlation(na.omit(latest_data), type = "c") +
   theme(legend.position = "none")
-```
 
-```
-## Warning in cor(x = structure(list(tb_year = c(2018, 2018, 2018, 2018, 2018, :
-## the standard deviation is zero
-```
-
-```
-## Warning: Removed 100 rows containing missing values (geom_text).
-```
-
-![plot of chunk eda-plot-correlation-con](figure/eda-plot-correlation-con-1.png)
-
-```r
 plot
 ```
 
-```
-## Warning: Removed 100 rows containing missing values (geom_text).
-```
-
-![plot of chunk eda-plot-correlation-con](figure/eda-plot-correlation-con-2.png)
-
 ### Only discrete features
 
-
-```r
+```{r eda-plot-correlation-dis, fig.height = 12, fig.width = 12}
 DataExplorer::plot_correlation(na.omit(latest_data), type = "d") +
   theme(legend.position = "none")
 ```
-
-![plot of chunk eda-plot-correlation-dis](figure/eda-plot-correlation-dis-1.png)![plot of chunk eda-plot-correlation-dis](figure/eda-plot-correlation-dis-2.png)
 
 ## Principal Component Analysis
 
 Drop all factor based variables, as well as time variables and raw incidence variables (as all just correlates of population).
 
-
-```r
+```{r eda-plot-prcomp, fig.width=8, fig.height=8}
 pca_df <- latest_data %>% 
   dplyr::select(-contains("year"), -population, -tb_cases, -z_tb_id,
                 -population, -cattle, -z_tb_geo_coverage, -z_tb_wild_animal, 
@@ -184,28 +140,20 @@ pca_df <- latest_data %>%
 DataExplorer::plot_prcomp(pca_df, variance_cap = 0.9, nrow = 2L, ncol = 2L)
 ```
 
-![plot of chunk eda-plot-prcomp](figure/eda-plot-prcomp-1.png)![plot of chunk eda-plot-prcomp](figure/eda-plot-prcomp-2.png)
-
 ## By % cases with zoonotic TB
 
 ### Boxplots
 
-
-```r
+```{r eda-plot-boxplot-template}
 ## Call boxplot function
 DataExplorer::plot_boxplot(pca_df, by = "tb_z_prop")
 ```
-
-![plot of chunk eda-plot-boxplot-template](figure/eda-plot-boxplot-template-1.png)
 
 
 ### Scatterplots
 
 
-
-```r
+```{r eda-plot-scatterplot-template}
 DataExplorer::plot_scatterplot(pca_df, by = "tb_z_prop", sampled_rows = 1000L)
 ```
-
-![plot of chunk eda-plot-scatterplot-template](figure/eda-plot-scatterplot-template-1.png)
 

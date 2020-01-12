@@ -8,3 +8,4 @@ docs
 .local
 .config
 pkgdown
+vignettes/results

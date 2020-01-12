@@ -7,7 +7,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 12, 
+  fig.height = 8,
+  dpi = 330
+)
+```
 
 ## Overview
 
@@ -18,43 +26,24 @@ In this vignette the global distribution of zoonotic TB and variables thought to
 
 Use the latest available data for each variable. Note that this may introduce some bias - as TB incidence rates etc. have been changing over time. See the data exploration vignette for further details on data structure.
 
+```{r setup, include = FALSE}
+library(EstZoonoticTB)
+library(ggplot2)
+library(dplyr)
+```
 
 
-
-
-```r
+```{r}
 latest_data <- link_data(verbose = FALSE) %>% 
   get_latest_combined_data()
 
 latest_data
-#> # A tibble: 244 x 30
-#>    country country_code g_whoregion tb_year tb_cases tb_inc tb_inc_lo tb_inc_hi
-#>    <chr>   <fct>        <fct>         <dbl>    <int>  <dbl>     <dbl>     <dbl>
-#>  1 Afghan… AFG          Eastern Me…    2018    70000    189     122       270  
-#>  2 Albania ALB          Europe         2018      510     18      15        20  
-#>  3 Algeria DZA          Africa         2018    29000     69      53        88  
-#>  4 Americ… ASM          Western Pa…    2018        0      0       0         0  
-#>  5 Andorra AND          Europe         2018        2      3       2.6       3.5
-#>  6 Angola  AGO          Africa         2018   109000    355     230       507  
-#>  7 Anguil… AIA          Americas       2018        3     22      14        31  
-#>  8 Antigu… ATG          Americas       2018        6      6       5.1       6.9
-#>  9 Argent… ARG          Americas       2018    12000     27      23        31  
-#> 10 Armenia ARM          Europe         2018      920     31      24        39  
-#> # … with 234 more rows, and 22 more variables: prop_tb_ep <dbl>,
-#> #   prop_hiv <dbl>, prop_hiv_lo <dbl>, prop_hiv_hi <dbl>, z_tb_year <dbl>,
-#> #   z_tb_id <int>, z_tb_geo_coverage <fct>, z_tb_study_pop <fct>,
-#> #   z_tb_multi_year_study <fct>, tb_z_prop <dbl>, tb_z_prop_lo <dbl>,
-#> #   tb_z_prop_hi <dbl>, tb_z_prop_se <dbl>, z_tb_animal_year <dbl>,
-#> #   z_tb_dom_animal <fct>, z_tb_wild_animal <fct>, demo_year <dbl>,
-#> #   population <dbl>, prop_rural <dbl>, animal_year <dbl>, cattle <int>,
-#> #   cattle_per_head <dbl>
 ```
 
 
 ## Proportion of tuberculosis (TB) that is zoonotic
 
-
-```r
+```{r}
 prop_map <- function(df) {
   map <- global_map(df, variable = "tb_z_prop", 
          variable_label = "% of TB cases that are zoonotic",
@@ -66,36 +55,27 @@ prop_map <- function(df) {
 prop_map(latest_data)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
-
 ### Country-wide studies
 
-
-```r
+```{r}
 latest_data %>% 
   filter(z_tb_geo_coverage %in% "Country-wide data") %>% 
   prop_map()
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
-
 ### Non-Country-wide studies
 
-
-```r
+```{r}
 latest_data %>% 
   filter(z_tb_geo_coverage %in% "Non-country-wide data") %>% 
   prop_map()
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
-
 ## TB incidence rates
 
 Incidence rate data is from 2017 for consitancy.
 
-
-```r
+```{r}
 link_data(verbose = FALSE) %>% 
   filter(year == 2017) %>% 
    global_map(variable = "tb_inc", 
@@ -103,14 +83,11 @@ link_data(verbose = FALSE) %>%
           trans = "sqrt")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
-
 ## Proportion of TB cases that are extra-pulmonary only
 
 Data is again from 2017 only.
 
-
-```r
+```{r}
 link_data(verbose = FALSE) %>% 
   filter(year == 2017) %>% 
    global_map(variable = "prop_tb_ep", 
@@ -118,15 +95,12 @@ link_data(verbose = FALSE) %>%
          fill_labels = scales::percent)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
-
 
 ## Proportion of TB cases that are HIV positive
 
 Data is again from 2017 only.
 
-
-```r
+```{r}
 link_data(verbose = FALSE) %>% 
   filter(year == 2017) %>% 
    global_map(variable = "prop_hiv", 
@@ -135,36 +109,28 @@ link_data(verbose = FALSE) %>%
          fill_labels = scales::percent)
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
-
 ## Presence of zoonotic TB in animals
 
 Data is latest from 2018 only.
 
 ### Domesticated animals
 
-
-```r
+```{r}
 latest_data %>% 
      global_map(variable = "z_tb_dom_animal", 
          variable_label = "Presence of zoonotic TB",
          viridis_palette = "viridis")
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
-
 
 ### Wild animals
 
-
-```r
+```{r}
 latest_data %>% 
      global_map(variable = "z_tb_wild_animal", 
          variable_label = "Presence of zoonotic TB",
          viridis_palette = "viridis")
 ```
-
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
 
 ## Demographics
 
@@ -172,15 +138,12 @@ Data is latest available.
 
 ## Proportion of the population that is rural.
 
-
-```r
+```{r}
 latest_data %>% 
      global_map(variable = "prop_rural", 
          variable_label = "% of population that is rural",
          fill_labels = scales::percent)
 ```
-
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png)
 
 ## Animal demographics
 
@@ -188,12 +151,9 @@ Data is latest available.
 
 ### Cattle per person
 
-
-```r
+```{r}
 latest_data %>% 
      global_map(variable = "cattle_per_head", 
                 trans = "sqrt",
                 variable_label = "Number of cattle per person")
 ```
-
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)

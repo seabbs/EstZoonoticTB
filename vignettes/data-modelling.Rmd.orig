@@ -37,6 +37,9 @@ library(brms)
 library(future)
 library(mice)
 library(tidylog)
+
+## Set up auto writing for stan models
+rstan_options(auto_write = TRUE)
 ```
 
 * Get all data
@@ -62,9 +65,8 @@ df_with_filt_tb
 ```{r}
 analysis_df <- df_with_filt_tb %>% 
   dplyr::select(-z_tb_dom_animal, -z_tb_wild_animal, 
-                -country_code, - tb_cases, -tb_inc, 
-                -tb_inc_lo, -tb_inc_hi, -z_tb_id, -z_tb_geo_coverage,
-                -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi, -population,
+                -country_code, - tb_cases, -z_tb_id, -z_tb_geo_coverage,
+                -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi,
                 -cattle, -g_whoregion, -z_tb_multi_year_study) %>% 
   dplyr::mutate(id = 1:n())
                 
@@ -84,20 +86,31 @@ analysis_df %>%
 
 
 ```{r}
-samples <- 2
-
-bootstrapped_df_all <- analysis_df %>% 
+# Define required bootstrapping
+bootstrap_uncertainty <- function(df = NULL, samples = NULL) {
+  out <- df %>% 
   ## Move proportions away from 0 and 1 by a small amount for beta distribution
-  mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-5, 
+  dplyr::mutate(tb_z_prop = ifelse(tb_z_prop == 0, 1e-5, 
                             ifelse(tb_z_prop == 1, 1 - 1e-5, tb_z_prop))) %>% 
-  ## Hold out the original data as a point estimate sample
-  {bind_rows(mutate(., sample = 0),
+  dplyr::mutate(., sample = 0)
+  
+  if (samples > 1) {
+    out <-   out %>% 
+    ## Hold out the original data as a point estimate sample
+      {bind_rows(mutate(., sample = 0),
                ## Add noise for variables that we have information about
+               
                 mutate(., prop_hiv = purrr::map2(prop_hiv, prop_hiv_hi, ~ 
                                                    rtruncnorm(samples - 1, a = 0, b = 1,
-                                                              mean = .x, sd = (.y - .x) / 1.96)),
+                                                              mean = .x, 
+                                                              sd = (.y - .x) / 1.96)),
+                      tb_inc = purrr::map2(tb_inc, tb_inc_hi, ~ 
+                                                   rtruncnorm(samples - 1, a = 0, b = 1,
+                                                              mean = .x, 
+                                                              sd = (.y - .x) / 1.96))
                        tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ 
-                                                 rtruncnorm(samples - 1, a = 1e-5, b = (1 - 1e-5), 
+                                                 rtruncnorm(samples - 1, a = 1e-5, 
+                                                            b = (1 - 1e-5), 
                                                             mean = .x, sd = .y))) %>% 
                 ## Add a 2.5% SE normal noise for numeric variables with no noise.
                 mutate_at(.vars = vars(cattle_per_head), 
@@ -109,15 +122,35 @@ bootstrapped_df_all <- analysis_df %>%
                 mutate(sample = list(tibble::tibble(sample = 1:(samples - 1)))) %>% 
                 tidyr::unnest(cols = c(prop_tb_ep, prop_hiv, tb_z_prop, 
                                        prop_rural, cattle_per_head, sample)),
-             )} %>% 
-  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se) %>% 
-  group_split(sample) %>% 
+             )}
+  }
+  
+  ## Drop uncertainty variables
+  out <- out %>% 
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se, -tb_inc_hi, tb_inc_lo)
+  
+  return(out)
+}
+
+# Define by sample imputation
+impute_per_sample <- function(df = NULL, maxit = 20) {
+  out <- df %>% 
+  dplyr::group_split(sample) %>% 
   purrr::map(~ dplyr::bind_cols(dplyr::select(., tb_z_prop),
                                 dplyr::select(., -tb_z_prop) %>% 
-                                  mice::mice(m = 1, maxit = 20) %>% 
+                                  mice::mice(m = 1, maxit = maxit) %>% 
                                   mice::complete()
                     )) %>% 
-  bind_rows()
+  dplyr::bind_rows()
+  
+  return(out)
+}
+
+
+bootstrapped_df_all <- analysis_df %>% 
+  bootstrap_uncertainty(samples = 1) %>% 
+  impute_per_sample()
+
 
 bootstrapped_df_all
 ```
@@ -187,7 +220,6 @@ models <- tibble(
 ```{r}
 ## Split sampled data into seperate data.frames
 split_df <- bootstrapped_df %>% 
-    mutate_at(.vars = vars(year, prop_tb_ep, prop_hiv, prop_rural, cattle_per_head), scale) %>% 
     group_split(sample) %>% 
     purrr::map(as.data.frame)
 
@@ -197,10 +229,11 @@ fit_model <- purrr::partial(
   brm_multiple,
   data = split_df,
   family = Beta(link = "logit", link_phi = "log"),
-  control = list(adapt_delta = 0.99, max_treedepth = 20),
+  control = list(adapt_delta = 0.999, max_treedepth = 20),
   sample_prior = "yes",
-  iter = 1000,
-  warmup = 500,
+  iter = 2000,
+  warmup = 1000,
+  thin = 1,
   prior = c(prior(horseshoe(1), class = "b")),
   future = TRUE,
   refresh = 0,
@@ -228,13 +261,23 @@ if (nrow(large_rhat) > 0) {
 * Fit all models
 
 ```{r}
+fit_model <- FALSE
+
+if (fit_model | file.exists("results/fitted_model.rds")) {
 ## Set up parallel processing
 plan(multiprocess)
 
 ## Fit models (silenced output)
 results <- models %>% 
   ## Fit each model across multiple samples
-  dplyr::mutate(fit = purrr::map(formula, ~ fit_model(formula = as.formula(.))))
+  dplyr::mutate(fit = purrr::map(formula,
+                                 ~ fit_model(formula = as.formula(.))))
+
+saveRDS(results, "results/fitted_model.rds")
+
+}else{
+  results <- readRDS("results/fitted_model.rds")
+}
 
 ## Check convergance
 results <- results %>% 
@@ -273,7 +316,7 @@ brms::loo(results$fit[[1]], results$fit[[2]],
 * Define best fitting model
 
 ```{r}
-model <- results$fit[[1]]
+model <- results$fit[[4]]
 ```
 
 ## Explore best fitting model
@@ -337,6 +380,25 @@ plot_var_effect(model, var = "cattle_per_head",
 
 ```{r}
 bootstrapped_predictions <- bootstrapped_df_all %>% 
-  dplyr::group_split(sample) %>% 
-  purrr::map(~ predict(model, newdata = .))
+  dplyr::group_by(sample) %>% 
+  tidyr::nest() %>% 
+  dplyr::mutate(preds = purrr::map(data, ~ predict(model, newdata = .) %>% 
+                  tibble::as_tibble())) %>% 
+  unnest(cols = c(data, preds))
+
+summarised_predictions <- bootstrapped_predictions %>% 
+  dplyr::mutate(
+    ztb_inc = tb_inc * population * Estimate / 100000,
+    ztb_inc_lo = tb_inc * population * Q2.5 / 100000,
+    ztb_inc_hi = tb_inc * population * Q97.5 / 100000
+  ) %>% 
+  dplyr::group_by(country, year) %>% 
+  dplyr::summarise(
+    ztb_inc = mean(ztb_inc, na.rm = TRUE),
+    ztb_inc_lo = min(ztb_inc_lo, na.rm = TRUE),
+    ztb_inc_hi = max(ztb_inc_hi, na.rm = TRUE),
+    ztb_prop = mean(Estimate, na.rm = TRUE),
+    ztb_prop_lo = min(Q2.5, na.rm = TRUE),
+    ztb_prop_hi = max(Q97.5, na.rm = TRUE)
+  )
 ```

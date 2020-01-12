@@ -7,16 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-```{r setup, echo = FALSE}
-library(EstZoonoticTB)
-```
+
+
 
 ## Overview
 
@@ -83,8 +76,25 @@ This vignette outlines the data sources for the packaged datasets. It also summa
 * Upper and lower confidence intervals (95%) also included.
 * Standard error also included for later use in modelling/simulation.
 
-```{r}
+
+```r
 EstZoonoticTB::zoonotic_tb_humans
+#> # A tibble: 201 x 16
+#>       id study_id dirty_id country geo_coverage study_pop sampling_strat
+#>    <int>    <dbl>    <dbl> <fct>   <fct>        <fct>     <fct>         
+#>  1     1        2      279 Austria Country-wid… Country-… All notified …
+#>  2     2        2      280 Belgium Country-wid… Country-… All notified …
+#>  3     3        2      281 Bulgar… Country-wid… Country-… All notified …
+#>  4     4        2      282 Cyprus  Country-wid… Country-… All notified …
+#>  5     5        2      283 Czechia Country-wid… Country-… All notified …
+#>  6     6        2      284 Denmark Country-wid… Country-… All notified …
+#>  7     7        2      285 Estonia Country-wid… Country-… All notified …
+#>  8     8        2      286 France  Country-wid… Country-… All notified …
+#>  9     9        2      287 Finland Country-wid… Country-… All notified …
+#> 10    10        2      288 Germany Country-wid… Country-… All notified …
+#> # … with 191 more rows, and 9 more variables: study_period <fct>,
+#> #   study_end <dbl>, multi_year_study <fct>, cases <dbl>, sample_size <dbl>,
+#> #   tb_z_prop <dbl>, tb_z_prop_lo <dbl>, tb_z_prop_hi <dbl>, tb_z_prop_se <dbl>
 ```
 
 #### Limitations
@@ -103,8 +113,23 @@ EstZoonoticTB::zoonotic_tb_humans
 * Last recorded status is also available but this field has currently been excluded due to its poor quality. 
 * Data for half years has been combined into data summarised across a year.
 
-```{r}
+
+```r
 EstZoonoticTB::zoonotic_tb_animals
+#> # A tibble: 187 x 5
+#>    country                       country_code  year dom            wild         
+#>    <fct>                         <fct>        <dbl> <fct>          <fct>        
+#>  1 Afghanistan                   AFG           2018 present        <NA>         
+#>  2 Albania, Republic of          ALB           2018 present        <NA>         
+#>  3 Algeria, People's Democratic… DZA           2018 present        <NA>         
+#>  4 Andorra, Principality of      AND           2018 not present    not present  
+#>  5 Angola, Republic of           AGO           2018 not present    <NA>         
+#>  6 Argentina, Argentine Republic ARG           2018 limited        suspected + …
+#>  7 Armenia                       ARM           2018 suspected + l… not present  
+#>  8 Australia, Commonwealth of    AUS           2018 not present    not present  
+#>  9 Austria, Republic of          AUT           2018 present        not present  
+#> 10 Azerbaijan, Republic of       AZE           2018 not present    not present  
+#> # … with 177 more rows
 ```
 
 ## Tuberculosis (TB) incidence
@@ -115,8 +140,60 @@ EstZoonoticTB::zoonotic_tb_animals
 * Data sourced using `EstZoonoticTB::tb_data()`. See `?EstZoonoticTB::tb_data()` for documentation.
 
 
-```{r}
+
+```r
 EstZoonoticTB::tb_data()
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates
+#> Saving data to: /tmp/RtmproWQVW/tb_burden.rds
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates
+#> Saving data to: /tmp/RtmproWQVW/mdr_tb.rds
+#> Joining TB burden data and MDR TB data.
+#> Getting additional dataset: Latent TB infection
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=ltbi_estimates
+#> Saving data to: /tmp/RtmproWQVW/latent_tb_infection.rds
+#> Getting additional dataset: Notification
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=notifications
+#> Saving data to: /tmp/RtmproWQVW/notification.rds
+#> Getting additional dataset: Drug resistance surveillance
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=dr_surveillance
+#> Saving data to: /tmp/RtmproWQVW/drug_resistance_surveillance.rds
+#> Getting additional dataset: Non-routine HIV surveillance
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=tbhivnonroutinesurv
+#> Saving data to: /tmp/RtmproWQVW/non-routine_hiv_surveillance.rds
+#> Getting additional dataset: Outcomes
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=outcomes
+#> Saving data to: /tmp/RtmproWQVW/outcomes.rds
+#> Getting additional dataset: Budget
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=budget
+#> Saving data to: /tmp/RtmproWQVW/budget.rds
+#> Getting additional dataset: Expenditure and utilisation
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=expenditure_utilisation
+#> Saving data to: /tmp/RtmproWQVW/expenditure_and_utilisation.rds
+#> Getting additional dataset: Policies and services
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=policies
+#> Saving data to: /tmp/RtmproWQVW/policies_and_services.rds
+#> Getting additional dataset: Community engagement
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=community
+#> Saving data to: /tmp/RtmproWQVW/community_engagement.rds
+#> Getting additional dataset: Laboratories
+#> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=labs
+#> Saving data to: /tmp/RtmproWQVW/laboratories.rds
+#> Joining TB burden data and additional datasets.
+#> # A tibble: 4,474 x 12
+#>    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi
+#>    <chr>   <chr> <chr>       <int>    <int>  <dbl>     <dbl>     <dbl>
+#>  1 Afghan… AFG   Eastern Me…  2000    39000    190       123       271
+#>  2 Afghan… AFG   Eastern Me…  2001    41000    189       123       271
+#>  3 Afghan… AFG   Eastern Me…  2002    43000    189       122       270
+#>  4 Afghan… AFG   Eastern Me…  2003    45000    189       122       270
+#>  5 Afghan… AFG   Eastern Me…  2004    47000    189       122       270
+#>  6 Afghan… AFG   Eastern Me…  2005    48000    189       122       270
+#>  7 Afghan… AFG   Eastern Me…  2006    50000    189       122       270
+#>  8 Afghan… AFG   Eastern Me…  2007    51000    189       122       270
+#>  9 Afghan… AFG   Eastern Me…  2008    52000    189       122       270
+#> 10 Afghan… AFG   Eastern Me…  2009    54000    189       123       270
+#> # … with 4,464 more rows, and 4 more variables: prop_tb_ep <dbl>,
+#> #   prop_hiv <dbl>, prop_hiv_lo <dbl>, prop_hiv_hi <dbl>
 ```
 
 
@@ -128,8 +205,23 @@ EstZoonoticTB::tb_data()
 * The proportion of each country that is rural is also available.
 
 
-```{r}
+
+```r
 EstZoonoticTB::demographics
+#> # A tibble: 14,729 x 5
+#>    country     country_code  year population prop_rural
+#>    <fct>              <int> <int>      <dbl>      <dbl>
+#>  1 Afghanistan            2  1950    7752118      0.940
+#>  2 Afghanistan            2  1951    7839510      0.938
+#>  3 Afghanistan            2  1952    7934980      0.936
+#>  4 Afghanistan            2  1953    8038596      0.934
+#>  5 Afghanistan            2  1954    8150447      0.931
+#>  6 Afghanistan            2  1955    8270581      0.929
+#>  7 Afghanistan            2  1956    8399030      0.927
+#>  8 Afghanistan            2  1957    8535807      0.924
+#>  9 Afghanistan            2  1958    8680946      0.921
+#> 10 Afghanistan            2  1959    8834445      0.919
+#> # … with 14,719 more rows
 ```
    
    
@@ -143,7 +235,22 @@ EstZoonoticTB::demographics
   * Cattle
 * Additional animals that are vectors of Zoonotic TB could also be included as needed/thought appropriate
 
-```{r}
+
+```r
 EstZoonoticTB::animal_demographics
+#> # A tibble: 11,224 x 4
+#>    country     country_code  year  cattle
+#>    <fct>              <int> <int>   <int>
+#>  1 Afghanistan            2  1961 2900000
+#>  2 Afghanistan            2  1962 3200000
+#>  3 Afghanistan            2  1963 3300000
+#>  4 Afghanistan            2  1964 3350000
+#>  5 Afghanistan            2  1965 3400000
+#>  6 Afghanistan            2  1966 3600000
+#>  7 Afghanistan            2  1967 3600000
+#>  8 Afghanistan            2  1968 3633000
+#>  9 Afghanistan            2  1969 3600000
+#> 10 Afghanistan            2  1970 3700000
+#> # … with 11,214 more rows
 ```
    
