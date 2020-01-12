@@ -224,7 +224,7 @@ EstZoonoticTB::link_data
 #> 
 #>   return(out)
 #> }
-#> <bytecode: 0x556308cbb340>
+#> <bytecode: 0x55b9254ee9e8>
 #> <environment: namespace:EstZoonoticTB>
 ```
 
@@ -412,7 +412,7 @@ EstZoonoticTB::get_latest_combined_data
 #>   return(out)  
 #>   
 #> }
-#> <bytecode: 0x556303df5fd0>
+#> <bytecode: 0x55b91d401160>
 #> <environment: namespace:EstZoonoticTB>
 
 
@@ -433,7 +433,7 @@ EstZoonoticTB::get_latest_data
 #>     dplyr::ungroup()
 #>   
 #> }
-#> <bytecode: 0x556303a7a300>
+#> <bytecode: 0x55b91d333bb0>
 #> <environment: namespace:EstZoonoticTB>
 ```
 

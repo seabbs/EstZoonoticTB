@@ -144,40 +144,40 @@ EstZoonoticTB::zoonotic_tb_animals
 ```r
 EstZoonoticTB::tb_data()
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=estimates
-#> Saving data to: /tmp/RtmproWQVW/tb_burden.rds
+#> Saving data to: /tmp/RtmpnEipjF/tb_burden.rds
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=mdr_rr_estimates
-#> Saving data to: /tmp/RtmproWQVW/mdr_tb.rds
+#> Saving data to: /tmp/RtmpnEipjF/mdr_tb.rds
 #> Joining TB burden data and MDR TB data.
 #> Getting additional dataset: Latent TB infection
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=ltbi_estimates
-#> Saving data to: /tmp/RtmproWQVW/latent_tb_infection.rds
+#> Saving data to: /tmp/RtmpnEipjF/latent_tb_infection.rds
 #> Getting additional dataset: Notification
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=notifications
-#> Saving data to: /tmp/RtmproWQVW/notification.rds
+#> Saving data to: /tmp/RtmpnEipjF/notification.rds
 #> Getting additional dataset: Drug resistance surveillance
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=dr_surveillance
-#> Saving data to: /tmp/RtmproWQVW/drug_resistance_surveillance.rds
+#> Saving data to: /tmp/RtmpnEipjF/drug_resistance_surveillance.rds
 #> Getting additional dataset: Non-routine HIV surveillance
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=tbhivnonroutinesurv
-#> Saving data to: /tmp/RtmproWQVW/non-routine_hiv_surveillance.rds
+#> Saving data to: /tmp/RtmpnEipjF/non-routine_hiv_surveillance.rds
 #> Getting additional dataset: Outcomes
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=outcomes
-#> Saving data to: /tmp/RtmproWQVW/outcomes.rds
+#> Saving data to: /tmp/RtmpnEipjF/outcomes.rds
 #> Getting additional dataset: Budget
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=budget
-#> Saving data to: /tmp/RtmproWQVW/budget.rds
+#> Saving data to: /tmp/RtmpnEipjF/budget.rds
 #> Getting additional dataset: Expenditure and utilisation
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=expenditure_utilisation
-#> Saving data to: /tmp/RtmproWQVW/expenditure_and_utilisation.rds
+#> Saving data to: /tmp/RtmpnEipjF/expenditure_and_utilisation.rds
 #> Getting additional dataset: Policies and services
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=policies
-#> Saving data to: /tmp/RtmproWQVW/policies_and_services.rds
+#> Saving data to: /tmp/RtmpnEipjF/policies_and_services.rds
 #> Getting additional dataset: Community engagement
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=community
-#> Saving data to: /tmp/RtmproWQVW/community_engagement.rds
+#> Saving data to: /tmp/RtmpnEipjF/community_engagement.rds
 #> Getting additional dataset: Laboratories
 #> Downloading data from: https://extranet.who.int/tme/generateCSV.asp?ds=labs
-#> Saving data to: /tmp/RtmproWQVW/laboratories.rds
+#> Saving data to: /tmp/RtmpnEipjF/laboratories.rds
 #> Joining TB burden data and additional datasets.
 #> # A tibble: 4,474 x 12
 #>    country iso3  g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi

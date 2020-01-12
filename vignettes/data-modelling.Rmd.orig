@@ -7,14 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r opts, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.width = 12, 
   fig.height = 8,
-  dpi = 330,
-  eval = FALSE
+  dpi = 330
 )
 ```
 
@@ -37,9 +36,6 @@ library(brms)
 library(future)
 library(mice)
 library(tidylog)
-
-## Set up auto writing for stan models
-rstan_options(auto_write = TRUE)
 ```
 
 * Get all data
@@ -67,7 +63,7 @@ analysis_df <- df_with_filt_tb %>%
   dplyr::select(-z_tb_dom_animal, -z_tb_wild_animal, 
                 -country_code, - tb_cases, -z_tb_id, -z_tb_geo_coverage,
                 -z_tb_study_pop, -tb_z_prop_lo, -tb_z_prop_hi,
-                -cattle, -g_whoregion, -z_tb_multi_year_study) %>% 
+                -cattle, -z_tb_multi_year_study) %>% 
   dplyr::mutate(id = 1:n())
                 
 analysis_df
@@ -107,7 +103,7 @@ bootstrap_uncertainty <- function(df = NULL, samples = NULL) {
                       tb_inc = purrr::map2(tb_inc, tb_inc_hi, ~ 
                                                    rtruncnorm(samples - 1, a = 0, b = 1,
                                                               mean = .x, 
-                                                              sd = (.y - .x) / 1.96))
+                                                              sd = (.y - .x) / 1.96)),
                        tb_z_prop = purrr::map2(tb_z_prop, tb_z_prop_se, ~ 
                                                  rtruncnorm(samples - 1, a = 1e-5, 
                                                             b = (1 - 1e-5), 
@@ -127,7 +123,7 @@ bootstrap_uncertainty <- function(df = NULL, samples = NULL) {
   
   ## Drop uncertainty variables
   out <- out %>% 
-  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se, -tb_inc_hi, tb_inc_lo)
+  dplyr::select(-prop_hiv_lo, -prop_hiv_hi, -tb_z_prop_se, -tb_inc_hi, -tb_inc_lo)
   
   return(out)
 }
@@ -136,8 +132,8 @@ bootstrap_uncertainty <- function(df = NULL, samples = NULL) {
 impute_per_sample <- function(df = NULL, maxit = 20) {
   out <- df %>% 
   dplyr::group_split(sample) %>% 
-  purrr::map(~ dplyr::bind_cols(dplyr::select(., tb_z_prop),
-                                dplyr::select(., -tb_z_prop) %>% 
+  purrr::map(~ dplyr::bind_cols(dplyr::select(., tb_z_prop, population, id),
+                                dplyr::select(., -tb_z_prop, -id, -population) %>% 
                                   mice::mice(m = 1, maxit = maxit) %>% 
                                   mice::complete()
                     )) %>% 
@@ -221,6 +217,8 @@ models <- tibble(
 ## Split sampled data into seperate data.frames
 split_df <- bootstrapped_df %>% 
     group_split(sample) %>% 
+    purrr::map(~ mutate_at(., .vars = vars(year, prop_tb_ep, prop_hiv, 
+                           prop_rural, cattle_per_head), scale)) %>% 
     purrr::map(as.data.frame)
 
 
@@ -261,9 +259,9 @@ if (nrow(large_rhat) > 0) {
 * Fit all models
 
 ```{r}
-fit_model <- FALSE
+refit <- FALSE
 
-if (fit_model | file.exists("results/fitted_model.rds")) {
+if (refit | !file.exists("results/fitted_model.rds")) {
 ## Set up parallel processing
 plan(multiprocess)
 
@@ -316,7 +314,7 @@ brms::loo(results$fit[[1]], results$fit[[2]],
 * Define best fitting model
 
 ```{r}
-model <- results$fit[[4]]
+model <- results$fit[[3]]
 ```
 
 ## Explore best fitting model
@@ -357,7 +355,7 @@ plot_var_effect <- function(model, var = NULL, var_name = NULL,
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 ## By year
 plot_var_effect(model, var = "year", 
                 var_name = "Year")
@@ -378,20 +376,27 @@ plot_var_effect(model, var = "cattle_per_head",
 ## Predicting zTB incidence
 
 
+* Predict against all data
+
 ```{r}
 bootstrapped_predictions <- bootstrapped_df_all %>% 
   dplyr::group_by(sample) %>% 
   tidyr::nest() %>% 
-  dplyr::mutate(preds = purrr::map(data, ~ predict(model, newdata = .) %>% 
+  dplyr::mutate(preds = purrr::map(data, ~ 
+                                       mutate_at(., 
+                                                 .vars = vars(year, prop_tb_ep,
+                                                              prop_hiv, prop_rural,
+                                                              cattle_per_head), scale) %>%
+                                     predict(model, newdata = .) %>% 
                   tibble::as_tibble())) %>% 
-  unnest(cols = c(data, preds))
-
-summarised_predictions <- bootstrapped_predictions %>% 
+  unnest(cols = c(data, preds)) %>% 
   dplyr::mutate(
     ztb_inc = tb_inc * population * Estimate / 100000,
     ztb_inc_lo = tb_inc * population * Q2.5 / 100000,
     ztb_inc_hi = tb_inc * population * Q97.5 / 100000
-  ) %>% 
+  )
+
+summarised_predictions <- bootstrapped_predictions %>% 
   dplyr::group_by(country, year) %>% 
   dplyr::summarise(
     ztb_inc = mean(ztb_inc, na.rm = TRUE),
@@ -400,5 +405,40 @@ summarised_predictions <- bootstrapped_predictions %>%
     ztb_prop = mean(Estimate, na.rm = TRUE),
     ztb_prop_lo = min(Q2.5, na.rm = TRUE),
     ztb_prop_hi = max(Q97.5, na.rm = TRUE)
-  )
+  ) %>% 
+  ungroup()
+```
+
+* Summarise globally
+
+```{r}
+global_ztb <- bootstrapped_predictions %>% 
+  dplyr::group_by(sample, year) %>% 
+  dplyr::summarise_at(.vars = vars(contains("ztb_inc")), ~ sum(., na.rm = TRUE))
+
+
+global_ztb
+```
+
+* Summarise by region in 2015
+
+```{r}
+regional_ztb <- bootstrapped_predictions %>% 
+  dplyr::filter(year == 2015) %>% 
+  dplyr::group_by(sample, g_whoregion) %>% 
+  dplyr::summarise_at(.vars = vars(contains("ztb_inc")), ~ sum(., na.rm = TRUE))
+
+regional_ztb
+```
+
+* Order by country with high case loads
+
+```{r}
+high_case_loads <- summarised_predictions %>% 
+  dplyr::filter(year == 2015) %>% 
+  dplyr::arrange(desc(ztb_inc)) %>% 
+  dplyr::select(country, ztb_inc, ztb_inc_lo, ztb_inc_hi, ztb_prop) %>% 
+  dplyr::slice(1:10)
+
+high_case_loads
 ```
