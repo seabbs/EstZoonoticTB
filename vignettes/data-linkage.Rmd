@@ -7,12 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+
 
 ## Overview
 
@@ -25,16 +20,328 @@ The datasets outlined in the [data sources](https://www.samabbott.co.uk/EstZoono
 
 ### Code
 
-```{r}
+
+```r
 EstZoonoticTB::link_data
+#> function(z_tb_humans = NULL, tb_humans = NULL, z_tb_animals = NULL,
+#>                       demo = NULL, animal_demo = NULL,
+#>                       verbose = TRUE) {
+#>   
+#> 
+#> # Control for NULL variables ----------------------------------------------
+#> 
+#>   cases <- NULL; cattle <- NULL; country <- NULL; country.x <- NULL;
+#>   country.y <- NULL; country_code <- NULL; dirty_id <- NULL;
+#>   geo_coverage <- NULL; id <- NULL; iso3 <- NULL; multi_year_study <- NULL;
+#>   population <- NULL; sample_size <- NULL; sampling_strat <- NULL;
+#>   study_end <- NULL; study_id <- NULL; study_period <- NULL; study_pop <- NULL; 
+#>   dom <- NULL; wild <- NULL; g_whoregion <- NULL;
+#>   
+#>   
+#>   # Use default data if none is supplied ------------------------------------
+#>   
+#>   if (is.null(z_tb_humans)) {
+#>     z_tb_humans <- EstZoonoticTB::zoonotic_tb_humans %>% 
+#>       dplyr::mutate(country = as.character(country))
+#>   }
+#>   
+#>   if (is.null(tb_humans)) {
+#>     tb_humans <- EstZoonoticTB::tb_data(verbose = FALSE) %>% 
+#>       dplyr::mutate(country = as.character(country))
+#>   }
+#>   
+#>   
+#>   if (is.null(z_tb_animals)) {
+#>     z_tb_animals <- EstZoonoticTB::zoonotic_tb_animals %>% 
+#>       dplyr::mutate(country = as.character(country))
+#>   }
+#>   
+#>   if (is.null(demo)) {
+#>     demo <- EstZoonoticTB::demographics %>% 
+#>       dplyr::mutate(country = as.character(country))
+#>   }
+#>   
+#>   if (is.null(animal_demo)) {
+#>     animal_demo <- EstZoonoticTB::animal_demographics %>% 
+#>       dplyr::mutate(country = as.character(country))
+#>   }
+#>   
+#>   
+#>   # Join demographic data ---------------------------------------------------
+#>   
+#>   ## Check levels
+#>   
+#>   if (verbose) {
+#>     message("Joining human and animal demographic data.")
+#>     
+#>     message("Countries with data present for demographics and not animal demographics:")
+#>     print(setdiff(demo$country, animal_demo$country))
+#>     
+#>     
+#>     message("Countries with data present for animal demographics and not demographics:")
+#>     print(setdiff(animal_demo$country, demo$country))
+#>   }
+#>   
+#>   ## Suppress warnings for factors forced to character
+#>   ## Full join for all data. 
+#>   demo <- suppressWarnings(
+#>     demo %>% 
+#>       dplyr::full_join(animal_demo, 
+#>                        by = c("country", "year", "country_code"))
+#>   )
+#>   
+#>   ## Add animals per head
+#>   
+#>   demo <- demo %>% 
+#>     dplyr::mutate(cattle_per_head = cattle / population)
+#>   
+#>   # Join TB data and zTB in animals data ------------------------------------
+#>   
+#>   if (verbose) {
+#>     message("Joining TB incidence in humans data and zTB presence in animals data using country codes.")
+#>     
+#>     message("Countries with data present for TB incidence and not zTB in animals:")
+#>     tb_not_animal_tb <- tb_humans %>% 
+#>       dplyr::filter(iso3 %in% setdiff(tb_humans$iso3, z_tb_animals$country_code)) %>% 
+#>       dplyr::pull(country) %>% 
+#>       as.character %>% 
+#>       unique 
+#>     
+#>     print(tb_not_animal_tb)
+#>     
+#>     
+#>     message("Countries with data present for zTB in animals and not TB incidence:")
+#>     animal_tb_not_tb <- z_tb_animals %>% 
+#>       dplyr::filter(country_code %in% setdiff(z_tb_animals$country_code, tb_humans$iso3)) %>% 
+#>       dplyr::pull(country) %>% 
+#>       as.character %>% 
+#>       unique
+#>     
+#>     print(animal_tb_not_tb)
+#>   }
+#>   
+#>   ## Join using a full join on country code and year
+#>   ## assume that TB data country name is correct and replace with 
+#>   ## zTB in animals country name if missing.
+#>   joined_tb <- suppressWarnings(
+#>     tb_humans %>% 
+#>     dplyr::rename(country_code = iso3) %>% 
+#>     dplyr::mutate(country_code = as.character(country_code)) %>% 
+#>     dplyr::full_join(z_tb_animals %>% 
+#>                        dplyr::mutate(country_code = as.character(country_code)),
+#>                      by = c("country_code", "year")) 
+#>   ) %>% 
+#>     dplyr::mutate(country = ifelse(!is.na(country.x), 
+#>                                    as.character(country.x), 
+#>                                    as.character(country.y))) %>% 
+#>     dplyr::select(-country.x, -country.y) %>% 
+#>     dplyr::select(country, tidyselect::everything()) %>% 
+#>     dplyr::rename(z_tb_dom_animal = dom, z_tb_wild_animal = wild)
+#>   
+#>   
+#>   
+#> 
+#> # Join zTB data to other TB data ------------------------------------------
+#>   
+#>   if (verbose) {
+#>     message("Joining zTB incidence in humans data and all other TB data using country names")
+#>   }
+#>   
+#>   z_tb_not_other_tb <- z_tb_humans %>% 
+#>     dplyr::filter(country %in% setdiff(z_tb_humans$country, joined_tb$country)) %>% 
+#>     dplyr::pull(country) %>% 
+#>     as.character %>% 
+#>     unique 
+#>   
+#>   ## Check countries are listed in general TB dataset. 
+#>   if (length(z_tb_not_other_tb) > 0) {
+#>     message("The following countries in the zTB dataset do not match with countries in other TB datasets: ",
+#>          paste(z_tb_not_other_tb, collapse = ", "),
+#>          "\n Adjust data inputs and rerun this function.")
+#>   }
+#> 
+#>   
+#>   ## Joining datasets
+#>   ## Dropping not essential zTB data
+#>   z_tb_humans <- z_tb_humans %>% 
+#>     dplyr::rename(year = study_end) %>% 
+#>     dplyr::rename_at(.vars = dplyr::vars(id, geo_coverage,
+#>                                          study_pop, multi_year_study
+#>     ),
+#>     ~ paste0("z_tb_", .)) %>% 
+#>     dplyr::select(-study_id, -dirty_id,
+#>                   -cases, -sample_size, -study_period, 
+#>                   -sampling_strat) %>% 
+#>     dplyr::mutate(country = as.character(country))
+#>   
+#>   
+#>   ## Link in country_codes (controls for years without data)
+#>   z_tb_humans <- z_tb_humans %>% 
+#>     dplyr::full_join(joined_tb %>% 
+#>                        dplyr::select(country, country_code, g_whoregion) %>% 
+#>                        unique,
+#>                      by = c("country"))
+#> 
+#> 
+#>   ## Link using country codes and year
+#>   joined_tb <- suppressWarnings(
+#>     joined_tb %>% 
+#>     dplyr::full_join(z_tb_humans,
+#>               by = c("country", "country_code", "year", "g_whoregion"))
+#>   )
+#>   
+#>   
+#> # Join TB data to demographic data ----------------------------------------
+#>   
+#>   if (verbose) {
+#>     message("Joining TB data and demographic data using country names.")
+#>     
+#>     message("Countries with data present for TB not for demographics:")
+#> 
+#>     print(setdiff(unique(joined_tb$country), unique(demo$country)))
+#>     
+#>     
+#>     message("Countries with data present demographics and not TB:")
+#>     message("(Some mismatches are to be expected here due to historic country names)")
+#>     print(setdiff(unique(demo$country), unique(joined_tb$country)))
+#> 
+#>   }
+#>   
+#>   
+#>   ## Link in country_codes (controls for years without data)
+#>   demo <- demo %>% 
+#>     dplyr::select(-country_code) %>% 
+#>     dplyr::full_join(joined_tb %>% 
+#>                        dplyr::select(country, country_code, g_whoregion) %>% 
+#>                        unique,
+#>                      by = c("country"))
+#>   
+#>   
+#>   out <- joined_tb %>% 
+#>     dplyr::full_join(demo, 
+#>                      by = c("country", "country_code", "year", "g_whoregion")) %>% 
+#>     dplyr::mutate_if(is.character, factor)
+#> 
+#>   return(out)
+#> }
+#> <bytecode: 0x55b9254ee9e8>
+#> <environment: namespace:EstZoonoticTB>
 ```
 
 ### Data
 
-```{r}
+
+```r
 all_data <- EstZoonoticTB::link_data(verbose = TRUE)
+#> Joining human and animal demographic data.
+#> Countries with data present for demographics and not animal demographics:
+#>  [1] "Andorra"                  "Anguilla"                
+#>  [3] "Aruba"                    "Channel Islands"         
+#>  [5] "China, Macao SAR"         "Gibraltar"               
+#>  [7] "Holy See"                 "Isle of Man"             
+#>  [9] "Kiribati"                 "Maldives"                
+#> [11] "Marshall Islands"         "Mayotte"                 
+#> [13] "Monaco"                   "Nauru"                   
+#> [15] "Northern Mariana Islands" "Palau"                   
+#> [17] "San Marino"               "Tokelau"                 
+#> [19] "Turks and Caicos Islands" "Tuvalu"
+#> Countries with data present for animal demographics and not demographics:
+#> [1] "Norfolk Island"
+#> Joining TB incidence in humans data and zTB presence in animals data using country codes.
+#> Countries with data present for TB incidence and not zTB in animals:
+#>  [1] "American Samoa"                       
+#>  [2] "Anguilla"                             
+#>  [3] "Antigua and Barbuda"                  
+#>  [4] "Aruba"                                
+#>  [5] "Bahamas"                              
+#>  [6] "Benin"                                
+#>  [7] "Bermuda"                              
+#>  [8] "Bonaire, Saint Eustatius and Saba"    
+#>  [9] "British Virgin Islands"               
+#> [10] "Cameroon"                             
+#> [11] "Cayman Islands"                       
+#> [12] "China, Macao SAR"                     
+#> [13] "Curaçao"                              
+#> [14] "Democratic People's Republic of Korea"
+#> [15] "Dominica"                             
+#> [16] "Equatorial Guinea"                    
+#> [17] "Gabon"                                
+#> [18] "Grenada"                              
+#> [19] "Guam"                                 
+#> [20] "Guatemala"                            
+#> [21] "Lebanon"                              
+#> [22] "Luxembourg"                           
+#> [23] "Maldives"                             
+#> [24] "Monaco"                               
+#> [25] "Montserrat"                           
+#> [26] "Nauru"                                
+#> [27] "Niue"                                 
+#> [28] "Northern Mariana Islands"             
+#> [29] "Puerto Rico"                          
+#> [30] "Rwanda"                               
+#> [31] "Saint Kitts and Nevis"                
+#> [32] "Seychelles"                           
+#> [33] "Sint Maarten (Dutch part)"            
+#> [34] "Solomon Islands"                      
+#> [35] "Tajikistan"                           
+#> [36] "Togo"                                 
+#> [37] "Tokelau"                              
+#> [38] "Turks and Caicos Islands"             
+#> [39] "Tuvalu"                               
+#> [40] "Wallis and Futuna Islands"            
+#> [41] "Yemen"                                
+#> [42] "Netherlands Antilles"                 
+#> [43] "Serbia & Montenegro"
+#> Countries with data present for zTB in animals and not TB incidence:
+#>  [1] "Ceuta"                       "Chinese Taipei"             
+#>  [3] "Falkland Islands (Malvinas)" "Faroe Islands"              
+#>  [5] "French Guiana"               "Guadeloupe (France)"        
+#>  [7] "Liechtenstein"               "Martinique"                 
+#>  [9] "Mayotte (France)"            "Melilla"                    
+#> [11] "Reunion"                     "St. Helena"
+#> Joining zTB incidence in humans data and all other TB data using country names
+#> Joining TB data and demographic data using country names.
+#> Countries with data present for TB not for demographics:
+#>  [1] "Bonaire, Saint Eustatius and Saba" "Curaçao"                          
+#>  [3] "Sint Maarten (Dutch part)"         "West Bank and Gaza Strip"         
+#>  [5] "Netherlands Antilles"              "Serbia & Montenegro"              
+#>  [7] "Ceuta"                             "Chinese Taipei"                   
+#>  [9] "Guadeloupe (France)"               "Mayotte (France)"                 
+#> [11] "Melilla"                           "St. Helena"
+#> Countries with data present demographics and not TB:
+#> (Some mismatches are to be expected here due to historic country names)
+#>  [1] "Belgium-Luxembourg"              "Channel Islands"                
+#>  [3] "Czechoslovakia"                  "Ethiopia PDR"                   
+#>  [5] "Gibraltar"                       "Guadeloupe"                     
+#>  [7] "Holy See"                        "Isle of Man"                    
+#>  [9] "Mayotte"                         NA                               
+#> [11] "Pacific Islands Trust Territory" "Palestine"                      
+#> [13] "Saint Pierre and Miquelon"       "Sudan (former)"                 
+#> [15] "United States Virgin Islands"    "USSR"                           
+#> [17] "Western Sahara"                  "Yugoslav SFR"                   
+#> [19] "Norfolk Island"
 
 all_data
+#> # A tibble: 15,465 x 26
+#>    country country_code g_whoregion  year tb_cases tb_inc tb_inc_lo tb_inc_hi
+#>    <fct>   <fct>        <fct>       <dbl>    <int>  <dbl>     <dbl>     <dbl>
+#>  1 Afghan… AFG          Eastern Me…  2000    39000    190       123       271
+#>  2 Afghan… AFG          Eastern Me…  2001    41000    189       123       271
+#>  3 Afghan… AFG          Eastern Me…  2002    43000    189       122       270
+#>  4 Afghan… AFG          Eastern Me…  2003    45000    189       122       270
+#>  5 Afghan… AFG          Eastern Me…  2004    47000    189       122       270
+#>  6 Afghan… AFG          Eastern Me…  2005    48000    189       122       270
+#>  7 Afghan… AFG          Eastern Me…  2006    50000    189       122       270
+#>  8 Afghan… AFG          Eastern Me…  2007    51000    189       122       270
+#>  9 Afghan… AFG          Eastern Me…  2008    52000    189       122       270
+#> 10 Afghan… AFG          Eastern Me…  2009    54000    189       123       270
+#> # … with 15,455 more rows, and 18 more variables: prop_tb_ep <dbl>,
+#> #   prop_hiv <dbl>, prop_hiv_lo <dbl>, prop_hiv_hi <dbl>,
+#> #   z_tb_dom_animal <fct>, z_tb_wild_animal <fct>, z_tb_id <int>,
+#> #   z_tb_geo_coverage <fct>, z_tb_study_pop <fct>, z_tb_multi_year_study <fct>,
+#> #   tb_z_prop <dbl>, tb_z_prop_lo <dbl>, tb_z_prop_hi <dbl>,
+#> #   tb_z_prop_se <dbl>, population <dbl>, prop_rural <dbl>, cattle <int>,
+#> #   cattle_per_head <dbl>
 ```
 
 ### Latest data
@@ -43,17 +350,119 @@ As many of the packaged datasets are highly missing a more useful dataset for an
 
 ### Code
 
-```{r}
+
+```r
 EstZoonoticTB::get_latest_combined_data
+#> function(data) {
+#> 
+#> 
+#> # Prep --------------------------------------------------------------------
+#> 
+#>   cattle_per_head <- NULL; country <- NULL; country_code <- NULL;
+#>   desc <- NULL; g_whoregion <- NULL;  population <- NULL;
+#>   prop_hiv <- NULL; prop_hiv_hi <- NULL; prop_hiv_lo <- NULL; prop_rural <- NULL;
+#>   prop_tb_ep <- NULL; tb_cases <- NULL; tb_inc <- NULL; tb_inc_hi <- NULL;
+#>   tb_inc_lo <- NULL; tb_z_prop <- NULL; tb_z_prop_hi <- NULL; tb_z_prop_lo <- NULL;
+#>   tb_z_prop_se <- NULL; year <- NULL; z_tb_dom_animal <- NULL; z_tb_geo_coverage <- NULL;
+#>   z_tb_id <- NULL; z_tb_multi_year_study <- NULL; z_tb_study_pop <- NULL; z_tb_wild_animal <- NULL;
+#> # Prop of TB that is zoonotic ---------------------------------------------
+#> 
+#>   z_tb <- get_latest_data(data, tb_z_prop) %>% 
+#>     dplyr::select(country, country_code, z_tb_year = year,
+#>                   z_tb_id, z_tb_geo_coverage, z_tb_study_pop,
+#>                   z_tb_multi_year_study, tb_z_prop, tb_z_prop_lo,
+#>                   tb_z_prop_hi, tb_z_prop_se)
+#> 
+#> 
+#> # Zoonotic TB in animals --------------------------------------------------
+#> 
+#>   z_tb_animals <- get_latest_data(data, z_tb_dom_animal) %>% 
+#>     dplyr::select(country, country_code, z_tb_animal_year = year,
+#>                   z_tb_dom_animal, z_tb_wild_animal)
+#>   
+#> # TB incidence rate data --------------------------------------------------
+#>  
+#>   tb <- get_latest_data(data, tb_inc) %>% 
+#>     dplyr::select(country, country_code, g_whoregion, tb_year = year,
+#>                   tb_cases, tb_inc, tb_inc_lo, tb_inc_hi, prop_tb_ep,
+#>                   prop_hiv, prop_hiv_lo, prop_hiv_hi)
+#> 
+#> # Animal demographic data -------------------------------------------------
+#> 
+#>   cattle <- get_latest_data(data, cattle)   %>% 
+#>     dplyr::select(country, country_code, animal_year = year,
+#>                   cattle, cattle_per_head)
+#>   
+#> # Demographic data --------------------------------------------------------
+#>  
+#>   demo <- get_latest_data(data, population) %>% 
+#>     dplyr::select(country, country_code, demo_year = year,
+#>                   population, prop_rural)
+#> 
+#> 
+#> # Join all data -----------------------------------------------------------
+#> 
+#>   out <- tb %>% 
+#>     dplyr::full_join(z_tb, by = c("country", "country_code")) %>% 
+#>     dplyr::full_join(z_tb_animals, by = c("country", "country_code")) %>% 
+#>     dplyr::full_join(demo, by = c("country", "country_code")) %>% 
+#>     dplyr::full_join(cattle, by = c("country", "country_code"))
+#>     
+#>   
+#>   return(out)  
+#>   
+#> }
+#> <bytecode: 0x55b91d401160>
+#> <environment: namespace:EstZoonoticTB>
 
 
 EstZoonoticTB::get_latest_data
+#> function(data, variable = NULL) {
+#>   
+#>   country <- NULL; year <- NULL; desc <- NULL;
+#>   
+#>   variable <- rlang::enquo(variable)
+#>   
+#>   data %>% 
+#>     dplyr::mutate(country = country %>% 
+#>                     as.character) %>% 
+#>     dplyr::filter(!is.na(!!variable)) %>% 
+#>     dplyr::group_by(country) %>% 
+#>     dplyr::arrange(desc(year)) %>% 
+#>     dplyr::slice(1) %>% 
+#>     dplyr::ungroup()
+#>   
+#> }
+#> <bytecode: 0x55b91d333bb0>
+#> <environment: namespace:EstZoonoticTB>
 ```
 
 ### Data
 
-```{r}
+
+```r
 latest_data <- EstZoonoticTB::get_latest_combined_data(all_data)
 
 latest_data
+#> # A tibble: 244 x 30
+#>    country country_code g_whoregion tb_year tb_cases tb_inc tb_inc_lo tb_inc_hi
+#>    <chr>   <fct>        <fct>         <dbl>    <int>  <dbl>     <dbl>     <dbl>
+#>  1 Afghan… AFG          Eastern Me…    2018    70000    189     122       270  
+#>  2 Albania ALB          Europe         2018      510     18      15        20  
+#>  3 Algeria DZA          Africa         2018    29000     69      53        88  
+#>  4 Americ… ASM          Western Pa…    2018        0      0       0         0  
+#>  5 Andorra AND          Europe         2018        2      3       2.6       3.5
+#>  6 Angola  AGO          Africa         2018   109000    355     230       507  
+#>  7 Anguil… AIA          Americas       2018        3     22      14        31  
+#>  8 Antigu… ATG          Americas       2018        6      6       5.1       6.9
+#>  9 Argent… ARG          Americas       2018    12000     27      23        31  
+#> 10 Armenia ARM          Europe         2018      920     31      24        39  
+#> # … with 234 more rows, and 22 more variables: prop_tb_ep <dbl>,
+#> #   prop_hiv <dbl>, prop_hiv_lo <dbl>, prop_hiv_hi <dbl>, z_tb_year <dbl>,
+#> #   z_tb_id <int>, z_tb_geo_coverage <fct>, z_tb_study_pop <fct>,
+#> #   z_tb_multi_year_study <fct>, tb_z_prop <dbl>, tb_z_prop_lo <dbl>,
+#> #   tb_z_prop_hi <dbl>, tb_z_prop_se <dbl>, z_tb_animal_year <dbl>,
+#> #   z_tb_dom_animal <fct>, z_tb_wild_animal <fct>, demo_year <dbl>,
+#> #   population <dbl>, prop_rural <dbl>, animal_year <dbl>, cattle <int>,
+#> #   cattle_per_head <dbl>
 ```
